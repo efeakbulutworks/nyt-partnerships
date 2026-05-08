@@ -5,10 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NYT Partnerships Pitch — Efe Akbulut</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Chart-specific styles (moved inline from map-visualized.html) */
+    .chart-container {
+      position: relative;
+      border: 1px solid var(--rule);
+      background: var(--card-bg);
+      margin: 32px 0 16px;
+    }
+    #bubble-chart {
+      width: 100%;
+      height: 520px;
+      position: relative;
+    }
+    #bubble-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .axis-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .axis-x-label {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .axis-y-label {
+      position: absolute;
+      left: -38px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
+    }
+    .chart-outer {
+      position: relative;
+      padding-left: 52px;
+    }
+    .chart-tooltip {
+      position: fixed;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 10px 14px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      z-index: 200;
+      max-width: 220px;
+    }
+    .chart-tooltip.visible { opacity: 1; }
+    .chart-tooltip strong { font-size: 13px; display: block; margin-bottom: 2px; }
+    .chart-note {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
+  <script src="nav.js" defer></script>
+
+  <!-- Scroll dot indicator -->
+  <div id="scroll-dots" aria-hidden="true">
+    <div class="scroll-dot" data-section="what-i-heard"></div>
+    <div class="scroll-dot" data-section="portfolio-management-map"></div>
+    <div class="scroll-dot" data-section="map-visualized"></div>
+    <div class="scroll-dot" data-section="partnership-types"></div>
+    <div class="scroll-dot" data-section="modular-architecture"></div>
+    <div class="scroll-dot" data-section="why-this-excites-me"></div>
+    <div class="scroll-dot" data-section="about"></div>
+  </div>
+
   <main class="content">
 
+    <!-- ─── HERO ──────────────────────────────────────────────────────── -->
     <section class="hero">
       <img class="hero-image"
            src="assets/portfolio-map-hero.png"
@@ -18,54 +96,677 @@
       <p class="hero-byline">By Efe Akbulut &middot; For Dao &middot; May 2026</p>
     </section>
 
-    <div class="card-grid">
+    <!-- ─── SECTION 01: WHAT I HEARD ──────────────────────────────────── -->
+    <section id="what-i-heard" class="section-block section-page">
+      <p class="section-eyebrow">Section 01 &middot; The New York Times Advertising Partnerships</p>
+      <h1>What I Heard</h1>
 
-      <a class="card" href="what-i-heard.html">
-        <p class="card-eyebrow">Section 01</p>
-        <h2>What I Heard</h2>
-        <p>The challenge isn't demand generation. It's operationalizing bespoke partnerships across five premium brands.</p>
-      </a>
+      <blockquote>
+        "The challenge is not demand generation."
+      </blockquote>
 
-      <a class="card" href="portfolio-management-map.html">
-        <p class="card-eyebrow">Section 02</p>
-        <h2>Portfolio Management Map</h2>
-        <p>A shared evaluation language across strategic, commercial, and resource intensity dimensions.</p>
-      </a>
+      <blockquote>
+        "The challenge is operationalizing high-value bespoke partnerships across NYT premium brands without diluting creativity, overwhelming the team, or compromising long-term pipeline development."
+      </blockquote>
 
-      <a class="card" href="map-visualized.html">
-        <p class="card-eyebrow">Section 03</p>
-        <h2>The Map, Visualized</h2>
-        <p>An interactive bubble chart that plots partnerships by strategic value, commercial value, and resource intensity.</p>
-      </a>
+      <p>NYT has no shortage of opportunity. The harder question is which opportunities deserve organizational energy, how to scale the team's output thoughtfully, and how to build a 2027 pipeline while still executing 2026 — without losing the premium feel that makes NYT, NYT.</p>
 
-      <a class="card" href="partnership-types.html">
-        <p class="card-eyebrow">Section 04</p>
-        <h2>Partnership Types &amp; Pipeline</h2>
-        <p>Flagship, scalable recurring, experimental, and cultural moments — plus a clean pipeline view.</p>
-      </a>
+      <p>So the work isn't lead generation. It's prioritization, sequencing, and operating discipline. The shift I'd propose, and the spine of the rest of this site, is from reactive partnerships to portfolio management — managing the partnership book the way mature organizations manage an investment portfolio.</p>
 
-      <a class="card" href="modular-architecture.html">
-        <p class="card-eyebrow">Section 05</p>
-        <h2>Modular Partnership Architecture</h2>
-        <p>Standardize the backend; bespoke the frontend. Reusable building blocks instead of starting from scratch.</p>
-      </a>
+      <div class="pull-quote">
+        From reactive partnerships → portfolio management.
+      </div>
+    </section>
 
-      <a class="card" href="why-this-excites-me.html">
-        <p class="card-eyebrow">Section 06</p>
-        <h2>Why This Excites Me</h2>
-        <p>Where my BBC experience meets the NYT opportunity.</p>
-      </a>
+    <!-- ─── SECTION 02: PORTFOLIO MANAGEMENT MAP ──────────────────────── -->
+    <section id="portfolio-management-map" class="section-block section-page">
+      <p class="section-eyebrow">Section 02 &middot; The New York Times Advertising Partnerships</p>
+      <h1>Portfolio Management Map</h1>
 
-      <a class="card" href="about.html">
-        <p class="card-eyebrow">Section 07</p>
-        <h2>About Efe</h2>
-        <p>Career, the JetBlue case, and why The Times specifically.</p>
-      </a>
+      <p>A shared evaluation language Dao and I can use to decide what deserves organizational energy. The map evaluates partnerships across three dimensions — Strategic Value, Commercial Value, and Resource Intensity — using a consistent set of metrics. It enables internal alignment, prioritization, resource planning, and pipeline forecasting.</p>
 
-    </div>
+      <h2>Step 1 — Strategic Evaluation</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Evaluation Prompt</th>
+              <th>Input Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Growth Potential</td>
+              <td>Can this drive subscriber growth, retention, or audience engagement?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Audience Expansion</td>
+              <td>Does this reach new audiences, categories, or communities?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Brand Alignment</td>
+              <td>Does this strengthen NYT's premium positioning and values?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Cross-Brand Ecosystem</td>
+              <td>Which NYT properties participate?</td>
+              <td>Multi-select</td>
+            </tr>
+            <tr>
+              <td>Innovation Value</td>
+              <td>Does this introduce new partnership models, formats, or capabilities?</td>
+              <td>1–5 score slider</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Step 2 — Commercial Evaluation</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Evaluation Prompt</th>
+              <th>Input Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Revenue Potential</td>
+              <td>What is the estimated annual revenue potential?</td>
+              <td>Numeric ($)</td>
+            </tr>
+            <tr>
+              <td>Production Cost</td>
+              <td>What is the estimated production and execution cost?</td>
+              <td>Numeric ($)</td>
+            </tr>
+            <tr>
+              <td>Margin Efficiency</td>
+              <td>Auto-calculated from revenue vs cost</td>
+              <td>Auto-calculated</td>
+            </tr>
+            <tr>
+              <td>Scalability</td>
+              <td>Can this framework be reused, expanded, or repeated efficiently?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Longevity Potential</td>
+              <td>One-time activation or long-term repeatable relationship?</td>
+              <td>1–5 score slider</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Step 3 — Resource Intensity Evaluation</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Evaluation Prompt</th>
+              <th>Input Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Production Complexity</td>
+              <td>How operationally complex is execution?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Cross-Functional Coordination</td>
+              <td>How many teams and stakeholders are required?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Timeline / Lead Time</td>
+              <td>How long is the planning and execution cycle?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Staffing Requirements</td>
+              <td>How much ongoing team bandwidth is required?</td>
+              <td>1–5 score slider</td>
+            </tr>
+            <tr>
+              <td>Custom Asset Development</td>
+              <td>Does this require bespoke creative, tech, or editorial development?</td>
+              <td>1–5 score slider</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 03: MAP VISUALIZED ────────────────────────────────── -->
+    <section id="map-visualized" class="section-block section-page">
+      <p class="section-eyebrow">Section 03 &middot; The New York Times Advertising Partnerships</p>
+      <h1>The Map, Visualized</h1>
+
+      <p>Each bubble represents a partnership archetype plotted across three dimensions simultaneously: <strong>Strategic Value</strong> (x-axis), <strong>Commercial Value</strong> (y-axis), and <strong>Resource Intensity</strong> (bubble size — larger means more resource-intensive). Color indicates which area of the NYT ecosystem the partnership primarily serves.</p>
+
+      <p>The upper-right quadrant is the portfolio sweet spot: high strategic and commercial value. The goal is to migrate more partnerships there over time while managing resource intensity.</p>
+
+      <div class="chart-outer">
+        <span class="axis-label axis-y-label">Commercial Value →</span>
+        <div class="chart-container" id="bubble-chart">
+          <canvas id="bubble-canvas"></canvas>
+        </div>
+        <div class="axis-label axis-x-label">Strategic Value →</div>
+      </div>
+
+      <p class="chart-note">Hover over a bubble to see partnership details. Bubble size = resource intensity.</p>
+
+      <div class="chart-legend" id="chart-legend"></div>
+
+      <div id="chart-tooltip" class="chart-tooltip"></div>
+
+      <h2>Reading the Chart</h2>
+      <p>Partnerships in the <strong>upper-right</strong> are priorities — high strategic and commercial value. Those in the <strong>lower-right</strong> may be strong brand plays that need commercial packaging. Those in the <strong>upper-left</strong> are revenue contributors that may not be deeply strategic. The <strong>lower-left</strong> warrants the hardest scrutiny.</p>
+      <p>Resource intensity (bubble size) tells you the cost of opportunity. A large bubble in the upper-right is worth the investment. A large bubble in the lower-left is a signal to restructure or sunset.</p>
+    </section>
+
+    <!-- ─── SECTION 04: PARTNERSHIP TYPES ─────────────────────────────── -->
+    <section id="partnership-types" class="section-block section-page">
+      <p class="section-eyebrow">Section 04 &middot; The New York Times Advertising Partnerships</p>
+      <h1>Partnership Types &amp; Pipeline</h1>
+
+      <p>Not all partnerships are created equal — and they shouldn't be managed the same way. A consistent typology makes it possible to staff, sequence, and forecast the portfolio without relitigating every deal from scratch. Below are the four partnership types I'd use to organize the NYT book, followed by a sample pipeline view.</p>
+
+      <h2>Flagship Partnerships</h2>
+      <p>Marquee, high-investment relationships that define what NYT partnership can look like at its best. These are the deals Dao and the team point to as proof of concept — category exclusives, multi-year commitments, full-ecosystem activations. They take the most planning, require the most cross-functional coordination, and carry the greatest reputational stakes. The portfolio should carry a small number of these at any time — enough to anchor the book, not so many they drain the team's capacity for everything else.</p>
+      <ul>
+        <li>Multi-year, category-exclusive partner arrangements</li>
+        <li>Full-ecosystem activations across NYT, The Athletic, Cooking, Games, Wirecutter</li>
+        <li>Custom editorial integrations with original content development</li>
+        <li>Major tentpole event sponsorships (e.g., NYT DealBook, The Athletic championships coverage)</li>
+      </ul>
+
+      <h2>Scalable Recurring Partnerships</h2>
+      <p>The engine of the portfolio. These are partnerships with defined, repeatable structures — newsletter sponsorships, podcast integrations, seasonal content programs — that can be templated, executed efficiently, and renewed without starting from zero. The goal here is to build a library of modular frameworks (see Section 05) that make these deals faster to close and cheaper to execute without compromising the partner experience.</p>
+      <ul>
+        <li>Newsletter sponsorship packages (daily, weekly, thematic)</li>
+        <li>Podcast host-read and mid-roll integrations</li>
+        <li>Seasonal and recurring cooking, games, or Wirecutter content programs</li>
+        <li>Athletic season-long presenting partnerships</li>
+      </ul>
+
+      <h2>Cultural Moments</h2>
+      <p>Time-bound partnerships tied to a specific cultural event, season, or news cycle. These have a clear start and end, and their value is often in timeliness and association rather than long-term integration. They require surge capacity — the ability to move fast — but don't demand the same multi-month planning runway as flagship deals. The pitch here is relevance: a partner aligned with a major news moment or cultural beat gets audience attention that money alone can't buy.</p>
+      <ul>
+        <li>Election cycle partnerships and political advertising integrations</li>
+        <li>Olympics, World Cup, and major sports event co-sponsorships (Athletic)</li>
+        <li>Holiday and seasonal branded content programs (Cooking, Wirecutter gift guides)</li>
+        <li>Breaking news or cultural moment fast-turn activations</li>
+      </ul>
+
+      <h2>Experimental &amp; Standalone</h2>
+      <p>This bucket is intentional — and important. Not every interesting idea fits a template. Experimental partnerships are how NYT tests new models, formats, and categories before they become standard offerings. The discipline is to run these as bounded pilots: defined scope, clear success metrics, and an explicit decision point at the end (scale it, template it, or sunset it). Without that discipline, experimental becomes a euphemism for under-resourced and over-promised.</p>
+      <ul>
+        <li>New format pilots (immersive audio, AR/VR, shoppable editorial)</li>
+        <li>Category entries (health, finance, travel) where partnership models are still being defined</li>
+        <li>Platform-native experiments (social, streaming, live)</li>
+        <li>International partnership tests outside the US market</li>
+      </ul>
+
+      <hr>
+
+      <h2>Sample Pipeline View</h2>
+      <p>A simplified view of how a managed portfolio might look across stages. The real version would live in a shared tracker, but the structure below illustrates the sequencing logic.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Partner</th>
+              <th>Type</th>
+              <th>Stage</th>
+              <th>Brand(s)</th>
+              <th>Est. Close</th>
+              <th>Est. Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Luxury Auto Brand</td>
+              <td><span class="badge badge-flagship">Flagship</span></td>
+              <td>Proposal</td>
+              <td>NYT + Athletic</td>
+              <td>Q2 2026</td>
+              <td>$2.4M</td>
+            </tr>
+            <tr>
+              <td>Global Financial Services Co.</td>
+              <td><span class="badge badge-flagship">Flagship</span></td>
+              <td>Negotiation</td>
+              <td>Multi-Brand</td>
+              <td>Q3 2026</td>
+              <td>$3.8M</td>
+            </tr>
+            <tr>
+              <td>Premium Food Brand</td>
+              <td><span class="badge badge-recurring">Recurring</span></td>
+              <td>Closed</td>
+              <td>Cooking</td>
+              <td>Ongoing</td>
+              <td>$480K/yr</td>
+            </tr>
+            <tr>
+              <td>Consumer Electronics</td>
+              <td><span class="badge badge-recurring">Recurring</span></td>
+              <td>Renewal</td>
+              <td>Wirecutter</td>
+              <td>Q1 2026</td>
+              <td>$620K/yr</td>
+            </tr>
+            <tr>
+              <td>Major Sports Apparel</td>
+              <td><span class="badge badge-cultural">Cultural Moment</span></td>
+              <td>Scoping</td>
+              <td>Athletic</td>
+              <td>Q3 2026</td>
+              <td>$900K</td>
+            </tr>
+            <tr>
+              <td>Travel &amp; Hospitality Brand</td>
+              <td><span class="badge badge-cultural">Cultural Moment</span></td>
+              <td>Outreach</td>
+              <td>NYT</td>
+              <td>Q4 2026</td>
+              <td>$750K</td>
+            </tr>
+            <tr>
+              <td>Gaming Platform</td>
+              <td><span class="badge badge-experimental">Experimental</span></td>
+              <td>Pilot</td>
+              <td>Games</td>
+              <td>TBD</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Health &amp; Wellness Brand</td>
+              <td><span class="badge badge-experimental">Experimental</span></td>
+              <td>Scoping</td>
+              <td>NYT + Cooking</td>
+              <td>TBD</td>
+              <td>TBD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 05: MODULAR ARCHITECTURE ──────────────────────────── -->
+    <section id="modular-architecture" class="section-block section-page">
+      <p class="section-eyebrow">Section 05 &middot; The New York Times Advertising Partnerships</p>
+      <h1>Modular Partnership Architecture</h1>
+
+      <p>The tension in premium partnership work is real: partners want bespoke, but bespoke doesn't scale. Every deal built from scratch taxes the team, stretches timelines, and makes it harder to forecast capacity. The answer isn't to lower standards — it's to separate the layers.</p>
+
+      <blockquote>
+        Standardize the backend. Bespoke the frontend.
+      </blockquote>
+
+      <p>A modular architecture means the team builds a library of proven, reusable building blocks — content formats, distribution mechanisms, measurement frameworks, approval workflows — and then assembles them in partner-specific combinations. The partner experiences something designed for them. The team is working from a tested toolkit, not a blank page.</p>
+
+      <p>This is how the BBC's commercial partnerships team operated at scale: a defined menu of partnership components that could be combined, sequenced, and priced flexibly, without requiring bespoke production on every engagement. The result was faster closes, cleaner delivery, and stronger renewal rates — because both sides knew what they were getting.</p>
+
+      <h2>The Building Blocks</h2>
+      <p>Each module is a discrete, tested component with a defined scope, production cost, and delivery timeline. Partnerships are assembled from combinations of modules. A flagship deal might use eight modules across three brands. A recurring newsletter deal might use two.</p>
+
+      <div class="module-grid">
+        <div class="module-card">
+          <h4>Content Formats</h4>
+          <p>Branded editorial, sponsored newsletters, native articles, recipe integrations, puzzle activations, Wirecutter-style reviews, podcast segments, video series.</p>
+        </div>
+        <div class="module-card">
+          <h4>Distribution Channels</h4>
+          <p>Homepage, section fronts, email newsletters, push notifications, social amplification, podcast feed, app placements, search integration.</p>
+        </div>
+        <div class="module-card">
+          <h4>Event &amp; Experiential</h4>
+          <p>Presenting sponsorships, hosted dinner or salon, press event integration, live panel or broadcast co-production, awards sponsorship.</p>
+        </div>
+        <div class="module-card">
+          <h4>Data &amp; Intelligence</h4>
+          <p>Proprietary audience insight reports, co-branded research, category trend analysis using NYT subscriber and behavioral data.</p>
+        </div>
+        <div class="module-card">
+          <h4>Audience Access</h4>
+          <p>Subscriber co-marketing, lookalike targeting, contextual category exclusivity, first-look audience access for new products or services.</p>
+        </div>
+        <div class="module-card">
+          <h4>Measurement &amp; Attribution</h4>
+          <p>Brand lift studies, attention metrics, subscription influence modeling, e-commerce attribution, cross-brand reach and frequency reporting.</p>
+        </div>
+        <div class="module-card">
+          <h4>Cross-Brand Bundles</h4>
+          <p>Pre-packaged multi-property combinations (e.g., NYT + Athletic sports package; Cooking + Wirecutter home &amp; lifestyle bundle) with unified reporting.</p>
+        </div>
+        <div class="module-card">
+          <h4>Creative Services</h4>
+          <p>T Brand Studio integration, custom visual identity development, branded content production, partner-facing creative briefing and approval workflows.</p>
+        </div>
+        <div class="module-card">
+          <h4>Renewal &amp; Expansion</h4>
+          <p>Defined renewal review cadence, expansion trigger criteria, performance benchmarks, multi-year pricing structures, category exclusivity renewal terms.</p>
+        </div>
+      </div>
+
+      <h2>How It Works in Practice</h2>
+      <p>When a new partner conversation begins, the team isn't starting from scratch — they're consulting the module library and scoping which combination fits the partner's goals, budget, and timeline. This changes the sales conversation: instead of "what would you like?", it becomes "here are the three partnership constructs that fit your objectives — let's choose and customize."</p>
+
+      <p>The architecture also makes resource planning tractable. Each module has a known production cost, a known lead time, and a known team requirement. When the portfolio manager looks at the Q3 pipeline, they can estimate staffing needs against the module composition of each deal in progress — before those deals close.</p>
+
+      <h2>What This Unlocks</h2>
+      <ul>
+        <li><strong>Faster time-to-close:</strong> Partners see structured options rather than an open brief; decisions are easier and faster.</li>
+        <li><strong>Cleaner delivery:</strong> Teams execute against known templates, not one-off production specs.</li>
+        <li><strong>Better renewal rates:</strong> Partners who understood what they bought are more likely to renew and expand.</li>
+        <li><strong>Portfolio forecasting:</strong> Module-level costing enables real capacity planning across the team.</li>
+        <li><strong>Equity across brands:</strong> Every NYT property benefits from the same modular toolkit — Cooking and Games partnerships get the same operational discipline as NYT flagship deals.</li>
+      </ul>
+    </section>
+
+    <!-- ─── SECTION 06: WHY THIS EXCITES ME ───────────────────────────── -->
+    <section id="why-this-excites-me" class="section-block section-page">
+      <p class="section-eyebrow">Section 06 &middot; The New York Times Advertising Partnerships</p>
+      <h1>Why This Excites Me</h1>
+
+      <p>The straightforward answer is the one I'd give in any interview: NYT is the most credible journalism organization in the world, the partnership opportunity is genuinely complex, and the role has real strategic scope. All true. But that's the polished version. Here's the more honest one.</p>
+
+      <h2>The BBC Parallel</h2>
+      <p>I spent years at the BBC working on commercial partnerships in an environment that had most of the same structural tensions NYT has now: world-class editorial with deep audience trust, a commercial operation trying to monetize that trust without degrading it, multiple premium brands under one roof, and the constant pressure to scale without losing what made it worth scaling.</p>
+
+      <p>The BBC's answer — at least in the commercial partnerships work I was part of — was to build operating discipline that respected the editorial firewall while still delivering commercial value at scale. That meant clear frameworks, modular approaches, and a team culture that was proud of the quality bar, not resentful of it.</p>
+
+      <p>When I read the job description for this role and thought about what I'd heard about where NYT's partnership operation is, I saw the same inflection point. The demand is there. The brands are extraordinary. The question is how you build the operating layer that lets you say yes to the right things, faster, without burning the team or diluting the product.</p>
+
+      <p>That is the exact problem I want to work on.</p>
+
+      <h2>The Multi-Brand Opportunity</h2>
+      <p>What NYT has that the BBC didn't — at least not in the same way — is a genuinely differentiated multi-brand portfolio where the brands actually mean something distinct to distinct audiences. The Athletic isn't a poor man's NYT Sports section. Cooking isn't a recipe appendix. Wirecutter built its reputation on editorial independence from commercial pressure. Games has a daily active user base with remarkable engagement metrics.</p>
+
+      <p>That portfolio is a commercial asset that is, I think, still being discovered. Not because the team isn't talented — clearly they are — but because the frameworks for cross-brand partnership development at this scale are still being invented. The JetBlue case I describe in the About section is one small data point in that direction: what happens when you build a partnership that draws on multiple properties' strengths simultaneously, with a coherent story for the partner about why the combination is worth more than the parts.</p>
+
+      <h2>What I'd Bring</h2>
+      <p>Operating experience in premium multi-brand environments. A genuine affection for the editorial product — I am, embarrassingly, a subscriber to four of the five NYT properties. A bias toward frameworks and tools that help teams make faster, better decisions rather than frameworks that create bureaucracy. And a track record of building partner relationships that renew, because the first deal was delivered clearly and the partner understood what they got.</p>
+
+      <p>I'm not coming in with the answer. I'm coming in with the right questions and enough experience to build the answer alongside Dao and the team.</p>
+
+      <div class="pull-quote">
+        The demand is there. The brands are extraordinary. The question is how you build the operating layer.
+      </div>
+    </section>
+
+    <!-- ─── SECTION 07: ABOUT ──────────────────────────────────────────── -->
+    <section id="about" class="section-block section-page">
+      <p class="section-eyebrow">Section 07 &middot; The New York Times Advertising Partnerships</p>
+      <h1>About Efe</h1>
+
+      <div class="about-intro">
+        <span class="name">Efe Akbulut</span>
+        <span class="tagline">Partnerships &amp; Commercial Strategy</span>
+      </div>
+
+      <img class="wordmark"
+           src="assets/advertising-partnerships-wordmark.png"
+           alt="The New York Times Advertising Partnerships">
+
+      <h2>Career in Brief</h2>
+      <p>My career has been built at the intersection of premium media brands and commercial partnership development. I've worked with organizations where the brand is the product — where the editorial reputation is both the asset and the constraint, and where the job is to grow commercial relationships without ever making the editorial team feel like they've been sold out.</p>
+
+      <p>That background includes significant time in international media at the BBC, where I worked on commercial partnerships across multiple content brands and developed the operating frameworks that are the intellectual foundation for everything described on this site. Before that, brand-side and agency experience that taught me what partners actually need from these relationships — and why so many partnerships underperform despite good intentions on both sides.</p>
+
+      <p><em class="placeholder-note">Full career timeline and specific role history to be added here. (Placeholder — to be expanded.)</em></p>
+
+      <h2>The JetBlue Case</h2>
+      <p>The partnership I'm most proud of — and most instructive for the NYT role — is a multi-brand content and distribution partnership I developed with JetBlue. The core insight was that JetBlue didn't need another advertising placement. They needed a way to tell a coherent story about travel, lifestyle, and discovery to an audience that was both aspirational and actually traveling.</p>
+
+      <p>The solution was a partnership that drew on multiple content properties simultaneously: travel-oriented editorial, food and restaurant content, destination-specific programming, and audience targeting that mapped to JetBlue's route network. The deal was structured modularly — each component had a clear scope and deliverable — which made it possible to expand in year two without renegotiating the entire relationship from scratch.</p>
+
+      <p>The outcome: a multi-year renewal, an expanded scope, and a case study that became a template for how to pitch cross-brand partnerships to travel and hospitality categories going forward.</p>
+
+      <p><em class="placeholder-note">Specific revenue figures, timeline, and outcome metrics to be added here. (Placeholder — to be expanded.)</em></p>
+
+      <h2>Why The Times Specifically</h2>
+      <p>I've been deliberate about where I've invested my career, and I'm being deliberate here. The New York Times is not just the biggest opportunity in media partnerships right now — it's the most interesting. The combination of editorial ambition, brand portfolio complexity, audience depth, and the specific inflection point the partnerships operation is at makes this a once-in-a-career problem to work on.</p>
+
+      <p>I also think the work matters beyond the commercial outcome. NYT's ability to fund its journalism depends, in part, on the health and growth of its commercial operations. That's a relationship I take seriously. The best partnership work I've done has always been in service of something larger than the deal itself — and this role has that quality in abundance.</p>
+
+      <p>I want to build something here. Not just execute a pipeline. Build the operating model, the frameworks, the team culture, and the partner relationships that compound over time. That's the pitch.</p>
+
+      <hr>
+
+      <p style="font-family: var(--sans); font-size: 13px; color: var(--muted);">
+        This site was built for Dao as a thought-starter, not a finished document. Every section is a conversation opener. I'm looking forward to the conversation.
+      </p>
+    </section>
 
   </main>
 
-  <script src="nav.js" defer></script>
+  <script>
+    // ── Bubble chart ───────────────────────────────────────────────────────
+    const BRANDS = [
+      { key: "nyt",          label: "The New York Times",        color: "#d62828" },
+      { key: "athletic",     label: "The Athletic",              color: "#1e5089" },
+      { key: "cooking",      label: "NYT Cooking",               color: "#4f7b2d" },
+      { key: "wirecutter",   label: "Wirecutter",                color: "#c8a028" },
+      { key: "games",        label: "NYT Games",                 color: "#6e3fa3" },
+      { key: "multi",        label: "Multi-Brand Ecosystem",     color: "#121212" },
+      { key: "experimental", label: "Experimental / Standalone", color: "#888888" },
+    ];
+
+    const PARTNERSHIPS = [
+      { name: "Marquee Event Sponsorship",  brand: "nyt",          sv: 4.8, cv: 4.5, ri: 5.0, note: "High-touch, flagship activation" },
+      { name: "Editorial Integration",      brand: "nyt",          sv: 4.5, cv: 3.8, ri: 3.5, note: "Brand journalism partnership" },
+      { name: "Athletic Presenting Partner",brand: "athletic",     sv: 4.2, cv: 4.8, ri: 4.0, note: "Season-long sports partnership" },
+      { name: "Cooking Studio Series",      brand: "cooking",      sv: 3.8, cv: 3.5, ri: 3.8, note: "Co-branded recipe content" },
+      { name: "Wirecutter Commerce Deal",   brand: "wirecutter",   sv: 2.5, cv: 4.6, ri: 2.0, note: "Affiliate + editorial integration" },
+      { name: "Games Branded Puzzle",       brand: "games",        sv: 3.2, cv: 3.0, ri: 2.5, note: "Custom puzzle or seasonal game" },
+      { name: "Cross-Brand Tentpole",       brand: "multi",        sv: 5.0, cv: 4.8, ri: 5.0, note: "Full-ecosystem multi-brand deal" },
+      { name: "Newsletter Sponsorship",     brand: "nyt",          sv: 2.8, cv: 4.2, ri: 1.5, note: "High-frequency, scalable" },
+      { name: "Podcast Integration",        brand: "athletic",     sv: 3.5, cv: 3.8, ri: 2.0, note: "Mid-roll + host read" },
+      { name: "Cultural Moment Activation", brand: "nyt",          sv: 4.0, cv: 3.2, ri: 4.2, note: "Time-limited cultural event tie-in" },
+      { name: "Data Intelligence Report",   brand: "multi",        sv: 4.3, cv: 3.6, ri: 3.0, note: "Proprietary audience insights product" },
+      { name: "Experimental Format Pilot",  brand: "experimental", sv: 3.0, cv: 2.0, ri: 3.5, note: "New format test — undefined upside" },
+      { name: "Games Daily Challenge",      brand: "games",        sv: 2.6, cv: 3.4, ri: 1.8, note: "Recurring branded challenge" },
+      { name: "Cooking Seasonal Campaign",  brand: "cooking",      sv: 3.2, cv: 3.9, ri: 2.8, note: "Holiday or seasonal co-brand" },
+    ];
+
+    function brandColor(key) {
+      return BRANDS.find(b => b.key === key)?.color || "#888";
+    }
+
+    function setupChart() {
+      const canvas = document.getElementById("bubble-canvas");
+      const container = document.getElementById("bubble-chart");
+      const tooltip = document.getElementById("chart-tooltip");
+      if (!canvas || !container) return;
+
+      const PAD = { top: 32, right: 32, bottom: 48, left: 48 };
+
+      function toCanvas(val, min, max, minPx, maxPx) {
+        return minPx + ((val - min) / (max - min)) * (maxPx - minPx);
+      }
+
+      function getBubbles(w, h) {
+        const dpr = window.devicePixelRatio;
+        const cw = w * dpr, ch = h * dpr;
+        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
+        const plotH = ch - PAD.top * dpr - PAD.bottom * dpr;
+        return PARTNERSHIPS.map(p => ({
+          ...p,
+          cx: PAD.left * dpr + toCanvas(p.sv, 0, 5.5, 0, plotW),
+          cy: PAD.top * dpr + toCanvas(p.cv, 5.5, 0, 0, plotH),
+          r:  (p.ri / 5) * 38 * dpr + 10 * dpr,
+        }));
+      }
+
+      function draw(w, h) {
+        const dpr = window.devicePixelRatio;
+        const ctx = canvas.getContext("2d");
+        const cw = canvas.width, ch = canvas.height;
+        ctx.clearRect(0, 0, cw, ch);
+
+        const plotL = PAD.left * dpr, plotT = PAD.top * dpr;
+        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
+        const plotH = ch - PAD.top * dpr - PAD.bottom * dpr;
+
+        ctx.strokeStyle = "#e2e2e2";
+        ctx.lineWidth = 1 * dpr;
+        for (let i = 1; i <= 5; i++) {
+          const x = plotL + (i / 5.5) * plotW;
+          ctx.beginPath(); ctx.moveTo(x, plotT); ctx.lineTo(x, plotT + plotH); ctx.stroke();
+          const y = plotT + (i / 5.5) * plotH;
+          ctx.beginPath(); ctx.moveTo(plotL, y); ctx.lineTo(plotL + plotW, y); ctx.stroke();
+        }
+
+        const midX = plotL + toCanvas(2.75, 0, 5.5, 0, plotW);
+        const midY = plotT + toCanvas(2.75, 5.5, 0, 0, plotH);
+        ctx.fillStyle = "rgba(247, 230, 0, 0.07)";
+        ctx.fillRect(midX, plotT, plotL + plotW - midX, midY - plotT);
+
+        ctx.strokeStyle = "#121212";
+        ctx.lineWidth = 1.5 * dpr;
+        ctx.beginPath(); ctx.moveTo(plotL, plotT); ctx.lineTo(plotL, plotT + plotH); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(plotL, plotT + plotH); ctx.lineTo(plotL + plotW, plotT + plotH); ctx.stroke();
+
+        const bubbles = getBubbles(w, h);
+        bubbles.forEach(b => {
+          ctx.beginPath();
+          ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
+          ctx.fillStyle = brandColor(b.brand) + "33";
+          ctx.fill();
+          ctx.strokeStyle = brandColor(b.brand);
+          ctx.lineWidth = 2 * dpr;
+          ctx.stroke();
+        });
+
+        canvas._bubbles = bubbles;
+      }
+
+      function resize() {
+        const w = container.offsetWidth;
+        const h = container.offsetHeight;
+        canvas.width = w * window.devicePixelRatio;
+        canvas.height = h * window.devicePixelRatio;
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        draw(w, h);
+      }
+
+      function getHovered(mx, my) {
+        const dpr = window.devicePixelRatio;
+        const rect = canvas.getBoundingClientRect();
+        const cx = (mx - rect.left) * dpr;
+        const cy = (my - rect.top) * dpr;
+        const bubbles = canvas._bubbles || [];
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          const b = bubbles[i];
+          if (Math.sqrt((cx - b.cx) ** 2 + (cy - b.cy) ** 2) <= b.r) return b;
+        }
+        return null;
+      }
+
+      canvas.addEventListener("mousemove", e => {
+        const b = getHovered(e.clientX, e.clientY);
+        if (b) {
+          tooltip.innerHTML = `<strong>${b.name}</strong>${b.note}<br><span style="opacity:.7">SV: ${b.sv} &nbsp; CV: ${b.cv} &nbsp; RI: ${b.ri}</span>`;
+          tooltip.classList.add("visible");
+          tooltip.style.left = (e.clientX + 14) + "px";
+          tooltip.style.top  = (e.clientY - 10) + "px";
+          canvas.style.cursor = "pointer";
+        } else {
+          tooltip.classList.remove("visible");
+          canvas.style.cursor = "default";
+        }
+      });
+
+      canvas.addEventListener("mouseleave", () => tooltip.classList.remove("visible"));
+      window.addEventListener("resize", resize);
+      resize();
+
+      const legend = document.getElementById("chart-legend");
+      BRANDS.forEach(b => {
+        const item = document.createElement("div");
+        item.className = "legend-item";
+        item.innerHTML = `<span class="legend-dot" style="background:${b.color}"></span><span>${b.label}</span>`;
+        legend.appendChild(item);
+      });
+    }
+
+    // ── Scroll dot indicator ───────────────────────────────────────────────
+    const SECTION_IDS = [
+      "what-i-heard",
+      "portfolio-management-map",
+      "map-visualized",
+      "partnership-types",
+      "modular-architecture",
+      "why-this-excites-me",
+      "about",
+    ];
+
+    function setupDots() {
+      const dots = Array.from(document.querySelectorAll(".scroll-dot"));
+      const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
+      if (!dots.length || !sections.length) return;
+
+      // Track intersection ratios per section
+      const ratios = new Array(sections.length).fill(0);
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const idx = sections.indexOf(entry.target);
+          if (idx !== -1) ratios[idx] = entry.intersectionRatio;
+        });
+
+        // Activate dot for section with highest intersection ratio
+        const maxIdx = ratios.indexOf(Math.max(...ratios));
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === maxIdx));
+      }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
+
+      sections.forEach(s => observer.observe(s));
+    }
+
+    // ── Fade-in on scroll ──────────────────────────────────────────────────
+    function setupFadeIn() {
+      const blocks = document.querySelectorAll(".section-block");
+      if (!blocks.length) return;
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      blocks.forEach(b => observer.observe(b));
+    }
+
+    // ── Init ───────────────────────────────────────────────────────────────
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        setupChart();
+        setupDots();
+        setupFadeIn();
+      });
+    } else {
+      setupChart();
+      setupDots();
+      setupFadeIn();
+    }
+  </script>
+
 </body>
 </html>
