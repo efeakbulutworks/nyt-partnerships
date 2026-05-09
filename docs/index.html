@@ -34,7 +34,7 @@
     }
     .section-page .map-explainer {
       font-family: Lora, Georgia, serif;
-      font-size: 11px;
+      font-size: 13px;
       font-style: italic;
       line-height: 1.05;
       color: var(--muted);
@@ -88,7 +88,7 @@
       position: relative;
       border: 0;
       background: #fff;
-      margin: 0 0 8px;
+      margin: 0;
     }
     .map-chart-column {
       width: 100%;
@@ -125,7 +125,7 @@
       font-size: 12px;
       line-height: 1.2;
       color: var(--muted);
-      margin-top: 8px;
+      margin-top: 2px;
       margin-bottom: 0;
       text-align: center;
       max-width: none;
@@ -134,7 +134,7 @@
     .map-chart-column .map-clear-link {
       display: block;
       width: 100%;
-      margin-top: 8px;
+      margin-top: 4px;
       color: #c62828;
       text-align: right;
       font-weight: 600;
@@ -450,7 +450,7 @@
             <canvas id="bubble-canvas"></canvas>
           </div>
           <p class="chart-note">Hover over a bubble to see details.</p>
-          <a href="#" class="map-clear-link" id="clear-submission" style="display:none;">Clear my submission</a>
+          <a href="#" class="map-clear-link" id="clear-submission">Reset map</a>
         </div>
       </div>
 
@@ -1000,15 +1000,11 @@
       window.chartAddUserBubble = function (data) {
         userBubble = data;
         resize();
-        const cl = document.getElementById("clear-submission");
-        if (cl) cl.style.display = "block";
       };
 
       window.chartClearUserBubble = function () {
         userBubble = null;
         resize();
-        const cl = document.getElementById("clear-submission");
-        if (cl) cl.style.display = "none";
       };
     }
 
