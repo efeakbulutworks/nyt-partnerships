@@ -1,7 +1,7 @@
 /**
- * Evaluation flow — Pages 2, 3, 4.
+ * Evaluation flow — single combined form.
  * Manages window.partnershipDraft, star ratings, brand cards,
- * numeric inputs, live margin display, button gating, and submit.
+ * timeline pill counter, numeric inputs, live margin display, submit.
  */
 (function () {
   'use strict';
@@ -9,10 +9,20 @@
   // ── Global draft ────────────────────────────────────────────────────────────
 
   window.partnershipDraft = {
-    name: '', brands: [],
-    growth: 0, audience: 0, alignment: 0, innovation: 0,
-    revenue: 0, cost: 0, scalability: 0, longevity: 0,
-    complexity: 0, coordination: 0, timeline: 0, staffing: 0, customization: 0,
+    name: '',
+    brands: [],
+    // Strategic
+    brandAlignment: 0,
+    growthAudience: 0,
+    innovationScalability: 0,
+    // Commercial
+    revenue: 0,
+    cost: 0,
+    repeatability: 0,
+    // Resource
+    complexityCoordination: 0,
+    timelineQuarters: 0,
+    staffing: 0,
   };
 
   // ── Star ratings ────────────────────────────────────────────────────────────
@@ -39,10 +49,25 @@
       star.addEventListener('click', () => {
         window.partnershipDraft[field] = i + 1;
         renderStars(stars, i + 1);
-        updateButtons();
+        updateSubmit();
       });
     });
     renderStars(stars, 0);
+  }
+
+  // ── Timeline pill counter ────────────────────────────────────────────────────
+
+  function setupTimelinePills() {
+    document.querySelectorAll('.timeline-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const val = parseInt(pill.dataset.quarters, 10);
+        window.partnershipDraft.timelineQuarters = val;
+        document.querySelectorAll('.timeline-pill').forEach(p => {
+          p.classList.toggle('selected', parseInt(p.dataset.quarters, 10) === val);
+        });
+        updateSubmit();
+      });
+    });
   }
 
   // ── Brand cards ─────────────────────────────────────────────────────────────
@@ -75,7 +100,7 @@
           card.classList.add('selected');
         }
         updateEcosystemDisplay();
-        updateButtons();
+        updateSubmit();
       });
     });
   }
@@ -86,19 +111,17 @@
     inputEl.addEventListener('input', () => {
       const raw = inputEl.value.replace(/[^0-9]/g, '');
       window.partnershipDraft[field] = raw ? parseInt(raw, 10) : 0;
-      // Reformat with commas
       if (raw) {
-        const pos = inputEl.selectionStart;
+        const pos     = inputEl.selectionStart;
         const prevLen = inputEl.value.length;
         inputEl.value = parseInt(raw, 10).toLocaleString('en-US');
-        // Restore cursor roughly
-        const delta = inputEl.value.length - prevLen;
+        const delta   = inputEl.value.length - prevLen;
         inputEl.setSelectionRange(pos + delta, pos + delta);
       } else {
         inputEl.value = '';
       }
       updateMarginDisplay();
-      updateButtons();
+      updateSubmit();
     });
   }
 
@@ -106,37 +129,29 @@
     const margin = window.partnershipDraft.revenue - window.partnershipDraft.cost;
     const el = document.getElementById('margin-display');
     if (!el) return;
-    const fmt = Math.abs(margin).toLocaleString('en-US');
+    const fmt  = Math.abs(margin).toLocaleString('en-US');
     const sign = margin < 0 ? '−$' : '$';
     el.textContent = `Estimated margin: ${sign}${fmt}`;
-    el.className = 'live-margin-display ' + (margin >= 0 ? 'positive' : 'negative');
+    el.className   = 'live-margin-display ' + (margin >= 0 ? 'positive' : 'negative');
   }
 
-  // ── Button validation ───────────────────────────────────────────────────────
+  // ── Submit button gating ────────────────────────────────────────────────────
 
-  function updateButtons() {
-    const d = window.partnershipDraft;
-
-    const btn1 = document.getElementById('continue-step-1');
-    if (btn1) {
-      const ok = d.name.trim().length > 0
-        && d.brands.length > 0
-        && d.growth > 0 && d.audience > 0 && d.alignment > 0 && d.innovation > 0;
-      btn1.disabled = !ok;
-    }
-
-    const btn2 = document.getElementById('continue-step-2');
-    if (btn2) {
-      const ok = d.revenue > 0 && d.scalability > 0 && d.longevity > 0;
-      btn2.disabled = !ok;
-    }
-
-    const btn3 = document.getElementById('submit-step-3');
-    if (btn3) {
-      const ok = d.complexity > 0 && d.coordination > 0
-        && d.timeline > 0 && d.staffing > 0 && d.customization > 0;
-      btn3.disabled = !ok;
-    }
+  function updateSubmit() {
+    const d   = window.partnershipDraft;
+    const btn = document.getElementById('submit-eval');
+    if (!btn) return;
+    const ok = d.name.trim().length > 0
+      && d.brands.length > 0
+      && d.brandAlignment > 0
+      && d.growthAudience > 0
+      && d.innovationScalability > 0
+      && d.revenue > 0
+      && d.repeatability > 0
+      && d.complexityCoordination > 0
+      && d.timelineQuarters > 0
+      && d.staffing > 0;
+    btn.disabled = !ok;
   }
 
   // ── Scoring ─────────────────────────────────────────────────────────────────
@@ -150,6 +165,14 @@
     return 5;
   }
 
+  function timelineScore(quarters) {
+    if (quarters <= 1) return 1;
+    if (quarters === 2) return 2;
+    if (quarters === 3) return 3;
+    if (quarters === 4) return 4;
+    return 5;
+  }
+
   const BRAND_COLORS = {
     times:      '#d62828',
     athletic:   '#1e5089',
@@ -160,23 +183,28 @@
   };
 
   function computeScores() {
-    const d = window.partnershipDraft;
+    const d   = window.partnershipDraft;
     const eco = ecosystemScore(d.brands);
 
-    const strategicX = (d.growth + d.audience + d.alignment + eco + d.innovation) / 5;
+    const strategicX = (
+      eco + d.brandAlignment + d.growthAudience + d.innovationScalability
+    ) / 4;
+
     const commercialY = (marginScore(d.revenue, d.cost) * 0.50)
-                      + (d.scalability * 0.25)
-                      + (d.longevity * 0.25);
-    const resourceIntensity = (d.complexity + d.coordination + d.timeline + d.staffing + d.customization) / 5;
+                      + (d.repeatability * 0.50);
+
+    const resourceIntensity = (
+      d.complexityCoordination + timelineScore(d.timelineQuarters) + d.staffing
+    ) / 3;
 
     const color = d.brands.length === 1
       ? (BRAND_COLORS[d.brands[0]] || '#121212')
       : '#121212';
 
     return {
-      sv: Math.round(strategicX * 10) / 10,
-      cv: Math.round(commercialY * 10) / 10,
-      ri: Math.round(resourceIntensity * 10) / 10,
+      sv:    Math.round(strategicX       * 10) / 10,
+      cv:    Math.round(commercialY      * 10) / 10,
+      ri:    Math.round(resourceIntensity * 10) / 10,
       color,
     };
   }
@@ -184,17 +212,17 @@
   // ── Submit ───────────────────────────────────────────────────────────────────
 
   function handleSubmit() {
-    const d = window.partnershipDraft;
+    const d      = window.partnershipDraft;
     const scores = computeScores();
 
     if (typeof window.chartAddUserBubble === 'function') {
       window.chartAddUserBubble({
-        name:   d.name,
-        brands: [...d.brands],
-        sv:     scores.sv,
-        cv:     scores.cv,
-        ri:     scores.ri,
-        color:  scores.color,
+        name:            d.name,
+        brands:          [...d.brands],
+        sv:              scores.sv,
+        cv:              scores.cv,
+        ri:              scores.ri,
+        color:           scores.color,
         isUserSubmitted: true,
       });
     }
@@ -207,46 +235,33 @@
   // ── Init ─────────────────────────────────────────────────────────────────────
 
   function init() {
-    // Partnership name input
     const nameInput = document.getElementById('partnership-name');
     if (nameInput) {
       nameInput.addEventListener('input', () => {
         window.partnershipDraft.name = nameInput.value;
-        updateButtons();
+        updateSubmit();
       });
     }
 
-    // Brand cards
     setupBrandCards();
-
-    // Star rating widgets
     document.querySelectorAll('.stars-rating').forEach(setupStars);
+    setupTimelinePills();
 
-    // Numeric inputs
     const revInput  = document.getElementById('revenue-input');
     const costInput = document.getElementById('cost-input');
     if (revInput)  setupNumericInput(revInput,  'revenue');
     if (costInput) setupNumericInput(costInput, 'cost');
 
-    // Continue / submit buttons
-    document.getElementById('continue-step-1')?.addEventListener('click', () => {
-      window.fullpageGoToId?.('step-commercial');
-    });
-    document.getElementById('continue-step-2')?.addEventListener('click', () => {
-      window.fullpageGoToId?.('step-resource');
-    });
-    document.getElementById('submit-step-3')?.addEventListener('click', handleSubmit);
+    document.getElementById('submit-eval')?.addEventListener('click', handleSubmit);
 
-    // Clear submission link on map page
     document.getElementById('clear-submission')?.addEventListener('click', e => {
       e.preventDefault();
       window.chartClearUserBubble?.();
     });
 
-    // Initial render
     updateEcosystemDisplay();
     updateMarginDisplay();
-    updateButtons();
+    updateSubmit();
   }
 
   if (document.readyState === 'loading') {
