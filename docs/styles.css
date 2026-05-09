@@ -397,87 +397,36 @@ body {
 }
 
 .brand-card {
-  appearance: none;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid var(--rule);
   background: #fff;
-  border: 1px solid var(--rule);
   border-radius: 6px;
-  padding: 18px 16px;
-  text-align: center;
   cursor: pointer;
-  aspect-ratio: 3 / 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  transition: background 0.2s ease, border-color 0.2s ease,
-              box-shadow 0.15s ease, transform 0.15s ease;
+  display: block;
+  transition: border-color 200ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 
-.brand-card:hover:not(.selected) {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+.brand-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+.brand-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
 }
 
-.brand-card[data-brand="times"]:hover:not(.selected)      { border-color: #d62828; }
-.brand-card[data-brand="athletic"]:hover:not(.selected)   { border-color: #1e5089; }
-.brand-card[data-brand="cooking"]:hover:not(.selected)    { border-color: #4f7b2d; }
-.brand-card[data-brand="wirecutter"]:hover:not(.selected) { border-color: #c8a028; }
-.brand-card[data-brand="games"]:hover:not(.selected)      { border-color: #6e3fa3; }
-.brand-card[data-brand="audio"]:hover:not(.selected)      { border-color: #1c8a8a; }
-
-.brand-card-wordmark {
-  font-family: "Playfair Display", Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  display: block;
-  transition: color 0.2s ease;
+/* Selected: thick brand-colored outline; border-color set via JS from data-color */
+.brand-card.selected {
+  border-width: 4px;
 }
-
-.brand-card-name {
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  display: block;
-  margin-top: 8px;
-  transition: color 0.2s ease;
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-
-.brand-card[data-brand="times"]      .brand-card-name { font-size: 28px; }
-.brand-card[data-brand="athletic"]   .brand-card-name { font-size: 21px; }
-.brand-card[data-brand="cooking"]    .brand-card-name { font-size: 28px; }
-.brand-card[data-brand="wirecutter"] .brand-card-name { font-size: 21px; }
-.brand-card[data-brand="games"]      .brand-card-name { font-size: 30px; }
-.brand-card[data-brand="audio"]      .brand-card-name { font-size: 30px; }
-
-.brand-card[data-brand="times"]      .brand-card-wordmark,
-.brand-card[data-brand="times"]      .brand-card-name      { color: #d62828; }
-.brand-card[data-brand="athletic"]   .brand-card-wordmark,
-.brand-card[data-brand="athletic"]   .brand-card-name      { color: #1e5089; }
-.brand-card[data-brand="cooking"]    .brand-card-wordmark,
-.brand-card[data-brand="cooking"]    .brand-card-name      { color: #4f7b2d; }
-.brand-card[data-brand="wirecutter"] .brand-card-wordmark,
-.brand-card[data-brand="wirecutter"] .brand-card-name      { color: #c8a028; }
-.brand-card[data-brand="games"]      .brand-card-wordmark,
-.brand-card[data-brand="games"]      .brand-card-name      { color: #6e3fa3; }
-.brand-card[data-brand="audio"]      .brand-card-wordmark,
-.brand-card[data-brand="audio"]      .brand-card-name      { color: #1c8a8a; }
-
-.brand-card[data-brand="times"].selected      { background: #d62828; border-color: #d62828; }
-.brand-card[data-brand="athletic"].selected   { background: #1e5089; border-color: #1e5089; }
-.brand-card[data-brand="cooking"].selected    { background: #4f7b2d; border-color: #4f7b2d; }
-.brand-card[data-brand="wirecutter"].selected { background: #c8a028; border-color: #c8a028; }
-.brand-card[data-brand="games"].selected      { background: #6e3fa3; border-color: #6e3fa3; }
-.brand-card[data-brand="audio"].selected      { background: #1c8a8a; border-color: #1c8a8a; }
-
-.brand-card.selected .brand-card-wordmark,
-.brand-card.selected .brand-card-name { color: #fff; }
 
 /* ── Ecosystem display ───────────────────────────────────────────────── */
 

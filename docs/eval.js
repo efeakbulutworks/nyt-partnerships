@@ -95,9 +95,11 @@
         if (idx >= 0) {
           window.partnershipDraft.brands.splice(idx, 1);
           card.classList.remove('selected');
+          card.style.borderColor = '';
         } else {
           window.partnershipDraft.brands.push(brand);
           card.classList.add('selected');
+          card.style.borderColor = card.dataset.color || '';
         }
         updateEcosystemDisplay();
         updateSubmit();
