@@ -11,11 +11,11 @@
       position: relative;
       border: 1px solid var(--rule);
       background: var(--card-bg);
-      margin: 32px 0 16px;
+      margin: 16px 0 8px;
     }
     #bubble-chart {
       width: 100%;
-      height: 520px;
+      height: 380px;
       position: relative;
     }
     #bubble-canvas {
@@ -33,7 +33,7 @@
     }
     .axis-x-label {
       text-align: center;
-      margin-top: 8px;
+      margin-top: 4px;
     }
     .axis-y-label {
       position: absolute;
@@ -66,18 +66,21 @@
       font-family: var(--sans);
       font-size: 12px;
       color: var(--muted);
-      margin-top: 8px;
+      margin-top: 4px;
     }
   </style>
 </head>
 <body>
   <script src="nav.js" defer></script>
   <script src="fullpage.js" defer></script>
+  <script src="eval.js" defer></script>
 
-  <!-- Scroll dot indicator — one dot per section -->
+  <!-- Scroll dot indicator — one dot per section (9 total) -->
   <div id="scroll-dots" aria-hidden="true">
     <div class="scroll-dot" data-section="what-i-heard"></div>
-    <div class="scroll-dot" data-section="portfolio-management-map"></div>
+    <div class="scroll-dot" data-section="step-strategic"></div>
+    <div class="scroll-dot" data-section="step-commercial"></div>
+    <div class="scroll-dot" data-section="step-resource"></div>
     <div class="scroll-dot" data-section="map-visualized"></div>
     <div class="scroll-dot" data-section="partnership-types"></div>
     <div class="scroll-dot" data-section="modular-architecture"></div>
@@ -108,7 +111,7 @@
 
     </div>
 
-    <!-- Region D: bobbing scroll indicator -->
+    <!-- Bobbing scroll indicator -->
     <div class="scroll-indicator" aria-hidden="true">
       <span class="scroll-indicator-arrow">↓</span>
       <span class="scroll-indicator-label">scroll</span>
@@ -116,143 +119,429 @@
 
   </section>
 
-  <!-- ─── SECTIONS 02–07 — inside content wrapper for max-width + padding ── -->
+  <!-- ─── SECTIONS 02–09 — inside content wrapper for max-width + padding ── -->
   <main class="content">
 
-    <!-- ─── SECTION 02: PORTFOLIO MANAGEMENT MAP ──────────────────────── -->
-    <section id="portfolio-management-map" class="section-block section-page">
-      <p class="section-eyebrow">Section 02 &middot; The New York Times Advertising Partnerships</p>
-      <h1>Portfolio Management Map</h1>
+    <!-- ─── PAGE 2: STEP 1 OF 3 — STRATEGIC EVALUATION ────────────────── -->
+    <section id="step-strategic" class="section-block section-step">
+      <div class="step-content">
 
-      <h2>Step 1 — Strategic Evaluation</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>Evaluation Prompt</th>
-              <th>Input Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Growth Potential</td>
-              <td>Can this drive subscriber growth, retention, or audience engagement?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Audience Expansion</td>
-              <td>Does this reach new audiences, categories, or communities?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Brand Alignment</td>
-              <td>Does this strengthen NYT's premium positioning and values?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Cross-Brand Ecosystem</td>
-              <td>Which NYT properties participate?</td>
-              <td>Multi-select</td>
-            </tr>
-            <tr>
-              <td>Innovation Value</td>
-              <td>Does this introduce new partnership models, formats, or capabilities?</td>
-              <td>1–5 score slider</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div>
+          <p class="step-eyebrow">STEP 1 OF 3 · STRATEGIC EVALUATION</p>
+          <div class="step-indicator" style="margin: 8px 0 12px;">
+            <div class="step-dot step-dot--active"></div>
+            <div class="step-dot"></div>
+            <div class="step-dot"></div>
+          </div>
+          <h1 class="step-h1">Tell me about the partnership.</h1>
+          <p class="step-subhead">We'll plot it on the map at the end.</p>
+        </div>
 
-      <h2>Step 2 — Commercial Evaluation</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>Evaluation Prompt</th>
-              <th>Input Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Revenue Potential</td>
-              <td>What is the estimated annual revenue potential?</td>
-              <td>Numeric ($)</td>
-            </tr>
-            <tr>
-              <td>Production Cost</td>
-              <td>What is the estimated production and execution cost?</td>
-              <td>Numeric ($)</td>
-            </tr>
-            <tr>
-              <td>Margin Efficiency</td>
-              <td>Auto-calculated from revenue vs cost</td>
-              <td>Auto-calculated</td>
-            </tr>
-            <tr>
-              <td>Scalability</td>
-              <td>Can this framework be reused, expanded, or repeated efficiently?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Longevity Potential</td>
-              <td>One-time activation or long-term repeatable relationship?</td>
-              <td>1–5 score slider</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="step-fields">
 
-      <h2>Step 3 — Resource Intensity Evaluation</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>Evaluation Prompt</th>
-              <th>Input Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Production Complexity</td>
-              <td>How operationally complex is execution?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Cross-Functional Coordination</td>
-              <td>How many teams and stakeholders are required?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Timeline / Lead Time</td>
-              <td>How long is the planning and execution cycle?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Staffing Requirements</td>
-              <td>How much ongoing team bandwidth is required?</td>
-              <td>1–5 score slider</td>
-            </tr>
-            <tr>
-              <td>Custom Asset Development</td>
-              <td>Does this require bespoke creative, tech, or editorial development?</td>
-              <td>1–5 score slider</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <!-- Field 1: Partnership name -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+              <span class="metric-title">Partnership name</span>
+            </div>
+            <input
+              class="text-input"
+              id="partnership-name"
+              type="text"
+              placeholder="e.g. JetBlue × Cooking Travel Series"
+              autocomplete="off">
+          </div>
+
+          <!-- Field 2: Brand picker -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+              <span class="metric-title">Which NYT brands are involved?</span>
+            </div>
+            <p class="metric-question">Pick one or more. Selecting multiple raises the Cross-Brand Ecosystem score.</p>
+            <div class="brand-cards">
+              <button class="brand-card" data-brand="times" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">The Times</span>
+              </button>
+              <button class="brand-card" data-brand="athletic" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">The Athletic</span>
+              </button>
+              <button class="brand-card" data-brand="cooking" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">Cooking</span>
+              </button>
+              <button class="brand-card" data-brand="wirecutter" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">Wirecutter</span>
+              </button>
+              <button class="brand-card" data-brand="games" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">Games</span>
+              </button>
+              <button class="brand-card" data-brand="audio" type="button">
+                <span class="brand-card-wordmark">The New York Times</span>
+                <span class="brand-card-name">Audio</span>
+              </button>
+            </div>
+            <p class="ecosystem-display" id="ecosystem-display">0 brands selected → Cross-Brand Ecosystem score: 1 / 5</p>
+          </div>
+
+          <!-- Fields 3–6: 4 star-rating metrics in 2×2 grid -->
+          <div class="metrics-2x2">
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+                <span class="metric-title">Growth Potential</span>
+              </div>
+              <p class="metric-question">Can this drive subscriber growth, retention, or audience engagement?</p>
+              <div class="stars-rating" data-field="growth" role="group" aria-label="Growth Potential rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                <span class="metric-title">Audience Expansion</span>
+              </div>
+              <p class="metric-question">Does this reach new audiences, categories, or communities?</p>
+              <div class="stars-rating" data-field="audience" role="group" aria-label="Audience Expansion rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span class="metric-title">Brand Alignment</span>
+              </div>
+              <p class="metric-question">Does this strengthen NYT's premium positioning and values?</p>
+              <div class="stars-rating" data-field="alignment" role="group" aria-label="Brand Alignment rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="9" y1="18" x2="15" y2="18"/>
+                  <line x1="10" y1="22" x2="14" y2="22"/>
+                  <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/>
+                </svg>
+                <span class="metric-title">Innovation Value</span>
+              </div>
+              <p class="metric-question">Does this introduce new partnership models, formats, or capabilities?</p>
+              <div class="stars-rating" data-field="innovation" role="group" aria-label="Innovation Value rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+          </div><!-- /metrics-2x2 -->
+
+        </div><!-- /step-fields -->
+
+        <div class="step-footer">
+          <button class="step-button" id="continue-step-1" disabled type="button">Continue to Step 2 →</button>
+        </div>
+
+      </div><!-- /step-content -->
     </section>
 
-    <!-- ─── SECTION 03: MAP VISUALIZED ────────────────────────────────── -->
+    <!-- ─── PAGE 3: STEP 2 OF 3 — COMMERCIAL EVALUATION ───────────────── -->
+    <section id="step-commercial" class="section-block section-step">
+      <div class="step-content">
+
+        <div>
+          <p class="step-eyebrow">STEP 2 OF 3 · COMMERCIAL EVALUATION</p>
+          <div class="step-indicator" style="margin: 8px 0 12px;">
+            <div class="step-dot step-dot--active"></div>
+            <div class="step-dot step-dot--active"></div>
+            <div class="step-dot"></div>
+          </div>
+          <h1 class="step-h1">What's the commercial shape?</h1>
+          <p class="step-subhead">Revenue, cost, margin, scalability. The Y axis on the map.</p>
+        </div>
+
+        <div class="step-fields">
+
+          <!-- Revenue -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+              <span class="metric-title">Revenue Potential</span>
+            </div>
+            <p class="metric-question">Potential revenue, in USD.</p>
+            <div class="numeric-input-wrap">
+              <span class="numeric-prefix">$</span>
+              <input class="numeric-input" id="revenue-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            </div>
+            <p class="revenue-note">NYT's threshold for serious partnerships starts at seven figures. Below $1M lands the bubble in the bottom band.</p>
+          </div>
+
+          <!-- Cost -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+              <span class="metric-title">Production Cost</span>
+            </div>
+            <p class="metric-question">Estimated production and execution cost, in USD.</p>
+            <div class="numeric-input-wrap">
+              <span class="numeric-prefix">$</span>
+              <input class="numeric-input" id="cost-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Margin (auto-calculated) -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="3" x2="12" y2="20"/>
+                <path d="M5 20h14"/>
+                <path d="M4 8l8-5 8 5"/>
+                <path d="M4 8l4 10h16l4-10" stroke="none"/>
+                <path d="M4 8l4.5 9h7l4.5-9"/>
+              </svg>
+              <span class="metric-title">Estimated margin</span>
+            </div>
+            <p id="margin-display" class="live-margin-display positive">Estimated margin: $0</p>
+            <p class="margin-note">Auto-calculated. Used in the commercial score behind the scenes.</p>
+          </div>
+
+          <!-- Scalability + Longevity in 2-col grid -->
+          <div class="metrics-2x2">
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <rect x="3" y="12" width="4" height="8" rx="1"/>
+                  <rect x="9" y="8" width="4" height="12" rx="1"/>
+                  <rect x="15" y="4" width="4" height="16" rx="1"/>
+                  <line x1="1" y1="22" x2="23" y2="22"/>
+                </svg>
+                <span class="metric-title">Scalability</span>
+              </div>
+              <p class="metric-question">Can this framework be reused, expanded, or repeated efficiently?</p>
+              <div class="stars-rating" data-field="scalability" role="group" aria-label="Scalability rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/>
+                </svg>
+                <span class="metric-title">Longevity Potential</span>
+              </div>
+              <p class="metric-question">One-time activation or long-term repeatable relationship?</p>
+              <div class="stars-rating" data-field="longevity" role="group" aria-label="Longevity Potential rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+          </div><!-- /metrics-2x2 -->
+
+        </div><!-- /step-fields -->
+
+        <div class="step-footer">
+          <button class="step-button" id="continue-step-2" disabled type="button">Continue to Step 3 →</button>
+        </div>
+
+      </div><!-- /step-content -->
+    </section>
+
+    <!-- ─── PAGE 4: STEP 3 OF 3 — RESOURCE INTENSITY ───────────────────── -->
+    <section id="step-resource" class="section-block section-step">
+      <div class="step-content">
+
+        <div>
+          <p class="step-eyebrow">STEP 3 OF 3 · RESOURCE INTENSITY</p>
+          <div class="step-indicator" style="margin: 8px 0 12px;">
+            <div class="step-dot step-dot--active"></div>
+            <div class="step-dot step-dot--active"></div>
+            <div class="step-dot step-dot--active"></div>
+          </div>
+          <h1 class="step-h1">How heavy is the lift?</h1>
+          <p class="step-subhead">How much organizational energy this demands. Drives bubble size on the map.</p>
+        </div>
+
+        <div class="step-fields">
+
+          <!-- 5 metrics in 3+2 layout (2-col, left=3 blocks, right=2 blocks) -->
+          <div class="metrics-3-2">
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                </svg>
+                <span class="metric-title">Production Complexity</span>
+              </div>
+              <p class="metric-question">How operationally complex is execution?</p>
+              <div class="stars-rating" data-field="complexity" role="group" aria-label="Production Complexity rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                <span class="metric-title">Cross-Functional Coordination</span>
+              </div>
+              <p class="metric-question">How many teams and stakeholders are required?</p>
+              <div class="stars-rating" data-field="coordination" role="group" aria-label="Cross-Functional Coordination rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span class="metric-title">Timeline / Lead Time</span>
+              </div>
+              <p class="metric-question">How long is the planning and execution cycle?</p>
+              <div class="stars-rating" data-field="timeline" role="group" aria-label="Timeline rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2"/>
+                  <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+                </svg>
+                <span class="metric-title">Staffing Requirements</span>
+              </div>
+              <p class="metric-question">How much ongoing team bandwidth is required?</p>
+              <div class="stars-rating" data-field="staffing" role="group" aria-label="Staffing Requirements rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+            <div class="metric-block">
+              <div class="metric-header">
+                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
+                  <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                </svg>
+                <span class="metric-title">Customization Level</span>
+              </div>
+              <p class="metric-question">How bespoke vs repeatable is the structure?</p>
+              <div class="stars-rating" data-field="customization" role="group" aria-label="Customization Level rating">
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+                <span class="star" role="button" tabindex="0">★</span>
+              </div>
+              <div class="metric-low-high">Low · · · · · High</div>
+            </div>
+
+          </div><!-- /metrics-3-2 -->
+
+        </div><!-- /step-fields -->
+
+        <div class="step-footer">
+          <button class="submit-primary" id="submit-step-3" disabled type="button">Plot on the Map →</button>
+        </div>
+
+      </div><!-- /step-content -->
+    </section>
+
+    <!-- ─── PAGE 5: THE MAP (updated) ─────────────────────────────────── -->
     <section id="map-visualized" class="section-block section-page">
-      <p class="section-eyebrow">Section 03 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">Section 05 &middot; The New York Times Advertising Partnerships</p>
       <h1>The Map, Visualized</h1>
 
-      <p>Each bubble represents a partnership archetype plotted across three dimensions simultaneously: <strong>Strategic Value</strong> (x-axis), <strong>Commercial Value</strong> (y-axis), and <strong>Resource Intensity</strong> (bubble size — larger means more resource-intensive). Color indicates which area of the NYT ecosystem the partnership primarily serves.</p>
-
-      <p>The upper-right quadrant is the portfolio sweet spot: high strategic and commercial value. The goal is to migrate more partnerships there over time while managing resource intensity.</p>
+      <p>Each bubble: Strategic Value (x) · Commercial Value (y) · Resource Intensity (size). Upper-right is the portfolio sweet spot.</p>
 
       <div class="chart-outer">
         <span class="axis-label axis-y-label">Commercial Value →</span>
@@ -262,20 +551,17 @@
         <div class="axis-label axis-x-label">Strategic Value →</div>
       </div>
 
-      <p class="chart-note">Hover over a bubble to see partnership details. Bubble size = resource intensity.</p>
+      <p class="chart-note">Hover over a bubble to see details. Bubble size = resource intensity.</p>
 
       <div class="chart-legend" id="chart-legend"></div>
-
       <div id="chart-tooltip" class="chart-tooltip"></div>
 
-      <h2>Reading the Chart</h2>
-      <p>Partnerships in the <strong>upper-right</strong> are priorities — high strategic and commercial value. Those in the <strong>lower-right</strong> may be strong brand plays that need commercial packaging. Those in the <strong>upper-left</strong> are revenue contributors that may not be deeply strategic. The <strong>lower-left</strong> warrants the hardest scrutiny.</p>
-      <p>Resource intensity (bubble size) tells you the cost of opportunity. A large bubble in the upper-right is worth the investment. A large bubble in the lower-left is a signal to restructure or sunset.</p>
+      <a href="#" class="map-clear-link" id="clear-submission" style="display:none;">Clear my submission</a>
     </section>
 
-    <!-- ─── SECTION 04: PARTNERSHIP TYPES ─────────────────────────────── -->
+    <!-- ─── PAGE 6: PARTNERSHIP TYPES ─────────────────────────────────── -->
     <section id="partnership-types" class="section-block section-page">
-      <p class="section-eyebrow">Section 04 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">Section 06 &middot; The New York Times Advertising Partnerships</p>
       <h1>Partnership Types &amp; Pipeline</h1>
 
       <p>Not all partnerships are created equal — and they shouldn't be managed the same way. A consistent typology makes it possible to staff, sequence, and forecast the portfolio without relitigating every deal from scratch. Below are the four partnership types I'd use to organize the NYT book, followed by a sample pipeline view.</p>
@@ -290,7 +576,7 @@
       </ul>
 
       <h2>Scalable Recurring Partnerships</h2>
-      <p>The engine of the portfolio. These are partnerships with defined, repeatable structures — newsletter sponsorships, podcast integrations, seasonal content programs — that can be templated, executed efficiently, and renewed without starting from zero. The goal here is to build a library of modular frameworks (see Section 05) that make these deals faster to close and cheaper to execute without compromising the partner experience.</p>
+      <p>The engine of the portfolio. These are partnerships with defined, repeatable structures — newsletter sponsorships, podcast integrations, seasonal content programs — that can be templated, executed efficiently, and renewed without starting from zero. The goal here is to build a library of modular frameworks (see Section 07) that make these deals faster to close and cheaper to execute without compromising the partner experience.</p>
       <ul>
         <li>Newsletter sponsorship packages (daily, weekly, thematic)</li>
         <li>Podcast host-read and mid-roll integrations</li>
@@ -403,9 +689,9 @@
       </div>
     </section>
 
-    <!-- ─── SECTION 05: MODULAR ARCHITECTURE ──────────────────────────── -->
+    <!-- ─── PAGE 7: MODULAR ARCHITECTURE ──────────────────────────────── -->
     <section id="modular-architecture" class="section-block section-page">
-      <p class="section-eyebrow">Section 05 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">Section 07 &middot; The New York Times Advertising Partnerships</p>
       <h1>Modular Partnership Architecture</h1>
 
       <p>The tension in premium partnership work is real: partners want bespoke, but bespoke doesn't scale. Every deal built from scratch taxes the team, stretches timelines, and makes it harder to forecast capacity. The answer isn't to lower standards — it's to separate the layers.</p>
@@ -475,9 +761,9 @@
       </ul>
     </section>
 
-    <!-- ─── SECTION 06: WHY THIS EXCITES ME ───────────────────────────── -->
+    <!-- ─── PAGE 8: WHY THIS EXCITES ME ───────────────────────────────── -->
     <section id="why-this-excites-me" class="section-block section-page">
-      <p class="section-eyebrow">Section 06 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">Section 08 &middot; The New York Times Advertising Partnerships</p>
       <h1>Why This Excites Me</h1>
 
       <p>The straightforward answer is the one I'd give in any interview: NYT is the most credible journalism organization in the world, the partnership opportunity is genuinely complex, and the role has real strategic scope. All true. But that's the polished version. Here's the more honest one.</p>
@@ -506,9 +792,9 @@
       </div>
     </section>
 
-    <!-- ─── SECTION 07: ABOUT ──────────────────────────────────────────── -->
+    <!-- ─── PAGE 9: ABOUT ──────────────────────────────────────────────── -->
     <section id="about" class="section-block section-page">
-      <p class="section-eyebrow">Section 07 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">Section 09 &middot; The New York Times Advertising Partnerships</p>
       <h1>About Efe</h1>
 
       <div class="about-intro">
@@ -553,13 +839,14 @@
   </main>
 
   <script>
-    // ── Bubble chart ───────────────────────────────────────────────────────
+    // ── Bubble chart ─────────────────────────────────────────────────────────
     const BRANDS = [
       { key: "nyt",          label: "The New York Times",        color: "#d62828" },
       { key: "athletic",     label: "The Athletic",              color: "#1e5089" },
       { key: "cooking",      label: "NYT Cooking",               color: "#4f7b2d" },
       { key: "wirecutter",   label: "Wirecutter",                color: "#c8a028" },
       { key: "games",        label: "NYT Games",                 color: "#6e3fa3" },
+      { key: "audio",        label: "NYT Audio",                 color: "#1c8a8a" },
       { key: "multi",        label: "Multi-Brand Ecosystem",     color: "#121212" },
       { key: "experimental", label: "Experimental / Standalone", color: "#888888" },
     ];
@@ -586,42 +873,66 @@
     }
 
     function setupChart() {
-      const canvas = document.getElementById("bubble-canvas");
+      const canvas    = document.getElementById("bubble-canvas");
       const container = document.getElementById("bubble-chart");
-      const tooltip = document.getElementById("chart-tooltip");
+      const tooltip   = document.getElementById("chart-tooltip");
       if (!canvas || !container) return;
 
-      const PAD = { top: 32, right: 32, bottom: 48, left: 48 };
+      const PAD = { top: 28, right: 28, bottom: 40, left: 40 };
+
+      let userBubble    = null;  // submitted partnership (from eval flow)
+      let currentW      = 0;
+      let currentH      = 0;
 
       function toCanvas(val, min, max, minPx, maxPx) {
         return minPx + ((val - min) / (max - min)) * (maxPx - minPx);
       }
 
-      function getBubbles(w, h) {
+      function getRegularBubbles(w, h) {
         const dpr = window.devicePixelRatio;
-        const cw = w * dpr, ch = h * dpr;
+        const cw  = w * dpr, ch = h * dpr;
         const plotW = cw - PAD.left * dpr - PAD.right * dpr;
-        const plotH = ch - PAD.top * dpr - PAD.bottom * dpr;
+        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
         return PARTNERSHIPS.map(p => ({
           ...p,
           cx: PAD.left * dpr + toCanvas(p.sv, 0, 5.5, 0, plotW),
-          cy: PAD.top * dpr + toCanvas(p.cv, 5.5, 0, 0, plotH),
-          r:  (p.ri / 5) * 38 * dpr + 10 * dpr,
+          cy: PAD.top  * dpr + toCanvas(p.cv, 5.5, 0, 0, plotH),
+          r:  (p.ri / 5) * 36 * dpr + 8 * dpr,
+          isUser: false,
         }));
+      }
+
+      function getUserBubbleCoords(w, h) {
+        if (!userBubble) return null;
+        const dpr   = window.devicePixelRatio;
+        const cw    = w * dpr, ch = h * dpr;
+        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
+        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
+        // Radius: linear interpolation ri 1→14px, 5→36px
+        const r = (14 + (userBubble.ri - 1) / 4 * 22) * dpr;
+        return {
+          ...userBubble,
+          cx:     PAD.left * dpr + toCanvas(userBubble.sv, 0, 5.5, 0, plotW),
+          cy:     PAD.top  * dpr + toCanvas(userBubble.cv, 5.5, 0, 0, plotH),
+          r,
+          isUser: true,
+        };
       }
 
       function draw(w, h) {
         const dpr = window.devicePixelRatio;
         const ctx = canvas.getContext("2d");
-        const cw = canvas.width, ch = canvas.height;
+        const cw  = canvas.width, ch = canvas.height;
         ctx.clearRect(0, 0, cw, ch);
 
-        const plotL = PAD.left * dpr, plotT = PAD.top * dpr;
-        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
-        const plotH = ch - PAD.top * dpr - PAD.bottom * dpr;
+        const plotL = PAD.left   * dpr;
+        const plotT = PAD.top    * dpr;
+        const plotW = cw - PAD.left * dpr - PAD.right  * dpr;
+        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
 
+        // Grid lines
         ctx.strokeStyle = "#e2e2e2";
-        ctx.lineWidth = 1 * dpr;
+        ctx.lineWidth   = 1 * dpr;
         for (let i = 1; i <= 5; i++) {
           const x = plotL + (i / 5.5) * plotW;
           ctx.beginPath(); ctx.moveTo(x, plotT); ctx.lineTo(x, plotT + plotH); ctx.stroke();
@@ -629,45 +940,101 @@
           ctx.beginPath(); ctx.moveTo(plotL, y); ctx.lineTo(plotL + plotW, y); ctx.stroke();
         }
 
+        // Upper-right highlight quadrant
         const midX = plotL + toCanvas(2.75, 0, 5.5, 0, plotW);
         const midY = plotT + toCanvas(2.75, 5.5, 0, 0, plotH);
         ctx.fillStyle = "rgba(247, 230, 0, 0.07)";
         ctx.fillRect(midX, plotT, plotL + plotW - midX, midY - plotT);
 
+        // Axes
         ctx.strokeStyle = "#121212";
-        ctx.lineWidth = 1.5 * dpr;
+        ctx.lineWidth   = 1.5 * dpr;
         ctx.beginPath(); ctx.moveTo(plotL, plotT); ctx.lineTo(plotL, plotT + plotH); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(plotL, plotT + plotH); ctx.lineTo(plotL + plotW, plotT + plotH); ctx.stroke();
 
-        const bubbles = getBubbles(w, h);
+        // Regular bubbles
+        const bubbles = getRegularBubbles(w, h);
         bubbles.forEach(b => {
           ctx.beginPath();
           ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
-          ctx.fillStyle = brandColor(b.brand) + "33";
+          ctx.fillStyle   = brandColor(b.brand) + "33";
           ctx.fill();
           ctx.strokeStyle = brandColor(b.brand);
-          ctx.lineWidth = 2 * dpr;
+          ctx.lineWidth   = 1.5 * dpr;
           ctx.stroke();
         });
 
-        canvas._bubbles = bubbles;
+        // User bubble (drawn last — on top)
+        const ub = getUserBubbleCoords(w, h);
+        if (ub) {
+          // Yellow outer ring
+          ctx.beginPath();
+          ctx.arc(ub.cx, ub.cy, ub.r + 6 * dpr, 0, Math.PI * 2);
+          ctx.strokeStyle = "#f7e600";
+          ctx.lineWidth   = 2.5 * dpr;
+          ctx.stroke();
+
+          // Bubble fill
+          ctx.beginPath();
+          ctx.arc(ub.cx, ub.cy, ub.r, 0, Math.PI * 2);
+          ctx.fillStyle   = ub.color + "55";
+          ctx.fill();
+          ctx.strokeStyle = ub.color;
+          ctx.lineWidth   = 2.5 * dpr;
+          ctx.stroke();
+
+          // NEW tag above bubble
+          const TAG    = "NEW";
+          const fSize  = Math.round(10 * dpr);
+          ctx.font     = `700 ${fSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+          const textW  = ctx.measureText(TAG).width;
+          const padX   = 7 * dpr, padY = 3 * dpr;
+          const tagW   = textW + padX * 2;
+          const tagH   = fSize + padY * 2;
+          const tagX   = ub.cx - tagW / 2;
+          const tagY   = ub.cy - ub.r - 14 * dpr - tagH;
+
+          ctx.fillStyle = "#f7e600";
+          ctx.fillRect(tagX, tagY, tagW, tagH);
+
+          ctx.fillStyle    = "#121212";
+          ctx.textAlign    = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(TAG, ub.cx, tagY + tagH / 2);
+
+          // Reset text alignment
+          ctx.textAlign    = "left";
+          ctx.textBaseline = "alphabetic";
+        }
+
+        // Store all bubbles for hover detection
+        canvas._bubbles   = bubbles;
+        canvas._userBubble = ub;
       }
 
       function resize() {
-        const w = container.offsetWidth;
-        const h = container.offsetHeight;
-        canvas.width = w * window.devicePixelRatio;
-        canvas.height = h * window.devicePixelRatio;
-        canvas.style.width = w + "px";
-        canvas.style.height = h + "px";
-        draw(w, h);
+        currentW = container.offsetWidth;
+        currentH = container.offsetHeight;
+        const dpr = window.devicePixelRatio;
+        canvas.width        = currentW * dpr;
+        canvas.height       = currentH * dpr;
+        canvas.style.width  = currentW + "px";
+        canvas.style.height = currentH + "px";
+        draw(currentW, currentH);
       }
 
       function getHovered(mx, my) {
-        const dpr = window.devicePixelRatio;
+        const dpr  = window.devicePixelRatio;
         const rect = canvas.getBoundingClientRect();
-        const cx = (mx - rect.left) * dpr;
-        const cy = (my - rect.top) * dpr;
+        const cx   = (mx - rect.left)  * dpr;
+        const cy   = (my - rect.top)   * dpr;
+
+        // Check user bubble first (it's on top)
+        const ub = canvas._userBubble;
+        if (ub && Math.sqrt((cx - ub.cx) ** 2 + (cy - ub.cy) ** 2) <= ub.r + 6 * dpr) {
+          return ub;
+        }
+
         const bubbles = canvas._bubbles || [];
         for (let i = bubbles.length - 1; i >= 0; i--) {
           const b = bubbles[i];
@@ -679,7 +1046,12 @@
       canvas.addEventListener("mousemove", e => {
         const b = getHovered(e.clientX, e.clientY);
         if (b) {
-          tooltip.innerHTML = `<strong>${b.name}</strong>${b.note}<br><span style="opacity:.7">SV: ${b.sv} &nbsp; CV: ${b.cv} &nbsp; RI: ${b.ri}</span>`;
+          if (b.isUser) {
+            const brandsStr = b.brands && b.brands.length ? b.brands.join(", ") : "—";
+            tooltip.innerHTML = `<strong>${b.name}</strong>Strategic: ${b.sv} &nbsp; Commercial: ${b.cv} &nbsp; Resource: ${b.ri}<br><span style="opacity:.7">Brands: ${brandsStr}</span>`;
+          } else {
+            tooltip.innerHTML = `<strong>${b.name}</strong>${b.note}<br><span style="opacity:.7">SV: ${b.sv} &nbsp; CV: ${b.cv} &nbsp; RI: ${b.ri}</span>`;
+          }
           tooltip.classList.add("visible");
           tooltip.style.left = (e.clientX + 14) + "px";
           tooltip.style.top  = (e.clientY - 10) + "px";
@@ -694,6 +1066,7 @@
       window.addEventListener("resize", resize);
       resize();
 
+      // Legend
       const legend = document.getElementById("chart-legend");
       BRANDS.forEach(b => {
         const item = document.createElement("div");
@@ -701,10 +1074,26 @@
         item.innerHTML = `<span class="legend-dot" style="background:${b.color}"></span><span>${b.label}</span>`;
         legend.appendChild(item);
       });
+
+      // ── Public API ─────────────────────────────────────────────────────────
+
+      window.chartAddUserBubble = function (data) {
+        userBubble = data;
+        resize();
+        // Show clear link
+        const cl = document.getElementById("clear-submission");
+        if (cl) cl.style.display = "inline-block";
+      };
+
+      window.chartClearUserBubble = function () {
+        userBubble = null;
+        resize();
+        const cl = document.getElementById("clear-submission");
+        if (cl) cl.style.display = "none";
+      };
     }
 
-    // ── Init ───────────────────────────────────────────────────────────────
-    // Dots and fade-ins are managed by fullpage.js
+    // ── Init ─────────────────────────────────────────────────────────────────
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", setupChart);
     } else {

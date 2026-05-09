@@ -605,4 +605,440 @@ hr {
   .nav-brand {
     font-size: 14px;
   }
+
+  .section-step {
+    height: auto !important;
+    min-height: 100svh;
+    overflow: visible !important;
+    padding-bottom: 64px;
+  }
+
+  .metrics-2x2,
+  .metrics-3-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .brand-cards {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ─── STEP PAGES (Pages 2, 3, 4) ─────────────────────────────────────── */
+
+.section-step {
+  /* Tighter top padding than section-block default 140px */
+  padding: calc(var(--nav-height) + 36px) 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Step header ─────────────────────────────────────────────────────── */
+
+.step-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--rule);
+  flex-shrink: 0;
+}
+
+.step-dot--active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.step-h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.step-subhead {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* ── Step fields ─────────────────────────────────────────────────────── */
+
+.step-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+/* ── Metric block ────────────────────────────────────────────────────── */
+
+.metric-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.metric-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.metric-question {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+  padding-left: 28px; /* aligns under title, past icon */
+}
+
+.metric-low-high {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  padding-left: 28px;
+}
+
+/* ── Metrics grid layouts ────────────────────────────────────────────── */
+
+.metrics-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+.metrics-3-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+/* ── Star rating ─────────────────────────────────────────────────────── */
+
+.stars-rating {
+  display: flex;
+  gap: 6px;
+  padding-left: 28px;
+  margin-top: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star {
+  font-size: 26px;
+  line-height: 1;
+  color: var(--rule);
+  transition: color 0.12s ease;
+}
+
+.star.active {
+  color: var(--ink);
+}
+
+.star.preview {
+  color: rgba(18, 18, 18, 0.45);
+}
+
+/* ── Brand cards ─────────────────────────────────────────────────────── */
+
+.brand-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+@media (max-width: 1023px) {
+  .brand-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.brand-card {
+  appearance: none;
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-radius: 2px;
+}
+
+.brand-card:hover {
+  border-color: #bbb;
+}
+
+.brand-card-wordmark {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  line-height: 1.1;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.brand-card-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.05;
+  display: block;
+  margin-top: 2px;
+  transition: color 0.2s ease;
+}
+
+/* Per-brand default colors */
+.brand-card[data-brand="times"]      .brand-card-wordmark,
+.brand-card[data-brand="times"]      .brand-card-name      { color: #d62828; }
+.brand-card[data-brand="athletic"]   .brand-card-wordmark,
+.brand-card[data-brand="athletic"]   .brand-card-name      { color: #1e5089; }
+.brand-card[data-brand="cooking"]    .brand-card-wordmark,
+.brand-card[data-brand="cooking"]    .brand-card-name      { color: #4f7b2d; }
+.brand-card[data-brand="wirecutter"] .brand-card-wordmark,
+.brand-card[data-brand="wirecutter"] .brand-card-name      { color: #c8a028; }
+.brand-card[data-brand="games"]      .brand-card-wordmark,
+.brand-card[data-brand="games"]      .brand-card-name      { color: #6e3fa3; }
+.brand-card[data-brand="audio"]      .brand-card-wordmark,
+.brand-card[data-brand="audio"]      .brand-card-name      { color: #1c8a8a; }
+
+/* Selected state — background fills with brand color, text turns white */
+.brand-card[data-brand="times"].selected      { background: #d62828; border-color: #d62828; }
+.brand-card[data-brand="athletic"].selected   { background: #1e5089; border-color: #1e5089; }
+.brand-card[data-brand="cooking"].selected    { background: #4f7b2d; border-color: #4f7b2d; }
+.brand-card[data-brand="wirecutter"].selected { background: #c8a028; border-color: #c8a028; }
+.brand-card[data-brand="games"].selected      { background: #6e3fa3; border-color: #6e3fa3; }
+.brand-card[data-brand="audio"].selected      { background: #1c8a8a; border-color: #1c8a8a; }
+
+.brand-card.selected .brand-card-wordmark,
+.brand-card.selected .brand-card-name {
+  color: #fff;
+}
+
+/* ── Ecosystem display ───────────────────────────────────────────────── */
+
+.ecosystem-display {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+/* ── Text input ──────────────────────────────────────────────────────── */
+
+.text-input {
+  font-family: Lora, Georgia, serif;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  padding: 12px 14px;
+  width: 100%;
+  outline: none;
+  border-radius: 2px;
+  transition: border-color 0.15s ease;
+  margin-left: 28px;
+  max-width: calc(100% - 28px);
+}
+
+.text-input:focus {
+  border-color: var(--ink);
+}
+
+.text-input::placeholder {
+  color: #bbb;
+}
+
+/* ── Numeric input (with $ prefix) ──────────────────────────────────── */
+
+.numeric-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 0.5px solid var(--rule);
+  border-radius: 2px;
+  max-width: 320px;
+  margin-left: 28px;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+
+.numeric-input-wrap:focus-within {
+  border-color: var(--ink);
+}
+
+.numeric-prefix {
+  font-family: Lora, Georgia, serif;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 12px 4px 12px 14px;
+  user-select: none;
+}
+
+.numeric-input {
+  font-family: Lora, Georgia, serif;
+  font-size: 17px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 12px 14px 12px 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.numeric-input::placeholder {
+  color: #bbb;
+}
+
+/* ── Live margin display ─────────────────────────────────────────────── */
+
+.live-margin-display {
+  font-family: Lora, Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding-left: 28px;
+  margin-top: 4px;
+}
+
+.live-margin-display.positive { color: #2e7d32; }
+.live-margin-display.negative { color: #c62828; }
+
+.margin-note {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--muted);
+  padding-left: 28px;
+  margin-top: 2px;
+}
+
+.revenue-note {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--muted);
+  padding-left: 28px;
+  margin-top: 4px;
+}
+
+/* ── Step footer / buttons ───────────────────────────────────────────── */
+
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.step-button {
+  font-family: Lora, Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  background: var(--ink);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.step-button:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.step-button:not(:disabled):hover {
+  opacity: 0.85;
+}
+
+.submit-primary {
+  font-family: Lora, Georgia, serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+  background: var(--ink);
+  border: none;
+  padding: 18px 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.submit-primary:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.submit-primary:not(:disabled):hover {
+  opacity: 0.85;
+}
+
+/* ── Map clear link ──────────────────────────────────────────────────── */
+
+.map-clear-link {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 8px;
+  display: inline-block;
 }
