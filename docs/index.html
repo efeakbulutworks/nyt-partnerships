@@ -28,11 +28,12 @@
     }
     .map-explainer {
       font-family: Lora, Georgia, serif;
-      font-size: 16px;
+      font-size: 14px;
       font-style: italic;
-      line-height: 1.6;
+      line-height: 1.38;
       color: var(--muted);
-      margin: 0 0 32px;
+      margin: 0 0 28px;
+      max-width: 26em;
     }
     .map-legend-title {
       font-family: var(--sans);
@@ -64,12 +65,12 @@
       display: block;
     }
     .size-dot.small { width: 22px; height: 22px; }
-    .size-dot.medium { width: 36px; height: 36px; }
-    .size-dot.large { width: 52px; height: 52px; }
+    .size-dot.medium { width: 42px; height: 42px; }
+    .size-dot.large { width: 72px; height: 72px; }
     .chart-container {
       position: relative;
-      border: 1px solid var(--rule);
-      background: var(--card-bg);
+      border: 0;
+      background: #fff;
       margin: 0 0 8px;
     }
     #bubble-chart {
@@ -103,6 +104,8 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 8px;
+      text-align: center;
+      max-width: none;
     }
     @media (max-width: 1023px) {
       .map-layout {
@@ -166,7 +169,7 @@
           </svg>
           <span class="metric-title">Which NYT brands are involved?</span>
         </div>
-        <p class="metric-question">Pick one or more. Selecting multiple raises the Cross-Brand Ecosystem score.</p>
+        <p class="metric-question">Pick one or more.</p>
         <div class="brand-cards">
           <button class="brand-card" data-brand="times" data-color="#d62828" style="--brand-color:#d62828" type="button">
             <img src="assets/logo-times.jpg" alt="The Times">
@@ -183,7 +186,7 @@
           <button class="brand-card" data-brand="games" data-color="#6e3fa3" style="--brand-color:#6e3fa3" type="button">
             <img src="assets/logo-games.avif" alt="NYT Games">
           </button>
-          <button class="brand-card" data-brand="audio" data-color="#d4634a" style="--brand-color:#d4634a" type="button">
+          <button class="brand-card" data-brand="audio" data-color="#006b6f" style="--brand-color:#006b6f" type="button">
             <img src="assets/logo-audio.png" alt="NYT Audio">
           </button>
         </div>
@@ -191,8 +194,8 @@
 
       <!-- ── STRATEGIC VALUE ───────────────────────────────────────────── -->
 
-      <hr class="eval-divider">
       <p class="eval-section-label">Strategic Value</p>
+      <hr class="eval-divider">
 
       <div class="metric-tiles">
 
@@ -257,8 +260,8 @@
 
       <!-- ── COMMERCIAL VALUE ──────────────────────────────────────────── -->
 
-      <hr class="eval-divider">
       <p class="eval-section-label">Commercial Value</p>
+      <hr class="eval-divider">
 
       <div class="metric-tiles">
 
@@ -316,8 +319,8 @@
 
       <!-- ── RESOURCE INTENSITY ────────────────────────────────────────── -->
 
-      <hr class="eval-divider">
       <p class="eval-section-label">Resource Intensity</p>
+      <hr class="eval-divider">
 
       <div class="metric-tiles">
 
@@ -380,8 +383,9 @@
       </div><!-- /resource metric-tiles -->
 
       <!-- ── SUBMIT ─────────────────────────────────────────────────────── -->
-      <div class="step-footer step-narrow">
-        <button class="submit-primary" id="submit-eval" disabled type="button">Plot on the Map →</button>
+      <div class="step-footer">
+        <p class="submit-feedback" id="submit-feedback" aria-live="polite"></p>
+        <button class="submit-primary" id="submit-eval" disabled type="button" aria-describedby="submit-feedback">Plot on the Map →</button>
       </div>
 
     </div><!-- /step-inner -->
@@ -391,17 +395,16 @@
   <main class="content map-content">
     <section id="map-visualized" class="section-page">
       <p class="section-eyebrow">The New York Times Advertising Partnerships</p>
-      <h1>The Map, Visualized</h1>
 
       <div class="map-layout">
         <aside class="map-left-rail" aria-label="Portfolio Management Map context and legends">
           <img class="pmm-logo" src="assets/pmm.jpg" alt="Portfolio Management Map">
-          <p class="map-explainer">The map represents the big picture of where advertising partnerships department is currently. Each bubble is a partnership opportunity. Position shows strategic and commercial value; size shows resource intensity. The four quadrants tell you what kind of bet you're making.</p>
+          <p class="map-explainer">The map logs the big picture current state of the advertising partnerships department. Each bubble is a partnership opportunity. Position shows strategic and commercial value; size shows resource intensity. The four quadrants tell you what kind of bet you're making.</p>
 
           <p class="map-legend-title">Brand Color</p>
           <div class="chart-legend" id="chart-legend"></div>
 
-          <p class="map-legend-title">Bubble Size</p>
+          <p class="map-legend-title">Resource Intensity</p>
           <div class="bubble-size-legend" aria-label="Bubble size indicates resource intensity">
             <span class="size-legend-item"><span class="size-dot small"></span><span>Low</span></span>
             <span class="size-legend-item"><span class="size-dot medium"></span><span>Medium</span></span>
@@ -425,13 +428,13 @@
 
   <script>
     const BRANDS = [
+      { key: "multi",      label: "Multi-Brand Partnership", color: "#121212" },
       { key: "nyt",        label: "The New York Times",    color: "#d62828" },
       { key: "athletic",   label: "The Athletic",          color: "#1e5089" },
       { key: "cooking",    label: "NYT Cooking",           color: "#4f7b2d" },
       { key: "wirecutter", label: "Wirecutter",            color: "#c8a028" },
       { key: "games",      label: "NYT Games",             color: "#6e3fa3" },
-      { key: "audio",      label: "NYT Audio",             color: "#d4634a" },
-      { key: "multi",      label: "Multi-Brand Ecosystem", color: "#121212" },
+      { key: "audio",      label: "NYT Audio",             color: "#006b6f" },
     ];
 
     // 8 examples — two per quadrant, spread across brands
@@ -463,7 +466,7 @@
         wirecutter: "Wirecutter",
         games: "NYT Games",
         audio: "NYT Audio",
-        multi: "Multi-Brand Ecosystem",
+        multi: "Multi-Brand Partnership",
       };
       return labels[key] || key;
     }
@@ -596,9 +599,8 @@
         const s = size;
         ctx.save();
         ctx.translate(x, y);
-        ctx.strokeStyle = "rgba(18,18,18,0.72)";
-        ctx.fillStyle = "rgba(18,18,18,0.72)";
-        ctx.lineWidth = 1.4 * dpr;
+        ctx.strokeStyle = ctx.fillStyle;
+        ctx.lineWidth = 1.8 * dpr;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
 
@@ -609,6 +611,15 @@
           ctx.lineTo(0, s / 2);
           ctx.lineTo(-s / 2, 0);
           ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(-s / 2, 0);
+          ctx.lineTo(-s / 5, -s / 2);
+          ctx.lineTo(0, 0);
+          ctx.lineTo(s / 5, -s / 2);
+          ctx.lineTo(s / 2, 0);
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, s / 2);
           ctx.stroke();
         } else if (type === "bars") {
           const w = s / 5;
@@ -633,19 +644,23 @@
           ctx.closePath();
           ctx.stroke();
         } else {
-          // Small lamp / learning marker for lower-priority experimental work.
+          // Light bulb marker for lower-priority exploratory work.
           ctx.beginPath();
-          ctx.moveTo(-s * 0.38, -s * 0.28);
-          ctx.lineTo(s * 0.38, -s * 0.28);
-          ctx.lineTo(s * 0.24, s * 0.08);
-          ctx.lineTo(-s * 0.24, s * 0.08);
-          ctx.closePath();
+          ctx.arc(0, -s * 0.12, s * 0.28, Math.PI * 0.05, Math.PI * 0.95, true);
           ctx.stroke();
           ctx.beginPath();
-          ctx.moveTo(0, s * 0.08);
-          ctx.lineTo(0, s * 0.44);
-          ctx.moveTo(-s * 0.28, s * 0.44);
-          ctx.lineTo(s * 0.28, s * 0.44);
+          ctx.moveTo(-s * 0.18, s * 0.1);
+          ctx.lineTo(s * 0.18, s * 0.1);
+          ctx.moveTo(-s * 0.15, s * 0.25);
+          ctx.lineTo(s * 0.15, s * 0.25);
+          ctx.moveTo(-s * 0.08, s * 0.4);
+          ctx.lineTo(s * 0.08, s * 0.4);
+          ctx.moveTo(-s * 0.36, -s * 0.42);
+          ctx.lineTo(-s * 0.5, -s * 0.56);
+          ctx.moveTo(s * 0.36, -s * 0.42);
+          ctx.lineTo(s * 0.5, -s * 0.56);
+          ctx.moveTo(0, -s * 0.5);
+          ctx.lineTo(0, -s * 0.68);
           ctx.stroke();
         }
 
@@ -653,69 +668,64 @@
       }
 
       function drawQuadrantLabels(ctx, plotL, plotT, plotW, plotH, dpr) {
-        const plotR = plotL + plotW;
-        const plotB = plotT + plotH;
+        const midX = tx(3, plotL, plotW);
+        const midY = ty(3, plotT, plotH);
         const Q_PAD = 18 * dpr;
-        const T_FS  = Math.round(10.5 * dpr);
-        const D_FS  = Math.round(11 * dpr);
-        const T_LH  = T_FS * 1.55;
+        const T_FS  = Math.round(13 * dpr);
+        const D_FS  = Math.round(13.5 * dpr);
+        const T_LH  = T_FS * 1.35;
         const D_LH  = D_FS * 1.42;
-        const I_SIZE = 13 * dpr;
-        const I_GAP = 7 * dpr;
-        const MAX_W = Math.min(220 * dpr, plotW * 0.38);
+        const I_SIZE = 18 * dpr;
+        const I_GAP = 8 * dpr;
+        const MAX_W = Math.min(250 * dpr, plotW * 0.42);
 
         const quadrants = [
           {
             title: "CORE GROWTH PARTNERSHIPS",
             desc:  "High strategic and commercial value. Core long-term partnerships that define the NYT ecosystem",
             icon: "diamond",
-            align: "right", cx: plotR - Q_PAD, cy: plotT + Q_PAD, top: true,
+            color: "#0b6b42",
+            x: midX + Q_PAD, y: plotT + Q_PAD,
           },
           {
             title: "REVENUE DRIVERS",
             desc:  "Strong commercial returns. Lower complexity and quick path to value.",
             icon: "bars",
-            align: "left", cx: plotL + Q_PAD, cy: plotT + Q_PAD, top: true,
+            color: "#1e5089",
+            x: plotL + Q_PAD, y: plotT + Q_PAD,
           },
           {
             title: "STRATEGIC BETS",
             desc:  "High strategic value, long-term brand and audience impact. Lower direct revenue. Invest for future growth.",
             icon: "star",
-            align: "right", cx: plotR - Q_PAD, cy: plotB - Q_PAD, top: false,
+            color: "#7b5a00",
+            x: midX + Q_PAD, y: midY + Q_PAD,
           },
           {
             title: "LOW PRIORITY",
             desc:  "Early stage. High uncertainty. Test, learn, scale the winners.",
-            icon: "lamp",
-            align: "left", cx: plotL + Q_PAD, cy: plotB - Q_PAD, top: false,
+            icon: "bulb",
+            color: "#5f5f5f",
+            x: plotL + Q_PAD, y: midY + Q_PAD,
           },
         ];
 
         quadrants.forEach(q => {
           ctx.font = `italic ${D_FS}px Lora, Georgia, serif`;
           const descLines = wrapText(ctx, q.desc, MAX_W);
-          const blockH = T_LH + descLines.length * D_LH + 5 * dpr;
-          const startY = q.top ? q.cy : q.cy - blockH;
+          const startY = q.y;
 
-          ctx.font         = `700 ${T_FS}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
-          ctx.fillStyle    = "rgba(18,18,18,0.72)";
+          ctx.font         = `800 ${T_FS}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+          ctx.fillStyle    = q.color;
           ctx.textBaseline = "top";
-          const titleW = ctx.measureText(q.title).width;
-          if (q.align === "left") {
-            drawQuadrantIcon(ctx, q.icon, q.cx + I_SIZE / 2, startY + T_FS * 0.72, I_SIZE, dpr);
-            ctx.textAlign = "left";
-            ctx.fillText(q.title, q.cx + I_SIZE + I_GAP, startY);
-          } else {
-            drawQuadrantIcon(ctx, q.icon, q.cx - titleW - I_GAP - I_SIZE / 2, startY + T_FS * 0.72, I_SIZE, dpr);
-            ctx.textAlign = "right";
-            ctx.fillText(q.title, q.cx, startY);
-          }
+          drawQuadrantIcon(ctx, q.icon, q.x + I_SIZE / 2, startY + T_FS * 0.63, I_SIZE, dpr);
+          ctx.textAlign = "left";
+          ctx.fillText(q.title, q.x + I_SIZE + I_GAP, startY);
 
           ctx.font      = `italic ${D_FS}px Lora, Georgia, serif`;
           ctx.fillStyle = "rgba(74,74,74,0.92)";
-          ctx.textAlign = q.align;
           descLines.forEach((line, i) => {
-            ctx.fillText(line, q.cx, startY + T_LH + 5 * dpr + i * D_LH);
+            ctx.fillText(line, q.x + I_SIZE + I_GAP, startY + T_LH + 7 * dpr + i * D_LH);
           });
         });
 
@@ -726,8 +736,8 @@
       function drawAxisAnnotations(ctx, plotL, plotT, plotW, plotH, cw, ch, dpr) {
         const plotR = plotL + plotW;
         const plotB = plotT + plotH;
-        const SML   = Math.round(9.5 * dpr);
-        const AX_FS = Math.round(10 * dpr);
+        const SML   = Math.round(11 * dpr);
+        const AX_FS = Math.round(13 * dpr);
 
         ctx.fillStyle = "rgba(74,74,74,0.9)";
 
@@ -735,9 +745,9 @@
         ctx.font         = `${SML}px -apple-system, sans-serif`;
         ctx.textAlign    = "left";
         ctx.textBaseline = "bottom";
-        ctx.fillText("LOW", plotL, plotT - 12 * dpr);
+        ctx.fillText("LOW", plotL, plotT - 14 * dpr);
         ctx.textAlign = "right";
-        ctx.fillText("HIGH", plotR, plotT - 12 * dpr);
+        ctx.fillText("HIGH", plotR, plotT - 14 * dpr);
 
         // LOW / HIGH on y-axis (left of plot)
         ctx.textAlign    = "right";
@@ -760,7 +770,7 @@
         // X: strategic value title above the map
         ctx.textAlign    = "center";
         ctx.textBaseline = "bottom";
-        ctx.fillText(strategicAxis, plotL + plotW / 2, plotT - 12 * dpr);
+        ctx.fillText(strategicAxis, plotL + plotW / 2, plotT - 30 * dpr);
 
         // Y: "COMMERCIAL VALUE →" rotated left
         ctx.save();

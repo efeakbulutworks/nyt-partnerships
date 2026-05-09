@@ -83,7 +83,7 @@
     const s = ecosystemScore(window.partnershipDraft.brands);
     const el = document.getElementById('ecosystem-display');
     if (el) {
-      el.textContent = `${n} brand${n !== 1 ? 's' : ''} selected → Cross-Brand Ecosystem score: ${s} / 5`;
+      el.textContent = `${n} brand${n !== 1 ? 's' : ''} selected → Multi-brand score: ${s} / 5`;
     }
   }
 
@@ -139,21 +139,36 @@
 
   // ── Submit button gating ────────────────────────────────────────────────────
 
+  function missingFields() {
+    const d = window.partnershipDraft;
+    const missing = [];
+    if (!d.name.trim()) missing.push('partnership name');
+    if (!d.brands.length) missing.push('at least one brand');
+    if (d.brandAlignment <= 0) missing.push('Brand Alignment');
+    if (d.growthAudience <= 0) missing.push('Growth & Audience');
+    if (d.innovationScalability <= 0) missing.push('Innovation');
+    if (d.revenue <= 0) missing.push('Revenue Potential');
+    if (d.repeatability <= 0) missing.push('Repeatability');
+    if (d.complexityCoordination <= 0) missing.push('Complexity');
+    if (d.timelineQuarters <= 0) missing.push('Timeline');
+    if (d.staffing <= 0) missing.push('Resourcing');
+    return missing;
+  }
+
   function updateSubmit() {
-    const d   = window.partnershipDraft;
     const btn = document.getElementById('submit-eval');
+    const feedback = document.getElementById('submit-feedback');
     if (!btn) return;
-    const ok = d.name.trim().length > 0
-      && d.brands.length > 0
-      && d.brandAlignment > 0
-      && d.growthAudience > 0
-      && d.innovationScalability > 0
-      && d.revenue > 0
-      && d.repeatability > 0
-      && d.complexityCoordination > 0
-      && d.timelineQuarters > 0
-      && d.staffing > 0;
+    const missing = missingFields();
+    const ok = missing.length === 0;
     btn.disabled = !ok;
+
+    if (feedback) {
+      feedback.classList.toggle('ready', ok);
+      feedback.textContent = ok
+        ? 'Ready to plot.'
+        : `Complete these before plotting: ${missing.join(', ')}.`;
+    }
   }
 
   // ── Scoring ─────────────────────────────────────────────────────────────────
@@ -181,7 +196,7 @@
     cooking:    '#4f7b2d',
     wirecutter: '#c8a028',
     games:      '#6e3fa3',
-    audio:      '#d4634a',
+    audio:      '#006b6f',
   };
 
   function computeScores() {
@@ -214,6 +229,12 @@
   // ── Submit ───────────────────────────────────────────────────────────────────
 
   function handleSubmit() {
+    if (missingFields().length) {
+      updateSubmit();
+      document.getElementById('submit-feedback')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     const d      = window.partnershipDraft;
     const scores = computeScores();
 
