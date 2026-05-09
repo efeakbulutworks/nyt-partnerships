@@ -147,6 +147,13 @@ body {
   font-size: 13px;
 }
 
+.map-left-rail .chart-legend {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 0;
+}
+
 .legend-item {
   display: flex;
   align-items: center;
