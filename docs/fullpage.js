@@ -10,7 +10,9 @@
 
   const SECTION_IDS = [
     'what-i-heard',
-    'portfolio-management-map',
+    'step-strategic',
+    'step-commercial',
+    'step-resource',
     'map-visualized',
     'partnership-types',
     'modular-architecture',
@@ -73,6 +75,11 @@
     sections[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setTimeout(() => { locked = false; }, LOCK_MS);
+  }
+
+  function goToId(id) {
+    const idx = sections.findIndex(s => s.id === id);
+    if (idx >= 0) goTo(idx);
   }
 
   /** Mark section as visible (fade-in) and update dots. */
@@ -149,6 +156,11 @@
       t = setTimeout(fn, ms);
     };
   }
+
+  // ── Public API ─────────────────────────────────────────────────────────────
+
+  window.fullpageGoTo   = goTo;
+  window.fullpageGoToId = goToId;
 
   // ── Boot ───────────────────────────────────────────────────────────────────
 
