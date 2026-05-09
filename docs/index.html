@@ -119,27 +119,27 @@
 
   </section>
 
-  <!-- ─── SECTIONS 02–09 — inside content wrapper for max-width + padding ── -->
-  <main class="content">
+  <!-- ─── PAGES 2–4: STEP FORM SECTIONS (outside content wrapper for full-width brand cards) ── -->
 
-    <!-- ─── PAGE 2: STEP 1 OF 3 — STRATEGIC EVALUATION ────────────────── -->
-    <section id="step-strategic" class="section-block section-step">
-      <div class="step-content">
+  <!-- ─── PAGE 2: STEP 1 OF 3 — STRATEGIC EVALUATION ────────────────────── -->
+  <section id="step-strategic" class="section-block section-step form-page">
+    <div class="step-inner">
 
-        <div>
-          <p class="step-eyebrow">STEP 1 OF 3 · STRATEGIC EVALUATION</p>
-          <div class="step-indicator" style="margin: 8px 0 12px;">
-            <div class="step-dot step-dot--active"></div>
-            <div class="step-dot"></div>
-            <div class="step-dot"></div>
-          </div>
-          <h1 class="step-h1">Tell me about the partnership.</h1>
-          <p class="step-subhead">We'll plot it on the map at the end.</p>
+      <div class="step-header">
+        <p class="step-eyebrow">STEP 1 OF 3 · STRATEGIC EVALUATION</p>
+        <div class="step-indicator">
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
         </div>
+        <h1 class="step-h1">Tell me about the partnership.</h1>
+        <p class="step-subhead">We'll plot it on the map at the end.</p>
+      </div>
 
-        <div class="step-fields">
+      <div class="step-fields">
 
-          <!-- Field 1: Partnership name -->
+        <!-- Field 1: Partnership name -->
+        <div class="step-narrow">
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -155,48 +155,50 @@
               placeholder="e.g. JetBlue × Cooking Travel Series"
               autocomplete="off">
           </div>
+        </div>
 
-          <!-- Field 2: Brand picker -->
-          <div class="metric-block">
-            <div class="metric-header">
-              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-              </svg>
-              <span class="metric-title">Which NYT brands are involved?</span>
-            </div>
-            <p class="metric-question">Pick one or more. Selecting multiple raises the Cross-Brand Ecosystem score.</p>
-            <div class="brand-cards">
-              <button class="brand-card" data-brand="times" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">The Times</span>
-              </button>
-              <button class="brand-card" data-brand="athletic" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">The Athletic</span>
-              </button>
-              <button class="brand-card" data-brand="cooking" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">Cooking</span>
-              </button>
-              <button class="brand-card" data-brand="wirecutter" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">Wirecutter</span>
-              </button>
-              <button class="brand-card" data-brand="games" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">Games</span>
-              </button>
-              <button class="brand-card" data-brand="audio" type="button">
-                <span class="brand-card-wordmark">The New York Times</span>
-                <span class="brand-card-name">Audio</span>
-              </button>
-            </div>
-            <p class="ecosystem-display" id="ecosystem-display">0 brands selected → Cross-Brand Ecosystem score: 1 / 5</p>
+        <!-- Field 2: Brand picker — full step-inner width for 6-column card row -->
+        <div class="metric-block">
+          <div class="metric-header">
+            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            <span class="metric-title">Which NYT brands are involved?</span>
           </div>
+          <p class="metric-question">Pick one or more. Selecting multiple raises the Cross-Brand Ecosystem score.</p>
+          <div class="brand-cards">
+            <button class="brand-card" data-brand="times" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">The Times</span>
+            </button>
+            <button class="brand-card" data-brand="athletic" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">The Athletic</span>
+            </button>
+            <button class="brand-card" data-brand="cooking" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">Cooking</span>
+            </button>
+            <button class="brand-card" data-brand="wirecutter" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">Wirecutter</span>
+            </button>
+            <button class="brand-card" data-brand="games" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">Games</span>
+            </button>
+            <button class="brand-card" data-brand="audio" type="button">
+              <span class="brand-card-wordmark">The New York Times</span>
+              <span class="brand-card-name">Audio</span>
+            </button>
+          </div>
+          <p class="ecosystem-display" id="ecosystem-display">0 brands selected → Cross-Brand Ecosystem score: 1 / 5</p>
+        </div>
 
-          <!-- Fields 3–6: 4 star-rating metrics in 2×2 grid -->
+        <!-- Fields 3–6: 4 star-rating metrics in 2×2 grid -->
+        <div class="step-narrow">
           <div class="metrics-2x2">
 
             <div class="metric-block">
@@ -278,263 +280,266 @@
             </div>
 
           </div><!-- /metrics-2x2 -->
-
-        </div><!-- /step-fields -->
-
-        <div class="step-footer">
-          <button class="step-button" id="continue-step-1" disabled type="button">Continue to Step 2 →</button>
         </div>
 
-      </div><!-- /step-content -->
-    </section>
+      </div><!-- /step-fields -->
 
-    <!-- ─── PAGE 3: STEP 2 OF 3 — COMMERCIAL EVALUATION ───────────────── -->
-    <section id="step-commercial" class="section-block section-step">
-      <div class="step-content">
+      <div class="step-footer step-narrow">
+        <button class="step-button" id="continue-step-1" disabled type="button">Continue to Step 2 →</button>
+      </div>
 
-        <div>
-          <p class="step-eyebrow">STEP 2 OF 3 · COMMERCIAL EVALUATION</p>
-          <div class="step-indicator" style="margin: 8px 0 12px;">
-            <div class="step-dot step-dot--active"></div>
-            <div class="step-dot step-dot--active"></div>
-            <div class="step-dot"></div>
+    </div><!-- /step-inner -->
+  </section>
+
+  <!-- ─── PAGE 3: STEP 2 OF 3 — COMMERCIAL EVALUATION ──────────────────── -->
+  <section id="step-commercial" class="section-block section-step form-page">
+    <div class="step-inner">
+
+      <div class="step-header">
+        <p class="step-eyebrow">STEP 2 OF 3 · COMMERCIAL EVALUATION</p>
+        <div class="step-indicator">
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot"></div>
+        </div>
+        <h1 class="step-h1">What's the commercial shape?</h1>
+        <p class="step-subhead">Revenue, cost, margin, scalability. The Y axis on the map.</p>
+      </div>
+
+      <div class="step-fields step-narrow">
+
+        <!-- Revenue -->
+        <div class="metric-block">
+          <div class="metric-header">
+            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+            <span class="metric-title">Revenue Potential</span>
           </div>
-          <h1 class="step-h1">What's the commercial shape?</h1>
-          <p class="step-subhead">Revenue, cost, margin, scalability. The Y axis on the map.</p>
+          <p class="metric-question">Potential revenue, in USD.</p>
+          <div class="numeric-input-wrap">
+            <span class="numeric-prefix">$</span>
+            <input class="numeric-input" id="revenue-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+          </div>
+          <p class="revenue-note">NYT's threshold for serious partnerships starts at seven figures. Below $1M lands the bubble in the bottom band.</p>
         </div>
 
-        <div class="step-fields">
+        <!-- Cost -->
+        <div class="metric-block">
+          <div class="metric-header">
+            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+            <span class="metric-title">Production Cost</span>
+          </div>
+          <p class="metric-question">Estimated production and execution cost, in USD.</p>
+          <div class="numeric-input-wrap">
+            <span class="numeric-prefix">$</span>
+            <input class="numeric-input" id="cost-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+          </div>
+        </div>
 
-          <!-- Revenue -->
+        <!-- Margin (auto-calculated) -->
+        <div class="metric-block">
+          <div class="metric-header">
+            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="3" x2="12" y2="20"/>
+              <path d="M5 20h14"/>
+              <path d="M4 8l8-5 8 5"/>
+              <path d="M4 8l4.5 9h7l4.5-9"/>
+            </svg>
+            <span class="metric-title">Estimated margin</span>
+          </div>
+          <p id="margin-display" class="live-margin-display positive">Estimated margin: $0</p>
+          <p class="margin-note">Auto-calculated. Used in the commercial score behind the scenes.</p>
+        </div>
+
+        <!-- Scalability + Longevity in 2-col grid -->
+        <div class="metrics-2x2">
+
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <rect x="3" y="12" width="4" height="8" rx="1"/>
+                <rect x="9" y="8" width="4" height="12" rx="1"/>
+                <rect x="15" y="4" width="4" height="16" rx="1"/>
+                <line x1="1" y1="22" x2="23" y2="22"/>
+              </svg>
+              <span class="metric-title">Scalability</span>
+            </div>
+            <p class="metric-question">Can this framework be reused, expanded, or repeated efficiently?</p>
+            <div class="stars-rating" data-field="scalability" role="group" aria-label="Scalability rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
+          </div>
+
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/>
+              </svg>
+              <span class="metric-title">Longevity Potential</span>
+            </div>
+            <p class="metric-question">One-time activation or long-term repeatable relationship?</p>
+            <div class="stars-rating" data-field="longevity" role="group" aria-label="Longevity Potential rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
+          </div>
+
+        </div><!-- /metrics-2x2 -->
+
+      </div><!-- /step-fields -->
+
+      <div class="step-footer step-narrow">
+        <button class="step-button" id="continue-step-2" disabled type="button">Continue to Step 3 →</button>
+      </div>
+
+    </div><!-- /step-inner -->
+  </section>
+
+  <!-- ─── PAGE 4: STEP 3 OF 3 — RESOURCE INTENSITY ─────────────────────── -->
+  <section id="step-resource" class="section-block section-step form-page">
+    <div class="step-inner">
+
+      <div class="step-header">
+        <p class="step-eyebrow">STEP 3 OF 3 · RESOURCE INTENSITY</p>
+        <div class="step-indicator">
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot step-dot--active"></div>
+        </div>
+        <h1 class="step-h1">How heavy is the lift?</h1>
+        <p class="step-subhead">How much organizational energy this demands. Drives bubble size on the map.</p>
+      </div>
+
+      <div class="step-fields step-narrow">
+
+        <!-- 5 metrics in 3+2 layout -->
+        <div class="metrics-3-2">
+
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"/>
-                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
               </svg>
-              <span class="metric-title">Revenue Potential</span>
+              <span class="metric-title">Production Complexity</span>
             </div>
-            <p class="metric-question">Potential revenue, in USD.</p>
-            <div class="numeric-input-wrap">
-              <span class="numeric-prefix">$</span>
-              <input class="numeric-input" id="revenue-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            <p class="metric-question">How operationally complex is execution?</p>
+            <div class="stars-rating" data-field="complexity" role="group" aria-label="Production Complexity rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
             </div>
-            <p class="revenue-note">NYT's threshold for serious partnerships starts at seven figures. Below $1M lands the bubble in the bottom band.</p>
+            <div class="metric-low-high">Low · · · · · High</div>
           </div>
 
-          <!-- Cost -->
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"/>
-                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                <path d="M16 3.13a4 4 0 010 7.75"/>
               </svg>
-              <span class="metric-title">Production Cost</span>
+              <span class="metric-title">Cross-Functional Coordination</span>
             </div>
-            <p class="metric-question">Estimated production and execution cost, in USD.</p>
-            <div class="numeric-input-wrap">
-              <span class="numeric-prefix">$</span>
-              <input class="numeric-input" id="cost-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            <p class="metric-question">How many teams and stakeholders are required?</p>
+            <div class="stars-rating" data-field="coordination" role="group" aria-label="Cross-Functional Coordination rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
             </div>
+            <div class="metric-low-high">Low · · · · · High</div>
           </div>
 
-          <!-- Margin (auto-calculated) -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span class="metric-title">Timeline / Lead Time</span>
+            </div>
+            <p class="metric-question">How long is the planning and execution cycle?</p>
+            <div class="stars-rating" data-field="timeline" role="group" aria-label="Timeline rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
+          </div>
+
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="3" x2="12" y2="20"/>
-                <path d="M5 20h14"/>
-                <path d="M4 8l8-5 8 5"/>
-                <path d="M4 8l4 10h16l4-10" stroke="none"/>
-                <path d="M4 8l4.5 9h7l4.5-9"/>
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
               </svg>
-              <span class="metric-title">Estimated margin</span>
+              <span class="metric-title">Staffing Requirements</span>
             </div>
-            <p id="margin-display" class="live-margin-display positive">Estimated margin: $0</p>
-            <p class="margin-note">Auto-calculated. Used in the commercial score behind the scenes.</p>
+            <p class="metric-question">How much ongoing team bandwidth is required?</p>
+            <div class="stars-rating" data-field="staffing" role="group" aria-label="Staffing Requirements rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
           </div>
 
-          <!-- Scalability + Longevity in 2-col grid -->
-          <div class="metrics-2x2">
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                  <rect x="3" y="12" width="4" height="8" rx="1"/>
-                  <rect x="9" y="8" width="4" height="12" rx="1"/>
-                  <rect x="15" y="4" width="4" height="16" rx="1"/>
-                  <line x1="1" y1="22" x2="23" y2="22"/>
-                </svg>
-                <span class="metric-title">Scalability</span>
-              </div>
-              <p class="metric-question">Can this framework be reused, expanded, or repeated efficiently?</p>
-              <div class="stars-rating" data-field="scalability" role="group" aria-label="Scalability rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
+                <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+              </svg>
+              <span class="metric-title">Customization Level</span>
             </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/>
-                </svg>
-                <span class="metric-title">Longevity Potential</span>
-              </div>
-              <p class="metric-question">One-time activation or long-term repeatable relationship?</p>
-              <div class="stars-rating" data-field="longevity" role="group" aria-label="Longevity Potential rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
+            <p class="metric-question">How bespoke vs repeatable is the structure?</p>
+            <div class="stars-rating" data-field="customization" role="group" aria-label="Customization Level rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
             </div>
-
-          </div><!-- /metrics-2x2 -->
-
-        </div><!-- /step-fields -->
-
-        <div class="step-footer">
-          <button class="step-button" id="continue-step-2" disabled type="button">Continue to Step 3 →</button>
-        </div>
-
-      </div><!-- /step-content -->
-    </section>
-
-    <!-- ─── PAGE 4: STEP 3 OF 3 — RESOURCE INTENSITY ───────────────────── -->
-    <section id="step-resource" class="section-block section-step">
-      <div class="step-content">
-
-        <div>
-          <p class="step-eyebrow">STEP 3 OF 3 · RESOURCE INTENSITY</p>
-          <div class="step-indicator" style="margin: 8px 0 12px;">
-            <div class="step-dot step-dot--active"></div>
-            <div class="step-dot step-dot--active"></div>
-            <div class="step-dot step-dot--active"></div>
+            <div class="metric-low-high">Low · · · · · High</div>
           </div>
-          <h1 class="step-h1">How heavy is the lift?</h1>
-          <p class="step-subhead">How much organizational energy this demands. Drives bubble size on the map.</p>
-        </div>
 
-        <div class="step-fields">
+        </div><!-- /metrics-3-2 -->
 
-          <!-- 5 metrics in 3+2 layout (2-col, left=3 blocks, right=2 blocks) -->
-          <div class="metrics-3-2">
+      </div><!-- /step-fields -->
 
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-                </svg>
-                <span class="metric-title">Production Complexity</span>
-              </div>
-              <p class="metric-question">How operationally complex is execution?</p>
-              <div class="stars-rating" data-field="complexity" role="group" aria-label="Production Complexity rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
+      <div class="step-footer step-narrow">
+        <button class="submit-primary" id="submit-step-3" disabled type="button">Plot on the Map →</button>
+      </div>
 
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 010 7.75"/>
-                </svg>
-                <span class="metric-title">Cross-Functional Coordination</span>
-              </div>
-              <p class="metric-question">How many teams and stakeholders are required?</p>
-              <div class="stars-rating" data-field="coordination" role="group" aria-label="Cross-Functional Coordination rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
+    </div><!-- /step-inner -->
+  </section>
 
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span class="metric-title">Timeline / Lead Time</span>
-              </div>
-              <p class="metric-question">How long is the planning and execution cycle?</p>
-              <div class="stars-rating" data-field="timeline" role="group" aria-label="Timeline rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2"/>
-                  <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
-                </svg>
-                <span class="metric-title">Staffing Requirements</span>
-              </div>
-              <p class="metric-question">How much ongoing team bandwidth is required?</p>
-              <div class="stars-rating" data-field="staffing" role="group" aria-label="Staffing Requirements rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
-                  <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
-                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
-                </svg>
-                <span class="metric-title">Customization Level</span>
-              </div>
-              <p class="metric-question">How bespoke vs repeatable is the structure?</p>
-              <div class="stars-rating" data-field="customization" role="group" aria-label="Customization Level rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-          </div><!-- /metrics-3-2 -->
-
-        </div><!-- /step-fields -->
-
-        <div class="step-footer">
-          <button class="submit-primary" id="submit-step-3" disabled type="button">Plot on the Map →</button>
-        </div>
-
-      </div><!-- /step-content -->
-    </section>
+  <!-- ─── PAGES 5–9 — inside content wrapper for max-width + padding ─── -->
+  <main class="content">
 
     <!-- ─── PAGE 5: THE MAP (updated) ─────────────────────────────────── -->
     <section id="map-visualized" class="section-block section-page">

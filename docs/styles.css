@@ -30,6 +30,10 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  /* CSS scroll-snap: proximity is gentle — only snaps when near a snap point.
+     Form pages scroll freely through their content; editorial pages are
+     JS-controlled and call e.preventDefault(), so this doesn't affect them. */
+  scroll-snap-type: y proximity;
 }
 
 body {
@@ -103,12 +107,11 @@ body {
 .section-block {
   /* Hard full-viewport height on desktop — JS controller navigates between them */
   height: 100vh;
-  height: 100svh; /* dynamic toolbar-aware on supporting browsers */
+  height: 100svh;
   overflow: hidden;
   scroll-margin-top: 72px;
-  /* breathing room: content starts well below the nav */
+  scroll-snap-align: start;
   padding-top: 140px;
-  /* fade-in initial state */
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 500ms ease-out, transform 500ms ease-out;
@@ -117,6 +120,15 @@ body {
 .section-block.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ─── FORM PAGES (Pages 2, 3, 4) — natural scroll, no JS hijack ──────────── */
+
+.form-page {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+  scroll-snap-stop: always; /* prevent skipping past a form page */
 }
 
 /* ─── PAGE 1 — NYT-editorial two-column layout ────────────────────────── */
@@ -625,25 +637,42 @@ hr {
 
 /* ─── STEP PAGES (Pages 2, 3, 4) ─────────────────────────────────────── */
 
+/*
+ * Step sections live OUTSIDE <main class="content"> so they can use a
+ * wider inner container (1100px) for the brand card row. Other form
+ * content (metrics, inputs, buttons) is wrapped in .step-narrow (720px).
+ */
+
 .section-step {
-  /* Tighter top padding than section-block default 140px */
-  padding: calc(var(--nav-height) + 36px) 0 32px;
-  display: flex;
-  flex-direction: column;
+  /* 56px below the nav bottom — override section-block's 140px */
+  padding: 56px 0 80px;
+  background: var(--bg);
 }
 
-.step-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Wide inner wrapper — holds brand cards at full width */
+.step-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* Narrow inner wrapper — holds text content at reading width */
+.step-narrow {
+  max-width: 720px;
 }
 
 /* ── Step header ─────────────────────────────────────────────────────── */
 
+.step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;  /* subhead → first field gap */
+}
+
 .step-eyebrow {
   font-family: var(--sans);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -653,13 +682,13 @@ hr {
 
 .step-indicator {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
 .step-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: transparent;
   border: 1.5px solid var(--rule);
@@ -673,10 +702,10 @@ hr {
 
 .step-h1 {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: clamp(36px, 4vw, 56px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
 }
@@ -684,11 +713,10 @@ hr {
 .step-subhead {
   font-family: Lora, Georgia, serif;
   font-style: italic;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1.4;
   color: var(--muted);
   margin: 0;
-  max-width: 60ch;
 }
 
 /* ── Step fields ─────────────────────────────────────────────────────── */
@@ -696,8 +724,7 @@ hr {
 .step-fields {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  flex: 1;
+  gap: 28px;
 }
 
 /* ── Metric block ────────────────────────────────────────────────────── */
@@ -705,18 +732,18 @@ hr {
 .metric-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
 }
 
 .metric-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 
 .metric-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   color: var(--muted);
   flex-shrink: 0;
   stroke: currentColor;
@@ -724,7 +751,7 @@ hr {
 
 .metric-title {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 17px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--ink);
 }
@@ -732,18 +759,19 @@ hr {
 .metric-question {
   font-family: Lora, Georgia, serif;
   font-style: italic;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.5;
   color: var(--muted);
-  margin: 0;
-  padding-left: 28px; /* aligns under title, past icon */
+  margin: 0 0 14px;
+  padding-left: 32px; /* aligns under title, past icon */
 }
 
 .metric-low-high {
   font-family: var(--sans);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
-  padding-left: 28px;
+  padding-left: 32px;
+  margin-top: 8px;
 }
 
 /* ── Metrics grid layouts ────────────────────────────────────────────── */
@@ -751,95 +779,108 @@ hr {
 .metrics-2x2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 40px;
+  gap: 28px 56px;
 }
 
 .metrics-3-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 40px;
+  gap: 28px 56px;
 }
 
 /* ── Star rating ─────────────────────────────────────────────────────── */
 
 .stars-rating {
   display: flex;
-  gap: 6px;
-  padding-left: 28px;
-  margin-top: 4px;
+  gap: 10px;
+  padding-left: 32px;
   cursor: pointer;
   user-select: none;
 }
 
 .star {
-  font-size: 26px;
+  font-size: 36px;
   line-height: 1;
   color: var(--rule);
   transition: color 0.12s ease;
 }
 
-.star.active {
-  color: var(--ink);
-}
-
-.star.preview {
-  color: rgba(18, 18, 18, 0.45);
-}
+.star.active  { color: var(--ink); }
+.star.preview { color: rgba(18, 18, 18, 0.4); }
 
 /* ── Brand cards ─────────────────────────────────────────────────────── */
 
 .brand-cards {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
-  margin-top: 6px;
-}
-
-@media (max-width: 1023px) {
-  .brand-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .brand-card {
   appearance: none;
   background: #fff;
-  border: 0.5px solid var(--rule);
-  padding: 14px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 18px 16px;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  /* aspect-ratio enforces landscape proportion matching the Cooking image */
+  aspect-ratio: 3 / 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  border-radius: 2px;
+  justify-content: center;
+  gap: 0;
+  transition: background 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.brand-card:hover {
-  border-color: #bbb;
+.brand-card:hover:not(.selected) {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
+
+/* Per-brand hover border */
+.brand-card[data-brand="times"]:hover:not(.selected)      { border-color: #d62828; }
+.brand-card[data-brand="athletic"]:hover:not(.selected)   { border-color: #1e5089; }
+.brand-card[data-brand="cooking"]:hover:not(.selected)    { border-color: #4f7b2d; }
+.brand-card[data-brand="wirecutter"]:hover:not(.selected) { border-color: #c8a028; }
+.brand-card[data-brand="games"]:hover:not(.selected)      { border-color: #6e3fa3; }
+.brand-card[data-brand="audio"]:hover:not(.selected)      { border-color: #1c8a8a; }
 
 .brand-card-wordmark {
   font-family: "Playfair Display", Georgia, serif;
   font-style: italic;
-  font-size: 10px;
+  font-weight: 500;
+  font-size: 12px;
   line-height: 1.1;
+  letter-spacing: 0.01em;
   display: block;
   transition: color 0.2s ease;
 }
 
 .brand-card-name {
   font-family: "Playfair Display", Georgia, serif;
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 1.05;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
   display: block;
-  margin-top: 2px;
+  margin-top: 8px;
   transition: color 0.2s ease;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
-/* Per-brand default colors */
+/* Per-brand name font sizes (spec-adjusted by word length) */
+.brand-card[data-brand="times"]      .brand-card-name { font-size: 28px; }
+.brand-card[data-brand="athletic"]   .brand-card-name { font-size: 21px; }
+.brand-card[data-brand="cooking"]    .brand-card-name { font-size: 28px; }
+.brand-card[data-brand="wirecutter"] .brand-card-name { font-size: 21px; }
+.brand-card[data-brand="games"]      .brand-card-name { font-size: 30px; }
+.brand-card[data-brand="audio"]      .brand-card-name { font-size: 30px; }
+
+/* Per-brand default (unselected) text color */
 .brand-card[data-brand="times"]      .brand-card-wordmark,
 .brand-card[data-brand="times"]      .brand-card-name      { color: #d62828; }
 .brand-card[data-brand="athletic"]   .brand-card-wordmark,
@@ -853,7 +894,7 @@ hr {
 .brand-card[data-brand="audio"]      .brand-card-wordmark,
 .brand-card[data-brand="audio"]      .brand-card-name      { color: #1c8a8a; }
 
-/* Selected state — background fills with brand color, text turns white */
+/* Selected: brand-color background, white text */
 .brand-card[data-brand="times"].selected      { background: #d62828; border-color: #d62828; }
 .brand-card[data-brand="athletic"].selected   { background: #1e5089; border-color: #1e5089; }
 .brand-card[data-brand="cooking"].selected    { background: #4f7b2d; border-color: #4f7b2d; }
@@ -862,116 +903,97 @@ hr {
 .brand-card[data-brand="audio"].selected      { background: #1c8a8a; border-color: #1c8a8a; }
 
 .brand-card.selected .brand-card-wordmark,
-.brand-card.selected .brand-card-name {
-  color: #fff;
-}
+.brand-card.selected .brand-card-name { color: #fff; }
 
 /* ── Ecosystem display ───────────────────────────────────────────────── */
 
 .ecosystem-display {
   font-family: Lora, Georgia, serif;
   font-style: italic;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--muted);
-  margin: 4px 0 0;
+  margin: 16px 0 0;
 }
 
 /* ── Text input ──────────────────────────────────────────────────────── */
 
 .text-input {
   font-family: Lora, Georgia, serif;
-  font-size: 17px;
+  font-size: 22px;
   line-height: 1.4;
   color: var(--ink);
   background: #fff;
-  border: 0.5px solid var(--rule);
-  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  padding: 14px 18px;
   width: 100%;
   outline: none;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: border-color 0.15s ease;
-  margin-left: 28px;
-  max-width: calc(100% - 28px);
+  margin-left: 32px;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
 }
 
-.text-input:focus {
-  border-color: var(--ink);
-}
-
-.text-input::placeholder {
-  color: #bbb;
-}
+.text-input:focus      { border-color: var(--ink); }
+.text-input::placeholder { color: #bbb; }
 
 /* ── Numeric input (with $ prefix) ──────────────────────────────────── */
 
 .numeric-input-wrap {
   display: flex;
   align-items: center;
-  border: 0.5px solid var(--rule);
-  border-radius: 2px;
-  max-width: 320px;
-  margin-left: 28px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  max-width: 380px;
+  margin-left: 32px;
   background: #fff;
   transition: border-color 0.15s ease;
 }
 
-.numeric-input-wrap:focus-within {
-  border-color: var(--ink);
-}
+.numeric-input-wrap:focus-within { border-color: var(--ink); }
 
 .numeric-prefix {
   font-family: Lora, Georgia, serif;
-  font-size: 17px;
+  font-size: 22px;
   color: var(--muted);
-  padding: 12px 4px 12px 14px;
+  padding: 14px 4px 14px 18px;
   user-select: none;
 }
 
 .numeric-input {
   font-family: Lora, Georgia, serif;
-  font-size: 17px;
+  font-size: 22px;
   color: var(--ink);
   background: transparent;
   border: none;
   outline: none;
-  padding: 12px 14px 12px 4px;
+  padding: 14px 18px 14px 4px;
   flex: 1;
   min-width: 0;
 }
 
-.numeric-input::placeholder {
-  color: #bbb;
-}
+.numeric-input::placeholder { color: #bbb; }
 
 /* ── Live margin display ─────────────────────────────────────────────── */
 
 .live-margin-display {
   font-family: Lora, Georgia, serif;
-  font-size: 16px;
-  font-weight: 700;
-  padding-left: 28px;
-  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 500;
+  padding-left: 32px;
+  margin-top: 6px;
 }
 
 .live-margin-display.positive { color: #2e7d32; }
 .live-margin-display.negative { color: #c62828; }
 
-.margin-note {
+.margin-note, .revenue-note {
   font-family: Lora, Georgia, serif;
   font-style: italic;
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
-  padding-left: 28px;
-  margin-top: 2px;
-}
-
-.revenue-note {
-  font-family: Lora, Georgia, serif;
-  font-style: italic;
-  font-size: 12px;
-  color: var(--muted);
-  padding-left: 28px;
-  margin-top: 4px;
+  padding-left: 32px;
+  margin-top: 6px;
 }
 
 /* ── Step footer / buttons ───────────────────────────────────────────── */
@@ -979,18 +1001,17 @@ hr {
 .step-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: auto;
-  padding-top: 16px;
+  margin-top: 40px;
 }
 
 .step-button {
   font-family: Lora, Georgia, serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   color: #fff;
   background: var(--ink);
   border: none;
-  padding: 14px 28px;
+  padding: 14px 32px;
   border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.15s ease;
@@ -1003,9 +1024,7 @@ hr {
   opacity: 0.55;
 }
 
-.step-button:not(:disabled):hover {
-  opacity: 0.85;
-}
+.step-button:not(:disabled):hover { opacity: 0.85; }
 
 .submit-primary {
   font-family: Lora, Georgia, serif;
@@ -1014,7 +1033,7 @@ hr {
   color: #fff;
   background: var(--ink);
   border: none;
-  padding: 18px 36px;
+  padding: 14px 32px;
   border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.15s ease;
@@ -1027,9 +1046,7 @@ hr {
   opacity: 0.55;
 }
 
-.submit-primary:not(:disabled):hover {
-  opacity: 0.85;
-}
+.submit-primary:not(:disabled):hover { opacity: 0.85; }
 
 /* ── Map clear link ──────────────────────────────────────────────────── */
 
@@ -1041,4 +1058,39 @@ hr {
   cursor: pointer;
   margin-top: 8px;
   display: inline-block;
+}
+
+/* ─── RESPONSIVE (form page additions) ──────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .brand-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 719px) {
+  .section-step {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .metrics-2x2,
+  .metrics-3-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .star {
+    font-size: 28px;
+  }
+
+  .step-subhead {
+    font-size: 18px;
+  }
+
+  .metric-title   { font-size: 20px; }
+  .metric-question { font-size: 16px; }
 }
