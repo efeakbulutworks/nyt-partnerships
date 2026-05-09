@@ -30,7 +30,6 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -98,32 +97,10 @@ body {
   padding: 0 24px 96px;
 }
 
-/* ─── SECTION BLOCKS (JS fullpage targets) ───────────────────────────── */
+/* ─── SECTION BLOCKS ─────────────────────────────────────────────────── */
 
 .section-block {
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
-  scroll-margin-top: 72px;
-  scroll-snap-align: start;
-  padding-top: 140px;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
-}
-
-.section-block.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── FORM PAGE — natural scroll, no JS hijack ───────────────────────── */
-
-.form-page {
-  height: auto;
-  min-height: 100svh;
-  overflow: visible;
-  scroll-snap-stop: always;
+  /* plain block — no scroll locking */
 }
 
 /* ─── SECTION PAGE (map section) ─────────────────────────────────────── */
@@ -264,11 +241,11 @@ body {
 .eval-divider {
   border: none;
   border-top: 1px solid var(--rule);
-  margin: 48px 0 40px;
+  margin: 32px 0 20px;
   max-width: 100%;
 }
 
-/* Small label above each subsection's first metric */
+/* Small label above each subsection */
 .eval-section-label {
   font-family: var(--sans);
   font-size: 13px;
@@ -276,8 +253,38 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
+
+/* ── 3-column metric tile grid ───────────────────────────────────────── */
+
+.metric-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.metric-tile {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Remove left-indent inside tiles — content is already contained */
+.metric-tile .metric-question  { padding-left: 0; margin-bottom: 0; }
+.metric-tile .stars-rating     { padding-left: 0; }
+.metric-tile .metric-low-high  { padding-left: 0; }
+.metric-tile .timeline-pills   { padding-left: 0; }
+.metric-tile .numeric-input-wrap { margin-left: 0; max-width: 100%; }
+.metric-tile .text-input       { margin-left: 0; max-width: 100%; }
+.metric-tile .live-margin-display { padding-left: 0; font-size: 18px; }
+.metric-tile .margin-note,
+.metric-tile .revenue-note     { padding-left: 0; }
 
 /* ── Metric block ────────────────────────────────────────────────────── */
 
@@ -600,15 +607,13 @@ body {
   .brand-cards {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .metric-tiles {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 719px) {
-  .section-block {
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-  }
-
   .section-step {
     padding-top: 40px;
     padding-bottom: 60px;
@@ -619,7 +624,11 @@ body {
   }
 
   .brand-cards {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metric-tiles {
+    grid-template-columns: 1fr;
   }
 
   .star {
