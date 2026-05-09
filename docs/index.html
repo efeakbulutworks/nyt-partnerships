@@ -9,6 +9,12 @@
     .map-content {
       max-width: 1440px;
     }
+    .section-page > .section-eyebrow {
+      font-size: 11px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      max-width: none;
+    }
     .map-layout {
       display: grid;
       grid-template-columns: minmax(210px, 270px) minmax(0, 1fr);
@@ -26,25 +32,27 @@
       height: auto;
       margin-bottom: 14px;
     }
-    .map-explainer {
+    .section-page .map-explainer {
       font-family: Lora, Georgia, serif;
-      font-size: 13px;
+      font-size: 11px;
       font-style: italic;
-      line-height: 1.12;
+      line-height: 1.05;
       color: var(--muted);
-      margin: 0 0 18px;
-      max-width: 26em;
+      margin: 0 0 12px;
+      max-width: 22em;
     }
-    .map-legend-title {
+    .section-page .map-legend-title {
       font-family: var(--sans);
       font-size: 11px;
       font-weight: 700;
+      line-height: 1.15;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
       margin: 18px 0 8px;
+      max-width: none;
     }
-    .resource-guide {
+    .section-page .resource-guide {
       font-family: Lora, Georgia, serif;
       font-size: 12px;
       font-style: italic;
@@ -112,11 +120,13 @@
     }
     .chart-tooltip.visible { opacity: 1; }
     .chart-tooltip strong { font-size: 13px; display: block; margin-bottom: 2px; }
-    .chart-note {
+    .section-page .chart-note {
       font-family: var(--sans);
       font-size: 12px;
+      line-height: 1.2;
       color: var(--muted);
       margin-top: 8px;
+      margin-bottom: 0;
       text-align: center;
       max-width: none;
       width: 100%;
