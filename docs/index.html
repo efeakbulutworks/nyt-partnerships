@@ -121,20 +121,29 @@
     .chart-tooltip.visible { opacity: 1; }
     .chart-tooltip strong { font-size: 13px; display: block; margin-bottom: 2px; }
     .section-page .chart-note {
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      transform: translateX(-50%);
+      z-index: 2;
       font-family: var(--sans);
       font-size: 12px;
       line-height: 1.2;
       color: var(--muted);
-      margin-top: -28px;
+      margin-top: 0;
       margin-bottom: 0;
       text-align: center;
       max-width: none;
-      width: 100%;
+      width: max-content;
     }
     .map-chart-column .map-clear-link {
+      position: absolute;
+      right: 0;
+      bottom: 6px;
+      z-index: 2;
       display: block;
-      width: 100%;
-      margin-top: -16px;
+      width: auto;
+      margin-top: 0;
       color: #c62828;
       text-align: right;
       font-weight: 600;
@@ -448,9 +457,9 @@
         <div class="map-chart-column">
           <div class="chart-container" id="bubble-chart">
             <canvas id="bubble-canvas"></canvas>
+            <p class="chart-note">Hover over a bubble to see details.</p>
+            <a href="#" class="map-clear-link" id="clear-submission">Reset map</a>
           </div>
-          <p class="chart-note">Hover over a bubble to see details.</p>
-          <a href="#" class="map-clear-link" id="clear-submission">Reset map</a>
         </div>
       </div>
 
