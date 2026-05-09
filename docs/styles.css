@@ -251,20 +251,20 @@ body {
 /* Thin rule between form subsections */
 .eval-divider {
   border: none;
-  border-top: 1px solid var(--rule);
-  margin: 32px 0 20px;
+  border-top: 3px solid var(--rule);
+  margin: 10px 0 22px;
   max-width: 100%;
 }
 
 /* Small label above each subsection */
 .eval-section-label {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 16px;
+  margin: 42px 0 0;
 }
 
 /* ── 3-column metric tile grid ───────────────────────────────────────── */
@@ -548,13 +548,32 @@ body {
 /* ── Submit button ───────────────────────────────────────────────────── */
 
 .step-footer {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   margin-top: 56px;
   padding-bottom: 40px;
 }
 
+.submit-feedback {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 760px;
+  margin: 0 0 2px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+  text-align: center;
+}
+
+.submit-feedback.ready {
+  color: #2e7d32;
+}
+
 .submit-primary {
+  grid-column: 2;
+  justify-self: center;
   font-family: Lora, Georgia, serif;
   font-weight: 500;
   font-size: 18px;
@@ -600,6 +619,14 @@ body {
 
   .metric-tiles {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step-footer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .submit-primary {
+    grid-column: 1;
   }
 
   .star {
