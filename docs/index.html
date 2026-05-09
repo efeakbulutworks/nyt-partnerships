@@ -10,40 +10,17 @@
       position: relative;
       border: 1px solid var(--rule);
       background: var(--card-bg);
-      margin: 16px 0 8px;
+      margin: 28px 0 8px;
     }
     #bubble-chart {
       width: 100%;
-      height: 380px;
+      height: 640px;
       position: relative;
     }
     #bubble-canvas {
       width: 100%;
       height: 100%;
       display: block;
-    }
-    .axis-label {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .axis-x-label {
-      text-align: center;
-      margin-top: 4px;
-    }
-    .axis-y-label {
-      position: absolute;
-      left: -38px;
-      top: 50%;
-      transform: translateY(-50%) rotate(-90deg);
-      transform-origin: center center;
-    }
-    .chart-outer {
-      position: relative;
-      padding-left: 52px;
     }
     .chart-tooltip {
       position: fixed;
@@ -65,7 +42,13 @@
       font-family: var(--sans);
       font-size: 12px;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 8px;
+    }
+    @media (max-width: 1023px) {
+      #bubble-chart { height: 520px; }
+    }
+    @media (max-width: 719px) {
+      #bubble-chart { height: 440px; }
     }
   </style>
 </head>
@@ -343,14 +326,10 @@
       <p class="section-eyebrow">The New York Times Advertising Partnerships</p>
       <h1>The Map, Visualized</h1>
 
-      <p>Each bubble: Strategic Value (x) · Commercial Value (y) · Resource Intensity (size). Upper-right is the portfolio sweet spot.</p>
+      <p style="font-size:18px;color:var(--muted);font-family:Lora,Georgia,serif;font-style:italic;max-width:720px;line-height:1.6;margin-bottom:0;">Each bubble is a partnership opportunity. Position shows strategic and commercial value; size shows resource intensity. The four quadrants tell you what kind of bet you're making.</p>
 
-      <div class="chart-outer">
-        <span class="axis-label axis-y-label">Commercial Value →</span>
-        <div class="chart-container" id="bubble-chart">
-          <canvas id="bubble-canvas"></canvas>
-        </div>
-        <div class="axis-label axis-x-label">Strategic Value →</div>
+      <div class="chart-container" id="bubble-chart">
+        <canvas id="bubble-canvas"></canvas>
       </div>
 
       <p class="chart-note">Hover over a bubble to see details. Bubble size = resource intensity.</p>
@@ -364,35 +343,40 @@
 
   <script>
     const BRANDS = [
-      { key: "nyt",          label: "The New York Times",        color: "#d62828" },
-      { key: "athletic",     label: "The Athletic",              color: "#1e5089" },
-      { key: "cooking",      label: "NYT Cooking",               color: "#4f7b2d" },
-      { key: "wirecutter",   label: "Wirecutter",                color: "#c8a028" },
-      { key: "games",        label: "NYT Games",                 color: "#6e3fa3" },
-      { key: "audio",        label: "NYT Audio",                 color: "#1c8a8a" },
-      { key: "multi",        label: "Multi-Brand Ecosystem",     color: "#121212" },
-      { key: "experimental", label: "Experimental / Standalone", color: "#888888" },
+      { key: "nyt",        label: "The New York Times",    color: "#d62828" },
+      { key: "athletic",   label: "The Athletic",          color: "#1e5089" },
+      { key: "cooking",    label: "NYT Cooking",           color: "#4f7b2d" },
+      { key: "wirecutter", label: "Wirecutter",            color: "#c8a028" },
+      { key: "games",      label: "NYT Games",             color: "#6e3fa3" },
+      { key: "audio",      label: "NYT Audio",             color: "#1c8a8a" },
+      { key: "multi",      label: "Multi-Brand Ecosystem", color: "#121212" },
     ];
 
+    // 8 examples — two per quadrant, spread across brands
     const PARTNERSHIPS = [
-      { name: "Marquee Event Sponsorship",  brand: "nyt",          sv: 4.8, cv: 4.5, ri: 5.0, note: "High-touch, flagship activation" },
-      { name: "Editorial Integration",      brand: "nyt",          sv: 4.5, cv: 3.8, ri: 3.5, note: "Brand journalism partnership" },
-      { name: "Athletic Presenting Partner",brand: "athletic",     sv: 4.2, cv: 4.8, ri: 4.0, note: "Season-long sports partnership" },
-      { name: "Cooking Studio Series",      brand: "cooking",      sv: 3.8, cv: 3.5, ri: 3.8, note: "Co-branded recipe content" },
-      { name: "Wirecutter Commerce Deal",   brand: "wirecutter",   sv: 2.5, cv: 4.6, ri: 2.0, note: "Affiliate + editorial integration" },
-      { name: "Games Branded Puzzle",       brand: "games",        sv: 3.2, cv: 3.0, ri: 2.5, note: "Custom puzzle or seasonal game" },
-      { name: "Cross-Brand Tentpole",       brand: "multi",        sv: 5.0, cv: 4.8, ri: 5.0, note: "Full-ecosystem multi-brand deal" },
-      { name: "Newsletter Sponsorship",     brand: "nyt",          sv: 2.8, cv: 4.2, ri: 1.5, note: "High-frequency, scalable" },
-      { name: "Podcast Integration",        brand: "athletic",     sv: 3.5, cv: 3.8, ri: 2.0, note: "Mid-roll + host read" },
-      { name: "Cultural Moment Activation", brand: "nyt",          sv: 4.0, cv: 3.2, ri: 4.2, note: "Time-limited cultural event tie-in" },
-      { name: "Data Intelligence Report",   brand: "multi",        sv: 4.3, cv: 3.6, ri: 3.0, note: "Proprietary audience insights product" },
-      { name: "Experimental Format Pilot",  brand: "experimental", sv: 3.0, cv: 2.0, ri: 3.5, note: "New format test — undefined upside" },
-      { name: "Games Daily Challenge",      brand: "games",        sv: 2.6, cv: 3.4, ri: 1.8, note: "Recurring branded challenge" },
-      { name: "Cooking Seasonal Campaign",  brand: "cooking",      sv: 3.2, cv: 3.9, ri: 2.8, note: "Holiday or seasonal co-brand" },
+      // Top-Right: Platform-Defining (high SV, high CV)
+      { name: "Athletic Championships Ecosystem", brand: "multi",      sv: 4.6, cv: 4.5, ri: 4.0, note: "Multi-brand flagship event series" },
+      { name: "Travel Collective",                brand: "multi",      sv: 4.2, cv: 4.0, ri: 4.0, note: "Cross-brand travel content partnership" },
+      // Top-Left: Efficient Revenue Drivers (low SV, high CV)
+      { name: "Wirecutter Holiday Recs",          brand: "wirecutter", sv: 2.6, cv: 4.3, ri: 2.0, note: "Affiliate + editorial integration" },
+      { name: "Newsletter Tier 2 Sponsorships",   brand: "nyt",        sv: 2.2, cv: 3.8, ri: 2.0, note: "High-frequency, scalable" },
+      // Bottom-Right: Cultural Impact (high SV, low CV)
+      { name: "Climate Solutions Hub",            brand: "nyt",        sv: 4.4, cv: 2.4, ri: 4.0, note: "Long-form brand journalism series" },
+      { name: "Election 2028 Coverage Sponsor",   brand: "nyt",        sv: 4.6, cv: 2.7, ri: 5.0, note: "High-reach election year activation" },
+      // Bottom-Left: Experimental Bets (low SV, low CV)
+      { name: "AI Storytelling Lab",              brand: "multi",      sv: 2.4, cv: 1.8, ri: 3.0, note: "New format test — undefined upside" },
+      { name: "Creator Collaborations",           brand: "athletic",   sv: 2.0, cv: 2.2, ri: 2.0, note: "Creator x Athletic content play" },
     ];
 
     function brandColor(key) {
       return BRANDS.find(b => b.key === key)?.color || "#888";
+    }
+
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
     }
 
     function setupChart() {
@@ -401,114 +385,331 @@
       const tooltip   = document.getElementById("chart-tooltip");
       if (!canvas || !container) return;
 
-      const PAD = { top: 28, right: 28, bottom: 40, left: 40 };
-      let userBubble = null;
-      let currentW = 0, currentH = 0;
+      // Axis visual range: slightly beyond 1–5 so edge bubbles have breathing room
+      const AMIN = 0.55, AMAX = 5.45;
+      const PAD  = { top: 56, right: 56, bottom: 72, left: 68 };
 
-      function toCanvas(val, min, max, minPx, maxPx) {
-        return minPx + ((val - min) / (max - min)) * (maxPx - minPx);
+      let userBubble = null, currentW = 0, currentH = 0;
+
+      // Map a data value to a canvas x coordinate
+      function tx(val, plotL, plotW) {
+        return plotL + ((val - AMIN) / (AMAX - AMIN)) * plotW;
+      }
+      // Map a data value to a canvas y coordinate (inverted: high = top)
+      function ty(val, plotT, plotH) {
+        return plotT + ((AMAX - val) / (AMAX - AMIN)) * plotH;
       }
 
-      function getRegularBubbles(w, h) {
-        const dpr = window.devicePixelRatio;
-        const cw = w * dpr, ch = h * dpr;
-        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
-        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
+      function riToR(ri, dpr) {
+        return (14 + ((ri - 1) / 4) * 22) * dpr;
+      }
+
+      function getBubbles(w, h) {
+        const dpr  = window.devicePixelRatio || 1;
+        const cw   = w * dpr, ch = h * dpr;
+        const plotL = PAD.left * dpr, plotT = PAD.top * dpr;
+        const plotW = cw - (PAD.left + PAD.right) * dpr;
+        const plotH = ch - (PAD.top  + PAD.bottom) * dpr;
         return PARTNERSHIPS.map(p => ({
           ...p,
-          cx: PAD.left * dpr + toCanvas(p.sv, 0, 5.5, 0, plotW),
-          cy: PAD.top  * dpr + toCanvas(p.cv, 5.5, 0, 0, plotH),
-          r:  (p.ri / 5) * 36 * dpr + 8 * dpr,
+          cx: tx(p.sv, plotL, plotW),
+          cy: ty(p.cv, plotT, plotH),
+          r:  riToR(p.ri, dpr),
           isUser: false,
         }));
       }
 
-      function getUserBubbleCoords(w, h) {
+      function getUserBubble(w, h) {
         if (!userBubble) return null;
-        const dpr = window.devicePixelRatio;
-        const cw = w * dpr, ch = h * dpr;
-        const plotW = cw - PAD.left * dpr - PAD.right * dpr;
-        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
-        const r = (14 + (userBubble.ri - 1) / 4 * 22) * dpr;
+        const dpr  = window.devicePixelRatio || 1;
+        const cw   = w * dpr, ch = h * dpr;
+        const plotL = PAD.left * dpr, plotT = PAD.top * dpr;
+        const plotW = cw - (PAD.left + PAD.right) * dpr;
+        const plotH = ch - (PAD.top  + PAD.bottom) * dpr;
         return {
           ...userBubble,
-          cx: PAD.left * dpr + toCanvas(userBubble.sv, 0, 5.5, 0, plotW),
-          cy: PAD.top  * dpr + toCanvas(userBubble.cv, 5.5, 0, 0, plotH),
-          r, isUser: true,
+          cx: tx(userBubble.sv, plotL, plotW),
+          cy: ty(userBubble.cv, plotT, plotH),
+          r:  riToR(userBubble.ri, dpr),
+          isUser: true,
         };
       }
 
-      function draw(w, h) {
-        const dpr = window.devicePixelRatio;
-        const ctx = canvas.getContext("2d");
-        const cw = canvas.width, ch = canvas.height;
-        ctx.clearRect(0, 0, cw, ch);
-
-        const plotL = PAD.left * dpr, plotT = PAD.top * dpr;
-        const plotW = cw - PAD.left * dpr - PAD.right  * dpr;
-        const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
-
-        ctx.strokeStyle = "#e2e2e2"; ctx.lineWidth = 1 * dpr;
-        for (let i = 1; i <= 5; i++) {
-          const x = plotL + (i / 5.5) * plotW;
-          ctx.beginPath(); ctx.moveTo(x, plotT); ctx.lineTo(x, plotT + plotH); ctx.stroke();
-          const y = plotT + (i / 5.5) * plotH;
-          ctx.beginPath(); ctx.moveTo(plotL, y); ctx.lineTo(plotL + plotW, y); ctx.stroke();
+      // Word-wrap text to fit maxWidth (canvas units)
+      function wrapText(ctx, text, maxWidth) {
+        const words = text.split(" ");
+        const lines = [];
+        let cur = "";
+        for (const word of words) {
+          const test = cur ? cur + " " + word : word;
+          if (ctx.measureText(test).width > maxWidth && cur) {
+            lines.push(cur);
+            cur = word;
+          } else {
+            cur = test;
+          }
         }
+        if (cur) lines.push(cur);
+        return lines;
+      }
 
-        const midX = plotL + toCanvas(2.75, 0, 5.5, 0, plotW);
-        const midY = plotT + toCanvas(2.75, 5.5, 0, 0, plotH);
-        ctx.fillStyle = "rgba(247, 230, 0, 0.07)";
-        ctx.fillRect(midX, plotT, plotL + plotW - midX, midY - plotT);
+      function drawBubbleLabel(ctx, b, dpr) {
+        const fSize  = Math.round(11 * dpr);
+        const lineH  = fSize * 1.35;
+        const maxW   = Math.max(b.r * 2.2, 90 * dpr);
+        ctx.font = `italic ${fSize}px Lora, Georgia, serif`;
+        const lines  = wrapText(ctx, b.name, maxW);
+        const totalH = lines.length * lineH;
 
-        ctx.strokeStyle = "#121212"; ctx.lineWidth = 1.5 * dpr;
-        ctx.beginPath(); ctx.moveTo(plotL, plotT); ctx.lineTo(plotL, plotT + plotH); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(plotL, plotT + plotH); ctx.lineTo(plotL + plotW, plotT + plotH); ctx.stroke();
+        // Always draw below the bubble
+        const startY = b.cy + b.r + 6 * dpr;
+        ctx.fillStyle    = "rgba(18,18,18,0.78)";
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "top";
+        lines.forEach((line, i) => {
+          ctx.fillText(line, b.cx, startY + i * lineH);
+        });
+        ctx.textAlign    = "left";
+        ctx.textBaseline = "alphabetic";
+      }
 
-        getRegularBubbles(w, h).forEach(b => {
-          ctx.beginPath(); ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
-          ctx.fillStyle = brandColor(b.brand) + "33"; ctx.fill();
-          ctx.strokeStyle = brandColor(b.brand); ctx.lineWidth = 1.5 * dpr; ctx.stroke();
+      function drawQuadrantLabels(ctx, plotL, plotT, plotW, plotH, dpr) {
+        const plotR = plotL + plotW;
+        const plotB = plotT + plotH;
+        const Q_PAD = 14 * dpr;
+        const T_FS  = Math.round(10 * dpr);
+        const D_FS  = Math.round(11 * dpr);
+        const T_LH  = T_FS * 1.6;
+        const D_LH  = D_FS * 1.4;
+
+        const quadrants = [
+          // Top-Right — far corner: upper-right
+          {
+            title: "PLATFORM-DEFINING",
+            desc:  ["High strategic, high commercial.", "The NYT ecosystem's anchor deals."],
+            align: "right", cx: plotR - Q_PAD, cy: plotT + Q_PAD, top: true,
+          },
+          // Top-Left — far corner: upper-left
+          {
+            title: "EFFICIENT REVENUE",
+            desc:  ["Quick commercial returns.", "Lower strategic stakes."],
+            align: "left", cx: plotL + Q_PAD, cy: plotT + Q_PAD, top: true,
+          },
+          // Bottom-Right — far corner: lower-right
+          {
+            title: "CULTURAL IMPACT",
+            desc:  ["Invest for tomorrow.", "Brand and audience plays."],
+            align: "right", cx: plotR - Q_PAD, cy: plotB - Q_PAD, top: false,
+          },
+          // Bottom-Left — far corner: lower-left
+          {
+            title: "EXPERIMENTAL BETS",
+            desc:  ["Early stage.", "Test, learn, scale the winners."],
+            align: "left", cx: plotL + Q_PAD, cy: plotB - Q_PAD, top: false,
+          },
+        ];
+
+        quadrants.forEach(q => {
+          const blockH = T_LH + q.desc.length * D_LH + 4 * dpr;
+          const startY = q.top ? q.cy : q.cy - blockH;
+
+          // Quadrant title
+          ctx.font         = `700 ${T_FS}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+          ctx.fillStyle    = "rgba(18,18,18,0.68)";
+          ctx.textAlign    = q.align;
+          ctx.textBaseline = "top";
+          ctx.fillText(q.title, q.cx, startY);
+
+          // Description lines
+          ctx.font      = `italic ${D_FS}px Lora, Georgia, serif`;
+          ctx.fillStyle = "rgba(107,107,107,0.9)";
+          q.desc.forEach((line, i) => {
+            ctx.fillText(line, q.cx, startY + T_LH + 4 * dpr + i * D_LH);
+          });
         });
 
-        const ub = getUserBubbleCoords(w, h);
-        if (ub) {
-          ctx.beginPath(); ctx.arc(ub.cx, ub.cy, ub.r + 6 * dpr, 0, Math.PI * 2);
-          ctx.strokeStyle = "#f7e600"; ctx.lineWidth = 2.5 * dpr; ctx.stroke();
+        ctx.textAlign    = "left";
+        ctx.textBaseline = "alphabetic";
+      }
 
-          ctx.beginPath(); ctx.arc(ub.cx, ub.cy, ub.r, 0, Math.PI * 2);
-          ctx.fillStyle = ub.color + "55"; ctx.fill();
-          ctx.strokeStyle = ub.color; ctx.lineWidth = 2.5 * dpr; ctx.stroke();
+      function drawAxisAnnotations(ctx, plotL, plotT, plotW, plotH, cw, ch, dpr) {
+        const plotR = plotL + plotW;
+        const plotB = plotT + plotH;
+        const SML   = Math.round(9 * dpr);
+        const AX_FS = Math.round(10 * dpr);
 
-          const TAG = "NEW", fSize = Math.round(10 * dpr);
-          ctx.font = `700 ${fSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
-          const textW = ctx.measureText(TAG).width;
-          const padX = 7 * dpr, padY = 3 * dpr;
-          const tagW = textW + padX * 2, tagH = fSize + padY * 2;
-          const tagX = ub.cx - tagW / 2, tagY = ub.cy - ub.r - 14 * dpr - tagH;
-          ctx.fillStyle = "#f7e600"; ctx.fillRect(tagX, tagY, tagW, tagH);
-          ctx.fillStyle = "#121212"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-          ctx.fillText(TAG, ub.cx, tagY + tagH / 2);
-          ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+        ctx.fillStyle = "rgba(107,107,107,0.85)";
+
+        // LOW / HIGH on x-axis (below plot)
+        ctx.font         = `${SML}px -apple-system, sans-serif`;
+        ctx.textAlign    = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("LOW", plotL, plotB + 6 * dpr);
+        ctx.textAlign = "right";
+        ctx.fillText("HIGH", plotR, plotB + 6 * dpr);
+
+        // LOW / HIGH on y-axis (left of plot)
+        ctx.textAlign    = "right";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("LOW", plotL - 6 * dpr, plotB);
+        ctx.textBaseline = "top";
+        ctx.fillText("HIGH", plotL - 6 * dpr, plotT);
+
+        // Axis titles
+        ctx.font      = `700 ${AX_FS}px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.fillStyle = "rgba(107,107,107,0.85)";
+
+        // X: "STRATEGIC VALUE →" centered below
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("STRATEGIC VALUE →", plotL + plotW / 2, ch - 6 * dpr);
+
+        // Y: "COMMERCIAL VALUE →" rotated left
+        ctx.save();
+        ctx.translate(10 * dpr, plotT + plotH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "top";
+        ctx.fillText("COMMERCIAL VALUE →", 0, 0);
+        ctx.restore();
+
+        ctx.textAlign    = "left";
+        ctx.textBaseline = "alphabetic";
+      }
+
+      function draw(w, h) {
+        const dpr   = window.devicePixelRatio || 1;
+        const ctx   = canvas.getContext("2d");
+        const cw    = canvas.width, ch = canvas.height;
+        ctx.clearRect(0, 0, cw, ch);
+
+        const plotL = PAD.left   * dpr;
+        const plotT = PAD.top    * dpr;
+        const plotW = cw - (PAD.left + PAD.right)  * dpr;
+        const plotH = ch - (PAD.top  + PAD.bottom) * dpr;
+        const plotR = plotL + plotW;
+        const plotB = plotT + plotH;
+
+        const midX = tx(3, plotL, plotW);
+        const midY = ty(3, plotT, plotH);
+
+        // ── 1. Quadrant background tints ──────────────────────────────────────
+        // Top-Left: Efficient Revenue — blue
+        ctx.fillStyle = "rgba(30,80,137,0.10)";
+        ctx.fillRect(plotL, plotT, midX - plotL, midY - plotT);
+        // Top-Right: Platform-Defining — green
+        ctx.fillStyle = "rgba(79,123,45,0.10)";
+        ctx.fillRect(midX, plotT, plotR - midX, midY - plotT);
+        // Bottom-Left: Experimental — gray
+        ctx.fillStyle = "rgba(107,107,107,0.08)";
+        ctx.fillRect(plotL, midY, midX - plotL, plotB - midY);
+        // Bottom-Right: Cultural Impact — gold
+        ctx.fillStyle = "rgba(200,160,40,0.10)";
+        ctx.fillRect(midX, midY, plotR - midX, plotB - midY);
+
+        // ── 2. Gridlines at each integer (skip midline = 3) ───────────────────
+        ctx.strokeStyle = "rgba(0,0,0,0.05)";
+        ctx.lineWidth   = 1 * dpr;
+        for (let i = 1; i <= 5; i++) {
+          if (i === 3) continue;
+          const x = tx(i, plotL, plotW);
+          ctx.beginPath(); ctx.moveTo(x, plotT); ctx.lineTo(x, plotB); ctx.stroke();
+          const y = ty(i, plotT, plotH);
+          ctx.beginPath(); ctx.moveTo(plotL, y); ctx.lineTo(plotR, y); ctx.stroke();
         }
 
-        canvas._bubbles = getRegularBubbles(w, h);
+        // ── 3. Midlines at X=3, Y=3 (quadrant dividers — stronger) ───────────
+        ctx.strokeStyle = "rgba(0,0,0,0.18)";
+        ctx.lineWidth   = 1 * dpr;
+        ctx.beginPath(); ctx.moveTo(midX, plotT); ctx.lineTo(midX, plotB); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(plotL, midY); ctx.lineTo(plotR, midY); ctx.stroke();
+
+        // ── 4. Quadrant labels ─────────────────────────────────────────────────
+        drawQuadrantLabels(ctx, plotL, plotT, plotW, plotH, dpr);
+
+        // ── 5. Axis annotations ────────────────────────────────────────────────
+        drawAxisAnnotations(ctx, plotL, plotT, plotW, plotH, cw, ch, dpr);
+
+        // ── 6. Regular bubbles ─────────────────────────────────────────────────
+        const bubbles = getBubbles(w, h);
+        bubbles.forEach(b => {
+          const color = brandColor(b.brand);
+          ctx.beginPath();
+          ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
+          ctx.fillStyle   = hexToRgba(color, 0.60);
+          ctx.fill();
+          ctx.strokeStyle = color;
+          ctx.lineWidth   = 1.5 * dpr;
+          ctx.stroke();
+        });
+
+        // ── 7. Bubble labels ───────────────────────────────────────────────────
+        bubbles.forEach(b => drawBubbleLabel(ctx, b, dpr));
+
+        // ── 8. User bubble (drawn last — on top) ───────────────────────────────
+        const ub = getUserBubble(w, h);
+        if (ub) {
+          const color = ub.color || "#121212";
+
+          // Yellow ring
+          ctx.beginPath();
+          ctx.arc(ub.cx, ub.cy, ub.r + 6 * dpr, 0, Math.PI * 2);
+          ctx.strokeStyle = "#f7e600";
+          ctx.lineWidth   = 2.5 * dpr;
+          ctx.stroke();
+
+          // Bubble
+          ctx.beginPath();
+          ctx.arc(ub.cx, ub.cy, ub.r, 0, Math.PI * 2);
+          ctx.fillStyle   = hexToRgba(color, 0.60);
+          ctx.fill();
+          ctx.strokeStyle = color;
+          ctx.lineWidth   = 2.5 * dpr;
+          ctx.stroke();
+
+          // Label
+          drawBubbleLabel(ctx, ub, dpr);
+
+          // "NEW" tag
+          const TAG   = "NEW";
+          const fSize = Math.round(10 * dpr);
+          ctx.font = `700 ${fSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+          const textW = ctx.measureText(TAG).width;
+          const padX  = 7 * dpr, padY = 3 * dpr;
+          const tagW  = textW + padX * 2, tagH = fSize + padY * 2;
+          const tagX  = ub.cx - tagW / 2;
+          const tagY  = ub.cy - ub.r - 14 * dpr - tagH;
+          ctx.fillStyle = "#f7e600";
+          ctx.fillRect(tagX, tagY, tagW, tagH);
+          ctx.fillStyle    = "#121212";
+          ctx.textAlign    = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(TAG, ub.cx, tagY + tagH / 2);
+          ctx.textAlign    = "left";
+          ctx.textBaseline = "alphabetic";
+        }
+
+        canvas._bubbles    = bubbles;
         canvas._userBubble = ub;
       }
 
       function resize() {
-        currentW = container.offsetWidth; currentH = container.offsetHeight;
-        const dpr = window.devicePixelRatio;
-        canvas.width = currentW * dpr; canvas.height = currentH * dpr;
-        canvas.style.width = currentW + "px"; canvas.style.height = currentH + "px";
+        currentW = container.offsetWidth;
+        currentH = container.offsetHeight;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width        = currentW * dpr;
+        canvas.height       = currentH * dpr;
+        canvas.style.width  = currentW + "px";
+        canvas.style.height = currentH + "px";
         draw(currentW, currentH);
       }
 
       function getHovered(mx, my) {
-        const dpr = window.devicePixelRatio;
+        const dpr  = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
-        const cx = (mx - rect.left) * dpr, cy = (my - rect.top) * dpr;
-        const ub = canvas._userBubble;
+        const cx   = (mx - rect.left) * dpr;
+        const cy   = (my - rect.top)  * dpr;
+        const ub   = canvas._userBubble;
         if (ub && Math.sqrt((cx - ub.cx) ** 2 + (cy - ub.cy) ** 2) <= ub.r + 6 * dpr) return ub;
         const bubbles = canvas._bubbles || [];
         for (let i = bubbles.length - 1; i >= 0; i--) {
@@ -539,21 +740,25 @@
       resize();
 
       const legend = document.getElementById("chart-legend");
-      BRANDS.forEach(b => {
-        const item = document.createElement("div");
-        item.className = "legend-item";
-        item.innerHTML = `<span class="legend-dot" style="background:${b.color}"></span><span>${b.label}</span>`;
-        legend.appendChild(item);
-      });
+      if (legend) {
+        BRANDS.forEach(b => {
+          const item = document.createElement("div");
+          item.className = "legend-item";
+          item.innerHTML = `<span class="legend-dot" style="background:${b.color}"></span><span>${b.label}</span>`;
+          legend.appendChild(item);
+        });
+      }
 
       window.chartAddUserBubble = function (data) {
-        userBubble = data; resize();
+        userBubble = data;
+        resize();
         const cl = document.getElementById("clear-submission");
         if (cl) cl.style.display = "inline-block";
       };
 
       window.chartClearUserBubble = function () {
-        userBubble = null; resize();
+        userBubble = null;
+        resize();
         const cl = document.getElementById("clear-submission");
         if (cl) cl.style.display = "none";
       };
