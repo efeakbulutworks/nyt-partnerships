@@ -72,6 +72,7 @@
 </head>
 <body>
   <script src="nav.js" defer></script>
+  <script src="fullpage.js" defer></script>
 
   <!-- Scroll dot indicator — one dot per section -->
   <div id="scroll-dots" aria-hidden="true">
@@ -707,64 +708,12 @@
       });
     }
 
-    // ── Scroll dot indicator ───────────────────────────────────────────────
-    const SECTION_IDS = [
-      "what-i-heard",
-      "portfolio-management-map",
-      "map-visualized",
-      "partnership-types",
-      "modular-architecture",
-      "why-this-excites-me",
-      "about",
-    ];
-
-    function setupDots() {
-      const dots = Array.from(document.querySelectorAll(".scroll-dot"));
-      const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
-      if (!dots.length || !sections.length) return;
-
-      const ratios = new Array(sections.length).fill(0);
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          const idx = sections.indexOf(entry.target);
-          if (idx !== -1) ratios[idx] = entry.intersectionRatio;
-        });
-        const maxIdx = ratios.indexOf(Math.max(...ratios));
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === maxIdx));
-      }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
-
-      sections.forEach(s => observer.observe(s));
-    }
-
-    // ── Fade-in on scroll ──────────────────────────────────────────────────
-    function setupFadeIn() {
-      const blocks = document.querySelectorAll(".section-block");
-      if (!blocks.length) return;
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-
-      blocks.forEach(b => observer.observe(b));
-    }
-
     // ── Init ───────────────────────────────────────────────────────────────
+    // Dots and fade-ins are managed by fullpage.js
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => {
-        setupChart();
-        setupDots();
-        setupFadeIn();
-      });
+      document.addEventListener("DOMContentLoaded", setupChart);
     } else {
       setupChart();
-      setupDots();
-      setupFadeIn();
     }
   </script>
 

@@ -30,10 +30,6 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-  /* Snap scroll */
-  scroll-snap-type: y mandatory;
-  scroll-padding-top: var(--nav-height);
-  scroll-behavior: smooth;
 }
 
 body {
@@ -102,13 +98,15 @@ body {
   padding: 0 24px 96px;
 }
 
-/* ─── SECTION BLOCKS (snap targets) ──────────────────────────────────── */
+/* ─── SECTION BLOCKS (JS fullpage targets) ───────────────────────────── */
 
 .section-block {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
-  /* breathing room: content starts well below the nav snap point */
+  /* Hard full-viewport height on desktop — JS controller navigates between them */
+  height: 100vh;
+  height: 100svh; /* dynamic toolbar-aware on supporting browsers */
+  overflow: hidden;
+  scroll-margin-top: 72px;
+  /* breathing room: content starts well below the nav */
   padding-top: 140px;
   /* fade-in initial state */
   opacity: 0;
@@ -131,6 +129,8 @@ body {
   padding: calc(var(--nav-height) + 64px) 24px 120px;
   display: flex;
   flex-direction: column;
+  /* overflow visible so the absolute scroll indicator isn't clipped */
+  overflow: visible;
 }
 
 .page-1-grid {
@@ -548,23 +548,18 @@ hr {
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────── */
 
-@media (max-width: 720px) {
-  /* Disable snap on touch — mandatory snap + momentum scrolling
-     feels aggressive on iOS and prevents reading long sections */
-  html {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
-
+@media (max-width: 719px) {
+  /* Mobile: plain native scrolling — no JS hijack, no fixed height */
   .section-block {
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
+    height: auto;
     min-height: auto;
+    overflow: visible;
   }
 
   .page-1 {
     min-height: 100svh;
     padding-bottom: 80px;
+    overflow: visible;
   }
 
   /* Stack page-1 grid to single column */
