@@ -119,120 +119,127 @@ body {
   transform: translateY(0);
 }
 
-/* ─── PAGE 1 — NYT-editorial black opener ─────────────────────────────── */
+/* ─── PAGE 1 — NYT-editorial two-column layout ────────────────────────── */
 
 .page-1 {
   background: #121212;
   color: #ffffff;
   position: relative;
-  /* override .section-block padding-top — Page 1 manages its own top space */
-  padding: calc(var(--nav-height) + 64px) 24px 120px;
+  /* wider than the site max-width; horizontal padding scales with viewport */
+  padding: calc(var(--nav-height) + 56px) clamp(24px, 5vw, 80px) 80px;
   display: flex;
   flex-direction: column;
-  /* overflow visible so the absolute scroll indicator isn't clipped */
+  /* overflow visible: scroll indicator is position:absolute at bottom */
   overflow: visible;
 }
 
-.page-1-grid {
-  max-width: var(--max-width);
+/* ── Two-column grid ──────────────────────────────────────────────────── */
+
+.page-1-layout {
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  grid-template-rows: 1fr auto;
-  gap: 0 72px;
+  grid-template-columns: 55fr 45fr;
+  gap: 0 64px;
+  align-items: start;
   flex: 1;
-  /* enough min-height so regions A and B have vertical separation */
-  min-height: calc(100vh - var(--nav-height) - 64px - 120px - 280px);
 }
 
-/* Region A: upper-left — eyebrow + headline + body */
-.page-1-region-a {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  padding-top: 16px;
+/* Thin vertical rule sitting in the middle of the column gap */
+.page-1-right {
+  position: relative;
+}
+
+.page-1-right::before {
+  content: '';
+  position: absolute;
+  left: -32px; /* half of 64px gap */
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Left column — lead story ─────────────────────────────────────────── */
+
+.page-1-left {
+  padding-top: 8px;
 }
 
 .page-1-eyebrow {
-  font-family: var(--sans);
+  font-family: Lora, Georgia, serif;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 24px;
+  display: block;
 }
 
 .page-1-headline {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(36px, 4vw, 52px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
   color: #ffffff;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .page-1-body {
   font-family: Lora, Georgia, serif;
-  font-size: clamp(17px, 1.8vw, 22px);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
   max-width: 36em;
 }
 
-/* Region B: lower-right — transition statement */
-.page-1-region-b {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: end;
-  text-align: right;
-  padding-bottom: 16px;
-}
+/* ── Right column — sidebar story ────────────────────────────────────── */
 
 .page-1-shift-1 {
   font-family: Lora, Georgia, serif;
-  font-size: clamp(15px, 1.6vw, 18px);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 20px;
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 16px;
 }
 
 .page-1-shift-2 {
   font-family: Lora, Georgia, serif;
-  font-size: clamp(17px, 1.8vw, 22px);
+  font-size: clamp(19px, 1.8vw, 24px);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
   color: #ffffff;
 }
 
-/* Region C: lower-center — image + caption */
-.page-1-region-c {
-  grid-column: 1 / 3;
-  grid-row: 2;
-  text-align: center;
-  padding-top: 52px;
+.page-1-rule {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 32px 0;
 }
 
 .page-1-map-img {
   display: block;
-  margin: 0 auto 24px;
-  max-width: 520px;
   width: 100%;
-  height: auto;
+  max-width: 420px;
+  max-height: 220px;
+  object-fit: contain;
+  object-position: left center;
+  margin: 0;
 }
 
 .page-1-map-caption {
   font-family: Lora, Georgia, serif;
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 60ch;
-  margin: 0 auto;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 24px;
 }
 
-/* Region D: bobbing scroll indicator */
+/* ── Region D: bobbing scroll indicator ──────────────────────────────── */
+
 @keyframes bob-down {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(6px); }
@@ -261,7 +268,7 @@ body {
 .scroll-indicator-label {
   font-family: var(--sans);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -548,6 +555,18 @@ hr {
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────── */
 
+/* Tablet: collapse two-column Page 1 to single column */
+@media (max-width: 1023px) and (min-width: 720px) {
+  .page-1-layout {
+    grid-template-columns: 1fr;
+    gap: 40px 0;
+  }
+
+  .page-1-right::before {
+    display: none;
+  }
+}
+
 @media (max-width: 719px) {
   /* Mobile: plain native scrolling — no JS hijack, no fixed height */
   .section-block {
@@ -562,30 +581,13 @@ hr {
     overflow: visible;
   }
 
-  /* Stack page-1 grid to single column */
-  .page-1-grid {
+  .page-1-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
     gap: 40px 0;
-    min-height: auto;
   }
 
-  .page-1-region-a {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .page-1-region-b {
-    grid-column: 1;
-    grid-row: 2;
-    text-align: left;
-    padding-bottom: 0;
-    align-self: auto;
-  }
-
-  .page-1-region-c {
-    grid-column: 1;
-    grid-row: 3;
+  .page-1-right::before {
+    display: none;
   }
 
   #scroll-dots {
