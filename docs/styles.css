@@ -4,7 +4,7 @@
   --bg: #ffffff;
   --ink: #121212;
   --rule: #e2e2e2;
-  --muted: #6b6b6b;
+  --muted: #4a4a4a;
   --accent-yellow: #f7e600;
   --card-bg: #fafafa;
 
@@ -264,7 +264,7 @@ body {
 
 .metric-tiles {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
 }
@@ -277,6 +277,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
+  height: 100%;
 }
 
 /* Remove left-indent inside tiles — content is already contained */
@@ -395,7 +397,7 @@ body {
 
 .brand-cards {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
 }
@@ -430,7 +432,7 @@ body {
 
 /* Selected: thick brand-colored outline; border-color set via JS from data-color */
 .brand-card.selected {
-  border-width: 4px;
+  border-width: 8px;
 }
 
 /* Selected overlay: 30% brand-color wash over the entire image */
@@ -570,11 +572,7 @@ body {
 
 @media (max-width: 1023px) {
   .brand-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .metric-tiles {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -589,11 +587,11 @@ body {
   }
 
   .brand-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .metric-tiles {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .star {
