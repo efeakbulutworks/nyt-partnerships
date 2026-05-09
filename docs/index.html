@@ -11,28 +11,28 @@
     }
     .map-layout {
       display: grid;
-      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
-      gap: clamp(28px, 4vw, 56px);
+      grid-template-columns: minmax(210px, 270px) minmax(0, 1fr);
+      gap: clamp(14px, 2vw, 28px);
       align-items: start;
-      margin-top: 28px;
+      margin-top: 22px;
     }
     .map-left-rail {
       border-right: 1px solid var(--rule);
-      padding-right: clamp(24px, 3vw, 40px);
+      padding-right: clamp(14px, 1.5vw, 22px);
     }
     .pmm-logo {
       display: block;
-      width: min(100%, 260px);
+      width: min(100%, 240px);
       height: auto;
-      margin-bottom: 22px;
+      margin-bottom: 14px;
     }
     .map-explainer {
       font-family: Lora, Georgia, serif;
-      font-size: 14px;
+      font-size: 13px;
       font-style: italic;
-      line-height: 1.38;
+      line-height: 1.12;
       color: var(--muted);
-      margin: 0 0 28px;
+      margin: 0 0 18px;
       max-width: 26em;
     }
     .map-legend-title {
@@ -42,21 +42,30 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
-      margin: 28px 0 12px;
+      margin: 18px 0 8px;
+    }
+    .resource-guide {
+      font-family: Lora, Georgia, serif;
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.25;
+      color: var(--muted);
+      margin: -2px 0 10px;
+      max-width: 22em;
     }
     .bubble-size-legend {
       display: flex;
       align-items: flex-end;
-      gap: 18px;
+      gap: 12px;
       font-family: var(--sans);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
     }
     .size-legend-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 5px;
     }
     .size-dot {
       border-radius: 50%;
@@ -72,6 +81,10 @@
       border: 0;
       background: #fff;
       margin: 0 0 8px;
+    }
+    .map-chart-column {
+      width: 100%;
+      min-width: 0;
     }
     #bubble-chart {
       width: 100%;
@@ -106,6 +119,15 @@
       margin-top: 8px;
       text-align: center;
       max-width: none;
+      width: 100%;
+    }
+    .map-chart-column .map-clear-link {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      color: #c62828;
+      text-align: right;
+      font-weight: 600;
     }
     @media (max-width: 1023px) {
       .map-layout {
@@ -405,13 +427,12 @@
           <div class="chart-legend" id="chart-legend"></div>
 
           <p class="map-legend-title">Resource Intensity</p>
+          <p class="resource-guide">Bigger bubbles mean more complex, higher-bandwidth projects.</p>
           <div class="bubble-size-legend" aria-label="Bubble size indicates resource intensity">
             <span class="size-legend-item"><span class="size-dot small"></span><span>Low</span></span>
             <span class="size-legend-item"><span class="size-dot medium"></span><span>Medium</span></span>
             <span class="size-legend-item"><span class="size-dot large"></span><span>High</span></span>
           </div>
-
-          <a href="#" class="map-clear-link" id="clear-submission" style="display:none;">Clear my submission</a>
         </aside>
 
         <div class="map-chart-column">
@@ -419,6 +440,7 @@
             <canvas id="bubble-canvas"></canvas>
           </div>
           <p class="chart-note">Hover over a bubble to see details.</p>
+          <a href="#" class="map-clear-link" id="clear-submission" style="display:none;">Clear my submission</a>
         </div>
       </div>
 
@@ -509,7 +531,7 @@
 
       // Axis visual range: slightly beyond 1–5 so edge bubbles have breathing room
       const AMIN = 0.55, AMAX = 5.45;
-      const PAD  = { top: 92, right: 56, bottom: 44, left: 92 };
+      const PAD  = { top: 78, right: 34, bottom: 38, left: 74 };
 
       let userBubble = null, currentW = 0, currentH = 0;
 
@@ -606,20 +628,25 @@
 
         if (type === "diamond") {
           ctx.beginPath();
-          ctx.moveTo(0, -s / 2);
-          ctx.lineTo(s / 2, 0);
-          ctx.lineTo(0, s / 2);
-          ctx.lineTo(-s / 2, 0);
+          ctx.moveTo(-s * 0.42, -s * 0.08);
+          ctx.lineTo(-s * 0.22, -s * 0.48);
+          ctx.lineTo(s * 0.22, -s * 0.48);
+          ctx.lineTo(s * 0.42, -s * 0.08);
+          ctx.lineTo(0, s * 0.5);
           ctx.closePath();
           ctx.stroke();
           ctx.beginPath();
-          ctx.moveTo(-s / 2, 0);
-          ctx.lineTo(-s / 5, -s / 2);
-          ctx.lineTo(0, 0);
-          ctx.lineTo(s / 5, -s / 2);
-          ctx.lineTo(s / 2, 0);
-          ctx.moveTo(0, 0);
-          ctx.lineTo(0, s / 2);
+          ctx.moveTo(-s * 0.42, -s * 0.08);
+          ctx.lineTo(s * 0.42, -s * 0.08);
+          ctx.moveTo(-s * 0.22, -s * 0.48);
+          ctx.lineTo(0, s * 0.5);
+          ctx.moveTo(s * 0.22, -s * 0.48);
+          ctx.lineTo(0, s * 0.5);
+          ctx.moveTo(0, -s * 0.48);
+          ctx.lineTo(-s * 0.16, -s * 0.08);
+          ctx.lineTo(0, s * 0.5);
+          ctx.lineTo(s * 0.16, -s * 0.08);
+          ctx.lineTo(0, -s * 0.48);
           ctx.stroke();
         } else if (type === "bars") {
           const w = s / 5;
@@ -670,14 +697,14 @@
       function drawQuadrantLabels(ctx, plotL, plotT, plotW, plotH, dpr) {
         const midX = tx(3, plotL, plotW);
         const midY = ty(3, plotT, plotH);
-        const Q_PAD = 18 * dpr;
-        const T_FS  = Math.round(13 * dpr);
-        const D_FS  = Math.round(13.5 * dpr);
-        const T_LH  = T_FS * 1.35;
-        const D_LH  = D_FS * 1.42;
-        const I_SIZE = 18 * dpr;
+        const Q_PAD = 26 * dpr;
+        const T_FS  = Math.round(13.5 * dpr);
+        const D_FS  = Math.round(11.5 * dpr);
+        const T_LH  = T_FS * 1.05;
+        const D_LH  = D_FS * 1.22;
+        const I_SIZE = 20 * dpr;
         const I_GAP = 8 * dpr;
-        const MAX_W = Math.min(250 * dpr, plotW * 0.42);
+        const MAX_W = Math.min(238 * dpr, plotW * 0.42);
 
         const quadrants = [
           {
@@ -714,18 +741,20 @@
           ctx.font = `italic ${D_FS}px Lora, Georgia, serif`;
           const descLines = wrapText(ctx, q.desc, MAX_W);
           const startY = q.y;
+          const titleMidY = startY + T_FS * 0.5;
 
           ctx.font         = `800 ${T_FS}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
           ctx.fillStyle    = q.color;
-          ctx.textBaseline = "top";
-          drawQuadrantIcon(ctx, q.icon, q.x + I_SIZE / 2, startY + T_FS * 0.63, I_SIZE, dpr);
+          ctx.textBaseline = "middle";
+          drawQuadrantIcon(ctx, q.icon, q.x + I_SIZE / 2, titleMidY, I_SIZE, dpr);
           ctx.textAlign = "left";
-          ctx.fillText(q.title, q.x + I_SIZE + I_GAP, startY);
+          ctx.fillText(q.title, q.x + I_SIZE + I_GAP, titleMidY);
 
           ctx.font      = `italic ${D_FS}px Lora, Georgia, serif`;
           ctx.fillStyle = "rgba(74,74,74,0.92)";
+          ctx.textBaseline = "top";
           descLines.forEach((line, i) => {
-            ctx.fillText(line, q.x + I_SIZE + I_GAP, startY + T_LH + 7 * dpr + i * D_LH);
+            ctx.fillText(line, q.x + I_SIZE + I_GAP, startY + T_LH + 3 * dpr + i * D_LH);
           });
         });
 
@@ -736,7 +765,7 @@
       function drawAxisAnnotations(ctx, plotL, plotT, plotW, plotH, cw, ch, dpr) {
         const plotR = plotL + plotW;
         const plotB = plotT + plotH;
-        const SML   = Math.round(11 * dpr);
+        const SML   = Math.round(10.5 * dpr);
         const AX_FS = Math.round(13 * dpr);
 
         ctx.fillStyle = "rgba(74,74,74,0.9)";
@@ -777,7 +806,7 @@
         ctx.translate(14 * dpr, plotT + plotH / 2);
         ctx.rotate(-Math.PI / 2);
         ctx.textAlign    = "center";
-        ctx.textBaseline = "top";
+        ctx.textBaseline = "middle";
         ctx.fillText(commercialAxis, 0, 0);
         ctx.restore();
 
@@ -816,7 +845,7 @@
         ctx.fillRect(midX, midY, plotR - midX, plotB - midY);
 
         // ── 2. Gridlines at each integer (skip midline = 3) ───────────────────
-        ctx.strokeStyle = "rgba(0,0,0,0.05)";
+        ctx.strokeStyle = "rgba(0,0,0,0.09)";
         ctx.lineWidth   = 1 * dpr;
         for (let i = 1; i <= 5; i++) {
           if (i === 3) continue;
@@ -827,10 +856,13 @@
         }
 
         // ── 3. Midlines at X=3, Y=3 (quadrant dividers — stronger) ───────────
-        ctx.strokeStyle = "rgba(0,0,0,0.18)";
+        ctx.strokeStyle = "rgba(0,0,0,0.26)";
         ctx.lineWidth   = 1 * dpr;
         ctx.beginPath(); ctx.moveTo(midX, plotT); ctx.lineTo(midX, plotB); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(plotL, midY); ctx.lineTo(plotR, midY); ctx.stroke();
+
+        ctx.strokeStyle = "rgba(0,0,0,0.16)";
+        ctx.strokeRect(plotL, plotT, plotW, plotH);
 
         // ── 4. Quadrant labels ─────────────────────────────────────────────────
         drawQuadrantLabels(ctx, plotL, plotT, plotW, plotH, dpr);
@@ -959,7 +991,7 @@
         userBubble = data;
         resize();
         const cl = document.getElementById("clear-submission");
-        if (cl) cl.style.display = "inline-block";
+        if (cl) cl.style.display = "block";
       };
 
       window.chartClearUserBubble = function () {
