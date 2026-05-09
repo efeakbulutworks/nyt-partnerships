@@ -181,7 +181,7 @@
     cooking:    '#4f7b2d',
     wirecutter: '#c8a028',
     games:      '#6e3fa3',
-    audio:      '#1c8a8a',
+    audio:      '#d4634a',
   };
 
   function computeScores() {

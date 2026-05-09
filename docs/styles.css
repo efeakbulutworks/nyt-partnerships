@@ -105,6 +105,10 @@ body {
 
 /* ─── SECTION PAGE (map section) ─────────────────────────────────────── */
 
+.section-page {
+  scroll-margin-top: var(--nav-height);
+}
+
 .section-eyebrow {
   font-family: var(--sans);
   font-size: 11px;
@@ -398,7 +402,7 @@ body {
 
 .brand-card {
   position: relative;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   padding: 0;
   border: 1px solid var(--rule);
@@ -406,6 +410,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
   display: block;
+  width: 100%;
   transition: border-color 200ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 
@@ -426,6 +431,17 @@ body {
 /* Selected: thick brand-colored outline; border-color set via JS from data-color */
 .brand-card.selected {
   border-width: 4px;
+}
+
+/* Selected overlay: 30% brand-color wash over the entire image */
+.brand-card.selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--brand-color, #121212);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 200ms ease;
 }
 
 /* ── Ecosystem display ───────────────────────────────────────────────── */
