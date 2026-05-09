@@ -6,7 +6,7 @@
   <title>NYT Partnerships Pitch — Efe Akbulut</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Chart-specific styles (moved inline from map-visualized.html) */
+    /* Chart-specific styles */
     .chart-container {
       position: relative;
       border: 1px solid var(--rule);
@@ -73,7 +73,7 @@
 <body>
   <script src="nav.js" defer></script>
 
-  <!-- Scroll dot indicator -->
+  <!-- Scroll dot indicator — one dot per section -->
   <div id="scroll-dots" aria-hidden="true">
     <div class="scroll-dot" data-section="what-i-heard"></div>
     <div class="scroll-dot" data-section="portfolio-management-map"></div>
@@ -84,46 +84,49 @@
     <div class="scroll-dot" data-section="about"></div>
   </div>
 
-  <main class="content">
+  <!-- ─── PAGE 1 — NYT-editorial black opener (full-width, outside content wrapper) ── -->
+  <section id="what-i-heard" class="section-block page-1">
 
-    <!-- ─── HERO ──────────────────────────────────────────────────────── -->
-    <section class="hero">
-      <img class="hero-image"
-           src="assets/portfolio-map-hero.png"
-           alt="The New York Times Advertising Partnerships — Portfolio Management Map">
-      <h1>From reactive partnerships to portfolio&nbsp;management.</h1>
-      <p class="hero-subhead">A thought-starter for scaling strategic partnership development across the NYT ecosystem.</p>
-      <p class="hero-byline">By Efe Akbulut &middot; For Dao &middot; May 2026</p>
-    </section>
+    <div class="page-1-grid">
 
-    <!-- ─── SECTION 01: WHAT I HEARD ──────────────────────────────────── -->
-    <section id="what-i-heard" class="section-block section-page">
-      <p class="section-eyebrow">Section 01 &middot; The New York Times Advertising Partnerships</p>
-      <h1>What I Heard</h1>
-
-      <blockquote>
-        "The challenge is not demand generation."
-      </blockquote>
-
-      <blockquote>
-        "The challenge is operationalizing high-value bespoke partnerships across NYT premium brands without diluting creativity, overwhelming the team, or compromising long-term pipeline development."
-      </blockquote>
-
-      <p>NYT has no shortage of opportunity. The harder question is which opportunities deserve organizational energy, how to scale the team's output thoughtfully, and how to build a 2027 pipeline while still executing 2026 — without losing the premium feel that makes NYT, NYT.</p>
-
-      <p>So the work isn't lead generation. It's prioritization, sequencing, and operating discipline. The shift I'd propose, and the spine of the rest of this site, is from reactive partnerships to portfolio management — managing the partnership book the way mature organizations manage an investment portfolio.</p>
-
-      <div class="pull-quote">
-        From reactive partnerships → portfolio management.
+      <!-- Region A: upper-left — eyebrow, headline, body -->
+      <div class="page-1-region-a">
+        <p class="page-1-eyebrow">WHAT I HEARD…</p>
+        <h2 class="page-1-headline">The challenge is not demand generation.</h2>
+        <p class="page-1-body">The challenge is operationalizing high-value bespoke partnerships across NYT premium brands without diluting creativity, overwhelming the team, or compromising long-term pipeline development.</p>
       </div>
-    </section>
+
+      <!-- Region B: lower-right — shift statement -->
+      <div class="page-1-region-b">
+        <p class="page-1-shift-1">So.. let's identify opportunities. Prioritize intelligently.</p>
+        <p class="page-1-shift-2">Let's make the shift: From Reactive Partnerships → Portfolio Management</p>
+      </div>
+
+      <!-- Region C: lower-center — portfolio map image + caption -->
+      <div class="page-1-region-c">
+        <img class="page-1-map-img"
+             src="assets/portfolio-map-hero.png"
+             alt="Portfolio Management Map">
+        <p class="page-1-map-caption">This map is a shared partnership evaluation language Dao and Efe can use: to decide what deserves organizational energy by scaling strategic partnership development across the NYT Ecosystem cross-brand opportunity mapping. Thus, the advertising partnerships team can intelligently lead the internal alignment, prioritization, resource planning, and pipeline forecasting.</p>
+      </div>
+
+    </div>
+
+    <!-- Region D: bobbing scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-indicator-arrow">↓</span>
+      <span class="scroll-indicator-label">scroll</span>
+    </div>
+
+  </section>
+
+  <!-- ─── SECTIONS 02–07 — inside content wrapper for max-width + padding ── -->
+  <main class="content">
 
     <!-- ─── SECTION 02: PORTFOLIO MANAGEMENT MAP ──────────────────────── -->
     <section id="portfolio-management-map" class="section-block section-page">
       <p class="section-eyebrow">Section 02 &middot; The New York Times Advertising Partnerships</p>
       <h1>Portfolio Management Map</h1>
-
-      <p>A shared evaluation language Dao and I can use to decide what deserves organizational energy. The map evaluates partnerships across three dimensions — Strategic Value, Commercial Value, and Resource Intensity — using a consistent set of metrics. It enables internal alignment, prioritization, resource planning, and pipeline forecasting.</p>
 
       <h2>Step 1 — Strategic Evaluation</h2>
       <div class="table-wrap">
@@ -720,7 +723,6 @@
       const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
       if (!dots.length || !sections.length) return;
 
-      // Track intersection ratios per section
       const ratios = new Array(sections.length).fill(0);
 
       const observer = new IntersectionObserver(entries => {
@@ -728,8 +730,6 @@
           const idx = sections.indexOf(entry.target);
           if (idx !== -1) ratios[idx] = entry.intersectionRatio;
         });
-
-        // Activate dot for section with highest intersection ratio
         const maxIdx = ratios.indexOf(Math.max(...ratios));
         dots.forEach((dot, i) => dot.classList.toggle("active", i === maxIdx));
       }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });

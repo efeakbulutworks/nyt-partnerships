@@ -30,6 +30,10 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  /* Snap scroll */
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--nav-height);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -49,10 +53,8 @@ body {
   right: 0;
   height: var(--nav-height);
   z-index: 100;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule);
+  background: #121212;
+  border-bottom: 1px solid #2a2a2a;
   display: flex;
   align-items: center;
 }
@@ -64,76 +66,51 @@ body {
   padding: 0 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .nav-brand {
   font-family: Lora, Georgia, serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
   text-decoration: none;
   white-space: nowrap;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-brand:hover {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nav-logo {
+  height: 44px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
 }
 
 /* ─── LAYOUT ──────────────────────────────────────────────────────────── */
 
+/* No top padding — sections manage their own vertical spacing */
 .content {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 48px 24px 96px;
+  padding: 0 24px 96px;
 }
 
-/* ─── HERO ────────────────────────────────────────────────────────────── */
-
-.hero {
-  margin-bottom: 64px;
-}
-
-.hero-image {
-  width: 100%;
-  max-height: 320px;
-  object-fit: contain;
-  display: block;
-  margin-bottom: 40px;
-}
-
-.hero h1 {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(36px, 5.5vw, 56px);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 20px;
-  color: var(--ink);
-}
-
-.hero-subhead {
-  font-family: Lora, Georgia, serif;
-  font-size: clamp(18px, 2.2vw, 22px);
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 16px;
-  max-width: 680px;
-}
-
-.hero-byline {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* ─── SECTION BLOCKS (single-page) ───────────────────────────────────── */
+/* ─── SECTION BLOCKS (snap targets) ──────────────────────────────────── */
 
 .section-block {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  /* breathing room: content starts well below the nav snap point */
   padding-top: 140px;
-  /* Fade-in initial state — hero is excluded and loads visible */
+  /* fade-in initial state */
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 500ms ease-out, transform 500ms ease-out;
@@ -144,7 +121,152 @@ body {
   transform: translateY(0);
 }
 
-/* ─── SECTION PAGE ────────────────────────────────────────────────────── */
+/* ─── PAGE 1 — NYT-editorial black opener ─────────────────────────────── */
+
+.page-1 {
+  background: #121212;
+  color: #ffffff;
+  position: relative;
+  /* override .section-block padding-top — Page 1 manages its own top space */
+  padding: calc(var(--nav-height) + 64px) 24px 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-1-grid {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr auto;
+  gap: 0 72px;
+  flex: 1;
+  /* enough min-height so regions A and B have vertical separation */
+  min-height: calc(100vh - var(--nav-height) - 64px - 120px - 280px);
+}
+
+/* Region A: upper-left — eyebrow + headline + body */
+.page-1-region-a {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  padding-top: 16px;
+}
+
+.page-1-eyebrow {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 20px;
+}
+
+.page-1-headline {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 28px;
+}
+
+.page-1-body {
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36em;
+}
+
+/* Region B: lower-right — transition statement */
+.page-1-region-b {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  text-align: right;
+  padding-bottom: 16px;
+}
+
+.page-1-shift-1 {
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+.page-1-shift-2 {
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* Region C: lower-center — image + caption */
+.page-1-region-c {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  text-align: center;
+  padding-top: 52px;
+}
+
+.page-1-map-img {
+  display: block;
+  margin: 0 auto 24px;
+  max-width: 520px;
+  width: 100%;
+  height: auto;
+}
+
+.page-1-map-caption {
+  font-family: Lora, Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Region D: bobbing scroll indicator */
+@keyframes bob-down {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.scroll-indicator-arrow {
+  font-size: 28px;
+  color: #ffffff;
+  line-height: 1;
+  display: block;
+  animation: bob-down 1.4s ease-in-out infinite;
+}
+
+.scroll-indicator-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── SECTION PAGE (sections 02–07) ──────────────────────────────────── */
 
 .section-eyebrow {
   font-family: var(--sans);
@@ -427,6 +549,50 @@ hr {
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────── */
 
 @media (max-width: 720px) {
+  /* Disable snap on touch — mandatory snap + momentum scrolling
+     feels aggressive on iOS and prevents reading long sections */
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+
+  .section-block {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    min-height: auto;
+  }
+
+  .page-1 {
+    min-height: 100svh;
+    padding-bottom: 80px;
+  }
+
+  /* Stack page-1 grid to single column */
+  .page-1-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 40px 0;
+    min-height: auto;
+  }
+
+  .page-1-region-a {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .page-1-region-b {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: left;
+    padding-bottom: 0;
+    align-self: auto;
+  }
+
+  .page-1-region-c {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
   #scroll-dots {
     display: none;
   }
@@ -436,6 +602,10 @@ hr {
   }
 
   .pull-quote {
-    padding: 24px 24px;
+    padding: 24px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
   }
 }
