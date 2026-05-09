@@ -1,9 +1,14 @@
 /**
- * Hard fullpage scroll controller — desktop only (>= 720px).
- * One wheel gesture or keypress = one full section advance, with a
- * 700ms transition lock so rapid inputs can't skip pages.
- * Touch swipe is also hijacked on tablet widths (>= 720px).
- * Below 720px the controller disables itself and native scrolling takes over.
+ * Fullpage scroll controller.
+ *
+ * Editorial pages (non-.form-page): hard JS hijack — one wheel/key/swipe
+ * advances exactly one section.
+ *
+ * Form pages (.form-page): JS hijack disabled; browser scrolls naturally.
+ * CSS scroll-snap (set on <html>) handles boundary snap into the next/prev
+ * section. IntersectionObserver keeps the dot indicator in sync.
+ *
+ * Desktop only (>= 720px). Below 720px, native scroll everywhere.
  */
 (function () {
   'use strict';
@@ -20,9 +25,9 @@
     'about',
   ];
 
-  const LOCK_MS        = 700;  // transition lock duration
-  const SWIPE_THRESH   = 50;   // px of vertical touch movement to count as swipe
-  const WHEEL_MIN_DELTA = 5;   // ignore micro wheel nudges below this absolute deltaY
+  const LOCK_MS         = 700;
+  const SWIPE_THRESH    = 50;
+  const WHEEL_MIN_DELTA = 5;
 
   let sections = [];
   let dots     = [];
@@ -30,20 +35,47 @@
   let locked   = false;
   let enabled  = false;
 
-  // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  function isFormPage(idx) {
+    return sections[idx] && sections[idx].classList.contains('form-page');
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
 
   function init() {
     sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
     dots     = Array.from(document.querySelectorAll('.scroll-dot'));
 
-    // Immediately mark Page 1 as visible (no scroll needed to reveal it)
     activate(0, false);
 
+    setupIntersectionObserver();
     checkEnable();
     window.addEventListener('resize', debounce(checkEnable, 120));
   }
 
-  // ── Enable / disable based on viewport width ───────────────────────────────
+  // ── IntersectionObserver — keeps dots in sync during native scroll ──────────
+
+  function setupIntersectionObserver() {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+            const idx = sections.indexOf(entry.target);
+            if (idx >= 0) {
+              current = idx;
+              sections[idx].classList.add('visible');
+              dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
+            }
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    sections.forEach(s => observer.observe(s));
+  }
+
+  // ── Enable / disable event hijack ─────────────────────────────────────────
 
   function checkEnable() {
     const wide = window.innerWidth >= 720;
@@ -71,7 +103,6 @@
 
     current = target;
     activate(current, true);
-
     sections[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setTimeout(() => { locked = false; }, LOCK_MS);
@@ -82,66 +113,51 @@
     if (idx >= 0) goTo(idx);
   }
 
-  /** Mark section as visible (fade-in) and update dots. */
-  function activate(index, animateDot) {
-    if (sections[index]) {
-      sections[index].classList.add('visible');
-    }
+  function activate(index) {
+    if (sections[index]) sections[index].classList.add('visible');
     dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
   }
 
-  // ── Wheel handler ──────────────────────────────────────────────────────────
+  // ── Wheel ──────────────────────────────────────────────────────────────────
 
   function onWheel(e) {
+    if (isFormPage(current)) return;   // let browser scroll naturally
     e.preventDefault();
     if (locked) return;
     if (Math.abs(e.deltaY) < WHEEL_MIN_DELTA) return;
     goTo(current + (e.deltaY > 0 ? 1 : -1));
   }
 
-  // ── Keyboard handler ───────────────────────────────────────────────────────
+  // ── Keyboard ───────────────────────────────────────────────────────────────
 
   function onKey(e) {
-    // Don't intercept when focus is inside an input/textarea
     const tag = document.activeElement && document.activeElement.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (isFormPage(current)) return;   // let browser handle arrow keys naturally
 
     switch (e.key) {
-      case 'ArrowDown':
-      case 'PageDown':
-        e.preventDefault();
-        goTo(current + 1);
-        break;
+      case 'ArrowDown': case 'PageDown':
+        e.preventDefault(); goTo(current + 1); break;
       case ' ':
-        e.preventDefault();
-        goTo(current + (e.shiftKey ? -1 : 1));
-        break;
-      case 'ArrowUp':
-      case 'PageUp':
-        e.preventDefault();
-        goTo(current - 1);
-        break;
+        e.preventDefault(); goTo(current + (e.shiftKey ? -1 : 1)); break;
+      case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); goTo(current - 1); break;
       case 'Home':
-        e.preventDefault();
-        goTo(0);
-        break;
+        e.preventDefault(); goTo(0); break;
       case 'End':
-        e.preventDefault();
-        goTo(sections.length - 1);
-        break;
+        e.preventDefault(); goTo(sections.length - 1); break;
     }
   }
 
-  // ── Touch / swipe handler ──────────────────────────────────────────────────
+  // ── Touch ──────────────────────────────────────────────────────────────────
 
   let touchStartY = 0;
 
-  function onTouchStart(e) {
-    touchStartY = e.touches[0].clientY;
-  }
+  function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
 
   function onTouchEnd(e) {
     if (locked) return;
+    if (isFormPage(current)) return;   // let browser scroll naturally
     const dy = touchStartY - e.changedTouches[0].clientY;
     if (Math.abs(dy) < SWIPE_THRESH) return;
     goTo(current + (dy > 0 ? 1 : -1));
@@ -151,10 +167,7 @@
 
   function debounce(fn, ms) {
     let t;
-    return function () {
-      clearTimeout(t);
-      t = setTimeout(fn, ms);
-    };
+    return function () { clearTimeout(t); t = setTimeout(fn, ms); };
   }
 
   // ── Public API ─────────────────────────────────────────────────────────────
