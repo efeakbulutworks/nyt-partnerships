@@ -75,70 +75,21 @@
   <script src="fullpage.js" defer></script>
   <script src="eval.js" defer></script>
 
-  <!-- Scroll dot indicator — one dot per section (9 total) -->
-  <div id="scroll-dots" aria-hidden="true">
-    <div class="scroll-dot" data-section="what-i-heard"></div>
-    <div class="scroll-dot" data-section="step-strategic"></div>
-    <div class="scroll-dot" data-section="step-commercial"></div>
-    <div class="scroll-dot" data-section="step-resource"></div>
-    <div class="scroll-dot" data-section="map-visualized"></div>
-    <div class="scroll-dot" data-section="partnership-types"></div>
-    <div class="scroll-dot" data-section="modular-architecture"></div>
-    <div class="scroll-dot" data-section="why-this-excites-me"></div>
-    <div class="scroll-dot" data-section="about"></div>
-  </div>
-
-  <!-- ─── PAGE 1 — NYT-editorial black opener (full-width, outside content wrapper) ── -->
-  <section id="what-i-heard" class="section-block page-1">
-
-    <div class="page-1-layout">
-
-      <div class="page-1-left">
-        <p class="page-1-eyebrow">WHAT I HEARD</p>
-        <h2 class="page-1-headline">The challenge is not demand generation.</h2>
-        <p class="page-1-body">The challenge is operationalizing high-value bespoke partnerships across NYT premium brands without diluting creativity, overwhelming the team, or compromising long-term pipeline development.</p>
-      </div>
-
-      <div class="page-1-right">
-        <p class="page-1-shift-1">So.. let's identify opportunities. Prioritize intelligently.</p>
-        <p class="page-1-shift-2">Let's make the shift: From Reactive Partnerships → Portfolio Management</p>
-        <hr class="page-1-rule">
-        <img class="page-1-map-img"
-             src="assets/portfolio-map-hero.png"
-             alt="Portfolio Management Map">
-        <p class="page-1-map-caption">This map is a shared partnership evaluation language Dao and Efe can use: to decide what deserves organizational energy by scaling strategic partnership development across the NYT Ecosystem cross-brand opportunity mapping. Thus, the advertising partnerships team can intelligently lead the internal alignment, prioritization, resource planning, and pipeline forecasting.</p>
-      </div>
-
-    </div>
-
-    <!-- Bobbing scroll indicator -->
-    <div class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-indicator-arrow">↓</span>
-      <span class="scroll-indicator-label">scroll</span>
-    </div>
-
-  </section>
-
-  <!-- ─── PAGES 2–4: STEP FORM SECTIONS (outside content wrapper for full-width brand cards) ── -->
-
-  <!-- ─── PAGE 2: STEP 1 OF 3 — STRATEGIC EVALUATION ────────────────────── -->
-  <section id="step-strategic" class="section-block section-step form-page">
+  <!-- ─── PAGE 1: COMBINED EVALUATION FORM ─────────────────────────────── -->
+  <section id="evaluation" class="section-block section-step form-page">
     <div class="step-inner">
 
       <div class="step-header">
-        <p class="step-eyebrow">STEP 1 OF 3 · STRATEGIC EVALUATION</p>
-        <div class="step-indicator">
-          <div class="step-dot step-dot--active"></div>
-          <div class="step-dot"></div>
-          <div class="step-dot"></div>
-        </div>
+        <p class="step-eyebrow">PARTNERSHIP EVALUATION</p>
         <h1 class="step-h1">Tell me about the partnership.</h1>
-        <p class="step-subhead">We'll plot it on the map at the end.</p>
+        <p class="step-subhead">Score it across the dimensions below. We'll plot it on the map at the end.</p>
       </div>
 
       <div class="step-fields">
 
-        <!-- Field 1: Partnership name -->
+        <!-- ── PARTNERSHIP IDENTITY ─────────────────────────────────────── -->
+
+        <!-- Partnership name -->
         <div class="step-narrow">
           <div class="metric-block">
             <div class="metric-header">
@@ -157,7 +108,7 @@
           </div>
         </div>
 
-        <!-- Field 2: Brand picker — full step-inner width for 6-column card row -->
+        <!-- Brand picker — full step-inner width for 6-column row -->
         <div class="metric-block">
           <div class="metric-header">
             <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -197,180 +148,22 @@
           <p class="ecosystem-display" id="ecosystem-display">0 brands selected → Cross-Brand Ecosystem score: 1 / 5</p>
         </div>
 
-        <!-- Fields 3–6: 4 star-rating metrics in 2×2 grid -->
+        <!-- ── STRATEGIC VALUE ──────────────────────────────────────────── -->
+
         <div class="step-narrow">
-          <div class="metrics-2x2">
+          <hr class="eval-divider">
+          <p class="eval-section-label">Strategic Value</p>
 
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                  <polyline points="17 6 23 6 23 12"/>
-                </svg>
-                <span class="metric-title">Growth Potential</span>
-              </div>
-              <p class="metric-question">Can this drive subscriber growth, retention, or audience engagement?</p>
-              <div class="stars-rating" data-field="growth" role="group" aria-label="Growth Potential rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 010 7.75"/>
-                </svg>
-                <span class="metric-title">Audience Expansion</span>
-              </div>
-              <p class="metric-question">Does this reach new audiences, categories, or communities?</p>
-              <div class="stars-rating" data-field="audience" role="group" aria-label="Audience Expansion rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <span class="metric-title">Brand Alignment</span>
-              </div>
-              <p class="metric-question">Does this strengthen NYT's premium positioning and values?</p>
-              <div class="stars-rating" data-field="alignment" role="group" aria-label="Brand Alignment rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-            <div class="metric-block">
-              <div class="metric-header">
-                <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="9" y1="18" x2="15" y2="18"/>
-                  <line x1="10" y1="22" x2="14" y2="22"/>
-                  <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/>
-                </svg>
-                <span class="metric-title">Innovation Value</span>
-              </div>
-              <p class="metric-question">Does this introduce new partnership models, formats, or capabilities?</p>
-              <div class="stars-rating" data-field="innovation" role="group" aria-label="Innovation Value rating">
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-                <span class="star" role="button" tabindex="0">★</span>
-              </div>
-              <div class="metric-low-high">Low · · · · · High</div>
-            </div>
-
-          </div><!-- /metrics-2x2 -->
-        </div>
-
-      </div><!-- /step-fields -->
-
-      <div class="step-footer step-narrow">
-        <button class="step-button" id="continue-step-1" disabled type="button">Continue to Step 2 →</button>
-      </div>
-
-    </div><!-- /step-inner -->
-  </section>
-
-  <!-- ─── PAGE 3: STEP 2 OF 3 — COMMERCIAL EVALUATION ──────────────────── -->
-  <section id="step-commercial" class="section-block section-step form-page">
-    <div class="step-inner">
-
-      <div class="step-header">
-        <p class="step-eyebrow">STEP 2 OF 3 · COMMERCIAL EVALUATION</p>
-        <div class="step-indicator">
-          <div class="step-dot step-dot--active"></div>
-          <div class="step-dot step-dot--active"></div>
-          <div class="step-dot"></div>
-        </div>
-        <h1 class="step-h1">What's the commercial shape?</h1>
-        <p class="step-subhead">Revenue, cost, margin, scalability. The Y axis on the map.</p>
-      </div>
-
-      <div class="step-fields step-narrow">
-
-        <!-- Revenue -->
-        <div class="metric-block">
-          <div class="metric-header">
-            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-            </svg>
-            <span class="metric-title">Revenue Potential</span>
-          </div>
-          <p class="metric-question">Potential revenue, in USD.</p>
-          <div class="numeric-input-wrap">
-            <span class="numeric-prefix">$</span>
-            <input class="numeric-input" id="revenue-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
-          </div>
-          <p class="revenue-note">NYT's threshold for serious partnerships starts at seven figures. Below $1M lands the bubble in the bottom band.</p>
-        </div>
-
-        <!-- Cost -->
-        <div class="metric-block">
-          <div class="metric-header">
-            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-            </svg>
-            <span class="metric-title">Production Cost</span>
-          </div>
-          <p class="metric-question">Estimated production and execution cost, in USD.</p>
-          <div class="numeric-input-wrap">
-            <span class="numeric-prefix">$</span>
-            <input class="numeric-input" id="cost-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
-          </div>
-        </div>
-
-        <!-- Margin (auto-calculated) -->
-        <div class="metric-block">
-          <div class="metric-header">
-            <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="3" x2="12" y2="20"/>
-              <path d="M5 20h14"/>
-              <path d="M4 8l8-5 8 5"/>
-              <path d="M4 8l4.5 9h7l4.5-9"/>
-            </svg>
-            <span class="metric-title">Estimated margin</span>
-          </div>
-          <p id="margin-display" class="live-margin-display positive">Estimated margin: $0</p>
-          <p class="margin-note">Auto-calculated. Used in the commercial score behind the scenes.</p>
-        </div>
-
-        <!-- Scalability + Longevity in 2-col grid -->
-        <div class="metrics-2x2">
-
+          <!-- Brand Alignment -->
           <div class="metric-block">
             <div class="metric-header">
-              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <rect x="3" y="12" width="4" height="8" rx="1"/>
-                <rect x="9" y="8" width="4" height="12" rx="1"/>
-                <rect x="15" y="4" width="4" height="16" rx="1"/>
-                <line x1="1" y1="22" x2="23" y2="22"/>
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
-              <span class="metric-title">Scalability</span>
+              <span class="metric-title">Brand Alignment</span>
             </div>
-            <p class="metric-question">Can this framework be reused, expanded, or repeated efficiently?</p>
-            <div class="stars-rating" data-field="scalability" role="group" aria-label="Scalability rating">
+            <p class="metric-question">Does this strengthen NYT's premium positioning and values?</p>
+            <div class="stars-rating" data-field="brandAlignment" role="group" aria-label="Brand Alignment rating">
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
@@ -379,16 +172,112 @@
             </div>
             <div class="metric-low-high">Low · · · · · High</div>
           </div>
+        </div>
 
+        <div class="step-narrow">
+          <!-- Growth & Audience -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+              <span class="metric-title">Growth &amp; Audience</span>
+            </div>
+            <p class="metric-question">Can this drive subscriber growth, retention, or reach new audiences and communities?</p>
+            <div class="stars-rating" data-field="growthAudience" role="group" aria-label="Growth and Audience rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
+          </div>
+        </div>
+
+        <div class="step-narrow">
+          <!-- Innovation & Scalability -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="9" y1="18" x2="15" y2="18"/>
+                <line x1="10" y1="22" x2="14" y2="22"/>
+                <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/>
+              </svg>
+              <span class="metric-title">Innovation &amp; Scalability</span>
+            </div>
+            <p class="metric-question">Does this introduce new partnership models that can scale across campaigns or brands?</p>
+            <div class="stars-rating" data-field="innovationScalability" role="group" aria-label="Innovation and Scalability rating">
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+              <span class="star" role="button" tabindex="0">★</span>
+            </div>
+            <div class="metric-low-high">Low · · · · · High</div>
+          </div>
+        </div>
+
+        <!-- ── COMMERCIAL VALUE ─────────────────────────────────────────── -->
+
+        <div class="step-narrow">
+          <hr class="eval-divider">
+          <p class="eval-section-label">Commercial Value</p>
+
+          <!-- Revenue -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+              <span class="metric-title">Revenue Potential</span>
+            </div>
+            <p class="metric-question">Potential revenue, in USD.</p>
+            <div class="numeric-input-wrap">
+              <span class="numeric-prefix">$</span>
+              <input class="numeric-input" id="revenue-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            </div>
+            <p class="revenue-note">NYT's commercial threshold for serious partnerships starts at seven figures. Margin below $1M lands the bubble in the bottom band of the map.</p>
+          </div>
+        </div>
+
+        <div class="step-narrow">
+          <!-- Production Cost -->
+          <div class="metric-block">
+            <div class="metric-header">
+              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+              </svg>
+              <span class="metric-title">Production Cost</span>
+            </div>
+            <p class="metric-question">Estimated production and execution cost, in USD.</p>
+            <div class="numeric-input-wrap">
+              <span class="numeric-prefix">$</span>
+              <input class="numeric-input" id="cost-input" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <div class="step-narrow">
+          <!-- Live margin -->
+          <p id="margin-display" class="live-margin-display positive">Estimated margin: $0</p>
+          <p class="margin-note">Auto-calculated. Used in the commercial score behind the scenes.</p>
+        </div>
+
+        <div class="step-narrow">
+          <!-- Repeatability -->
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                 <path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/>
               </svg>
-              <span class="metric-title">Longevity Potential</span>
+              <span class="metric-title">Repeatability</span>
             </div>
-            <p class="metric-question">One-time activation or long-term repeatable relationship?</p>
-            <div class="stars-rating" data-field="longevity" role="group" aria-label="Longevity Potential rating">
+            <p class="metric-question">One-time bespoke activation, or long-term repeatable framework?</p>
+            <div class="stars-rating" data-field="repeatability" role="group" aria-label="Repeatability rating">
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
@@ -397,69 +286,25 @@
             </div>
             <div class="metric-low-high">Low · · · · · High</div>
           </div>
-
-        </div><!-- /metrics-2x2 -->
-
-      </div><!-- /step-fields -->
-
-      <div class="step-footer step-narrow">
-        <button class="step-button" id="continue-step-2" disabled type="button">Continue to Step 3 →</button>
-      </div>
-
-    </div><!-- /step-inner -->
-  </section>
-
-  <!-- ─── PAGE 4: STEP 3 OF 3 — RESOURCE INTENSITY ─────────────────────── -->
-  <section id="step-resource" class="section-block section-step form-page">
-    <div class="step-inner">
-
-      <div class="step-header">
-        <p class="step-eyebrow">STEP 3 OF 3 · RESOURCE INTENSITY</p>
-        <div class="step-indicator">
-          <div class="step-dot step-dot--active"></div>
-          <div class="step-dot step-dot--active"></div>
-          <div class="step-dot step-dot--active"></div>
         </div>
-        <h1 class="step-h1">How heavy is the lift?</h1>
-        <p class="step-subhead">How much organizational energy this demands. Drives bubble size on the map.</p>
-      </div>
 
-      <div class="step-fields step-narrow">
+        <!-- ── RESOURCE INTENSITY ────────────────────────────────────────── -->
 
-        <!-- 5 metrics in 3+2 layout -->
-        <div class="metrics-3-2">
+        <div class="step-narrow">
+          <hr class="eval-divider">
+          <p class="eval-section-label">Resource Intensity</p>
 
+          <!-- Complexity & Coordination -->
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
               </svg>
-              <span class="metric-title">Production Complexity</span>
+              <span class="metric-title">Complexity &amp; Coordination</span>
             </div>
-            <p class="metric-question">How operationally complex is execution?</p>
-            <div class="stars-rating" data-field="complexity" role="group" aria-label="Production Complexity rating">
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-            </div>
-            <div class="metric-low-high">Low · · · · · High</div>
-          </div>
-
-          <div class="metric-block">
-            <div class="metric-header">
-              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                <path d="M16 3.13a4 4 0 010 7.75"/>
-              </svg>
-              <span class="metric-title">Cross-Functional Coordination</span>
-            </div>
-            <p class="metric-question">How many teams and stakeholders are required?</p>
-            <div class="stars-rating" data-field="coordination" role="group" aria-label="Cross-Functional Coordination rating">
+            <p class="metric-question">How operationally heavy is execution across teams?</p>
+            <div class="stars-rating" data-field="complexityCoordination" role="group" aria-label="Complexity and Coordination rating">
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
               <span class="star" role="button" tabindex="0">★</span>
@@ -468,26 +313,32 @@
             </div>
             <div class="metric-low-high">Low · · · · · High</div>
           </div>
+        </div>
 
+        <div class="step-narrow">
+          <!-- Timeline pill counter -->
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
-              <span class="metric-title">Timeline / Lead Time</span>
+              <span class="metric-title">Timeline</span>
             </div>
-            <p class="metric-question">How long is the planning and execution cycle?</p>
-            <div class="stars-rating" data-field="timeline" role="group" aria-label="Timeline rating">
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
+            <p class="metric-question">How many quarters will planning and execution take?</p>
+            <div class="timeline-pills">
+              <button class="timeline-pill" data-quarters="1" type="button">1Q</button>
+              <button class="timeline-pill" data-quarters="2" type="button">2Q</button>
+              <button class="timeline-pill" data-quarters="3" type="button">3Q</button>
+              <button class="timeline-pill" data-quarters="4" type="button">4Q</button>
+              <button class="timeline-pill" data-quarters="5" type="button">5Q</button>
+              <button class="timeline-pill" data-quarters="6" type="button">6Q</button>
             </div>
-            <div class="metric-low-high">Low · · · · · High</div>
           </div>
+        </div>
 
+        <div class="step-narrow">
+          <!-- Staffing Requirements -->
           <div class="metric-block">
             <div class="metric-header">
               <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -506,44 +357,22 @@
             </div>
             <div class="metric-low-high">Low · · · · · High</div>
           </div>
-
-          <div class="metric-block">
-            <div class="metric-header">
-              <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
-                <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
-                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
-              </svg>
-              <span class="metric-title">Customization Level</span>
-            </div>
-            <p class="metric-question">How bespoke vs repeatable is the structure?</p>
-            <div class="stars-rating" data-field="customization" role="group" aria-label="Customization Level rating">
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-              <span class="star" role="button" tabindex="0">★</span>
-            </div>
-            <div class="metric-low-high">Low · · · · · High</div>
-          </div>
-
-        </div><!-- /metrics-3-2 -->
+        </div>
 
       </div><!-- /step-fields -->
 
+      <!-- ── SUBMIT ──────────────────────────────────────────────────────── -->
       <div class="step-footer step-narrow">
-        <button class="submit-primary" id="submit-step-3" disabled type="button">Plot on the Map →</button>
+        <button class="submit-primary" id="submit-eval" disabled type="button">Plot on the Map →</button>
       </div>
 
     </div><!-- /step-inner -->
   </section>
 
-  <!-- ─── PAGES 5–9 — inside content wrapper for max-width + padding ─── -->
+  <!-- ─── PAGE 2: THE MAP ───────────────────────────────────────────────── -->
   <main class="content">
-
-    <!-- ─── PAGE 5: THE MAP (updated) ─────────────────────────────────── -->
     <section id="map-visualized" class="section-block section-page">
-      <p class="section-eyebrow">Section 05 &middot; The New York Times Advertising Partnerships</p>
+      <p class="section-eyebrow">The New York Times Advertising Partnerships</p>
       <h1>The Map, Visualized</h1>
 
       <p>Each bubble: Strategic Value (x) · Commercial Value (y) · Resource Intensity (size). Upper-right is the portfolio sweet spot.</p>
@@ -563,284 +392,6 @@
 
       <a href="#" class="map-clear-link" id="clear-submission" style="display:none;">Clear my submission</a>
     </section>
-
-    <!-- ─── PAGE 6: PARTNERSHIP TYPES ─────────────────────────────────── -->
-    <section id="partnership-types" class="section-block section-page">
-      <p class="section-eyebrow">Section 06 &middot; The New York Times Advertising Partnerships</p>
-      <h1>Partnership Types &amp; Pipeline</h1>
-
-      <p>Not all partnerships are created equal — and they shouldn't be managed the same way. A consistent typology makes it possible to staff, sequence, and forecast the portfolio without relitigating every deal from scratch. Below are the four partnership types I'd use to organize the NYT book, followed by a sample pipeline view.</p>
-
-      <h2>Flagship Partnerships</h2>
-      <p>Marquee, high-investment relationships that define what NYT partnership can look like at its best. These are the deals Dao and the team point to as proof of concept — category exclusives, multi-year commitments, full-ecosystem activations. They take the most planning, require the most cross-functional coordination, and carry the greatest reputational stakes. The portfolio should carry a small number of these at any time — enough to anchor the book, not so many they drain the team's capacity for everything else.</p>
-      <ul>
-        <li>Multi-year, category-exclusive partner arrangements</li>
-        <li>Full-ecosystem activations across NYT, The Athletic, Cooking, Games, Wirecutter</li>
-        <li>Custom editorial integrations with original content development</li>
-        <li>Major tentpole event sponsorships (e.g., NYT DealBook, The Athletic championships coverage)</li>
-      </ul>
-
-      <h2>Scalable Recurring Partnerships</h2>
-      <p>The engine of the portfolio. These are partnerships with defined, repeatable structures — newsletter sponsorships, podcast integrations, seasonal content programs — that can be templated, executed efficiently, and renewed without starting from zero. The goal here is to build a library of modular frameworks (see Section 07) that make these deals faster to close and cheaper to execute without compromising the partner experience.</p>
-      <ul>
-        <li>Newsletter sponsorship packages (daily, weekly, thematic)</li>
-        <li>Podcast host-read and mid-roll integrations</li>
-        <li>Seasonal and recurring cooking, games, or Wirecutter content programs</li>
-        <li>Athletic season-long presenting partnerships</li>
-      </ul>
-
-      <h2>Cultural Moments</h2>
-      <p>Time-bound partnerships tied to a specific cultural event, season, or news cycle. These have a clear start and end, and their value is often in timeliness and association rather than long-term integration. They require surge capacity — the ability to move fast — but don't demand the same multi-month planning runway as flagship deals. The pitch here is relevance: a partner aligned with a major news moment or cultural beat gets audience attention that money alone can't buy.</p>
-      <ul>
-        <li>Election cycle partnerships and political advertising integrations</li>
-        <li>Olympics, World Cup, and major sports event co-sponsorships (Athletic)</li>
-        <li>Holiday and seasonal branded content programs (Cooking, Wirecutter gift guides)</li>
-        <li>Breaking news or cultural moment fast-turn activations</li>
-      </ul>
-
-      <h2>Experimental &amp; Standalone</h2>
-      <p>This bucket is intentional — and important. Not every interesting idea fits a template. Experimental partnerships are how NYT tests new models, formats, and categories before they become standard offerings. The discipline is to run these as bounded pilots: defined scope, clear success metrics, and an explicit decision point at the end (scale it, template it, or sunset it). Without that discipline, experimental becomes a euphemism for under-resourced and over-promised.</p>
-      <ul>
-        <li>New format pilots (immersive audio, AR/VR, shoppable editorial)</li>
-        <li>Category entries (health, finance, travel) where partnership models are still being defined</li>
-        <li>Platform-native experiments (social, streaming, live)</li>
-        <li>International partnership tests outside the US market</li>
-      </ul>
-
-      <hr>
-
-      <h2>Sample Pipeline View</h2>
-      <p>A simplified view of how a managed portfolio might look across stages. The real version would live in a shared tracker, but the structure below illustrates the sequencing logic.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Partner</th>
-              <th>Type</th>
-              <th>Stage</th>
-              <th>Brand(s)</th>
-              <th>Est. Close</th>
-              <th>Est. Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Luxury Auto Brand</td>
-              <td><span class="badge badge-flagship">Flagship</span></td>
-              <td>Proposal</td>
-              <td>NYT + Athletic</td>
-              <td>Q2 2026</td>
-              <td>$2.4M</td>
-            </tr>
-            <tr>
-              <td>Global Financial Services Co.</td>
-              <td><span class="badge badge-flagship">Flagship</span></td>
-              <td>Negotiation</td>
-              <td>Multi-Brand</td>
-              <td>Q3 2026</td>
-              <td>$3.8M</td>
-            </tr>
-            <tr>
-              <td>Premium Food Brand</td>
-              <td><span class="badge badge-recurring">Recurring</span></td>
-              <td>Closed</td>
-              <td>Cooking</td>
-              <td>Ongoing</td>
-              <td>$480K/yr</td>
-            </tr>
-            <tr>
-              <td>Consumer Electronics</td>
-              <td><span class="badge badge-recurring">Recurring</span></td>
-              <td>Renewal</td>
-              <td>Wirecutter</td>
-              <td>Q1 2026</td>
-              <td>$620K/yr</td>
-            </tr>
-            <tr>
-              <td>Major Sports Apparel</td>
-              <td><span class="badge badge-cultural">Cultural Moment</span></td>
-              <td>Scoping</td>
-              <td>Athletic</td>
-              <td>Q3 2026</td>
-              <td>$900K</td>
-            </tr>
-            <tr>
-              <td>Travel &amp; Hospitality Brand</td>
-              <td><span class="badge badge-cultural">Cultural Moment</span></td>
-              <td>Outreach</td>
-              <td>NYT</td>
-              <td>Q4 2026</td>
-              <td>$750K</td>
-            </tr>
-            <tr>
-              <td>Gaming Platform</td>
-              <td><span class="badge badge-experimental">Experimental</span></td>
-              <td>Pilot</td>
-              <td>Games</td>
-              <td>TBD</td>
-              <td>TBD</td>
-            </tr>
-            <tr>
-              <td>Health &amp; Wellness Brand</td>
-              <td><span class="badge badge-experimental">Experimental</span></td>
-              <td>Scoping</td>
-              <td>NYT + Cooking</td>
-              <td>TBD</td>
-              <td>TBD</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ─── PAGE 7: MODULAR ARCHITECTURE ──────────────────────────────── -->
-    <section id="modular-architecture" class="section-block section-page">
-      <p class="section-eyebrow">Section 07 &middot; The New York Times Advertising Partnerships</p>
-      <h1>Modular Partnership Architecture</h1>
-
-      <p>The tension in premium partnership work is real: partners want bespoke, but bespoke doesn't scale. Every deal built from scratch taxes the team, stretches timelines, and makes it harder to forecast capacity. The answer isn't to lower standards — it's to separate the layers.</p>
-
-      <blockquote>
-        Standardize the backend. Bespoke the frontend.
-      </blockquote>
-
-      <p>A modular architecture means the team builds a library of proven, reusable building blocks — content formats, distribution mechanisms, measurement frameworks, approval workflows — and then assembles them in partner-specific combinations. The partner experiences something designed for them. The team is working from a tested toolkit, not a blank page.</p>
-
-      <p>This is how the BBC's commercial partnerships team operated at scale: a defined menu of partnership components that could be combined, sequenced, and priced flexibly, without requiring bespoke production on every engagement. The result was faster closes, cleaner delivery, and stronger renewal rates — because both sides knew what they were getting.</p>
-
-      <h2>The Building Blocks</h2>
-      <p>Each module is a discrete, tested component with a defined scope, production cost, and delivery timeline. Partnerships are assembled from combinations of modules. A flagship deal might use eight modules across three brands. A recurring newsletter deal might use two.</p>
-
-      <div class="module-grid">
-        <div class="module-card">
-          <h4>Content Formats</h4>
-          <p>Branded editorial, sponsored newsletters, native articles, recipe integrations, puzzle activations, Wirecutter-style reviews, podcast segments, video series.</p>
-        </div>
-        <div class="module-card">
-          <h4>Distribution Channels</h4>
-          <p>Homepage, section fronts, email newsletters, push notifications, social amplification, podcast feed, app placements, search integration.</p>
-        </div>
-        <div class="module-card">
-          <h4>Event &amp; Experiential</h4>
-          <p>Presenting sponsorships, hosted dinner or salon, press event integration, live panel or broadcast co-production, awards sponsorship.</p>
-        </div>
-        <div class="module-card">
-          <h4>Data &amp; Intelligence</h4>
-          <p>Proprietary audience insight reports, co-branded research, category trend analysis using NYT subscriber and behavioral data.</p>
-        </div>
-        <div class="module-card">
-          <h4>Audience Access</h4>
-          <p>Subscriber co-marketing, lookalike targeting, contextual category exclusivity, first-look audience access for new products or services.</p>
-        </div>
-        <div class="module-card">
-          <h4>Measurement &amp; Attribution</h4>
-          <p>Brand lift studies, attention metrics, subscription influence modeling, e-commerce attribution, cross-brand reach and frequency reporting.</p>
-        </div>
-        <div class="module-card">
-          <h4>Cross-Brand Bundles</h4>
-          <p>Pre-packaged multi-property combinations (e.g., NYT + Athletic sports package; Cooking + Wirecutter home &amp; lifestyle bundle) with unified reporting.</p>
-        </div>
-        <div class="module-card">
-          <h4>Creative Services</h4>
-          <p>T Brand Studio integration, custom visual identity development, branded content production, partner-facing creative briefing and approval workflows.</p>
-        </div>
-        <div class="module-card">
-          <h4>Renewal &amp; Expansion</h4>
-          <p>Defined renewal review cadence, expansion trigger criteria, performance benchmarks, multi-year pricing structures, category exclusivity renewal terms.</p>
-        </div>
-      </div>
-
-      <h2>How It Works in Practice</h2>
-      <p>When a new partner conversation begins, the team isn't starting from scratch — they're consulting the module library and scoping which combination fits the partner's goals, budget, and timeline. This changes the sales conversation: instead of "what would you like?", it becomes "here are the three partnership constructs that fit your objectives — let's choose and customize."</p>
-
-      <p>The architecture also makes resource planning tractable. Each module has a known production cost, a known lead time, and a known team requirement. When the portfolio manager looks at the Q3 pipeline, they can estimate staffing needs against the module composition of each deal in progress — before those deals close.</p>
-
-      <h2>What This Unlocks</h2>
-      <ul>
-        <li><strong>Faster time-to-close:</strong> Partners see structured options rather than an open brief; decisions are easier and faster.</li>
-        <li><strong>Cleaner delivery:</strong> Teams execute against known templates, not one-off production specs.</li>
-        <li><strong>Better renewal rates:</strong> Partners who understood what they bought are more likely to renew and expand.</li>
-        <li><strong>Portfolio forecasting:</strong> Module-level costing enables real capacity planning across the team.</li>
-        <li><strong>Equity across brands:</strong> Every NYT property benefits from the same modular toolkit — Cooking and Games partnerships get the same operational discipline as NYT flagship deals.</li>
-      </ul>
-    </section>
-
-    <!-- ─── PAGE 8: WHY THIS EXCITES ME ───────────────────────────────── -->
-    <section id="why-this-excites-me" class="section-block section-page">
-      <p class="section-eyebrow">Section 08 &middot; The New York Times Advertising Partnerships</p>
-      <h1>Why This Excites Me</h1>
-
-      <p>The straightforward answer is the one I'd give in any interview: NYT is the most credible journalism organization in the world, the partnership opportunity is genuinely complex, and the role has real strategic scope. All true. But that's the polished version. Here's the more honest one.</p>
-
-      <h2>The BBC Parallel</h2>
-      <p>I spent years at the BBC working on commercial partnerships in an environment that had most of the same structural tensions NYT has now: world-class editorial with deep audience trust, a commercial operation trying to monetize that trust without degrading it, multiple premium brands under one roof, and the constant pressure to scale without losing what made it worth scaling.</p>
-
-      <p>The BBC's answer — at least in the commercial partnerships work I was part of — was to build operating discipline that respected the editorial firewall while still delivering commercial value at scale. That meant clear frameworks, modular approaches, and a team culture that was proud of the quality bar, not resentful of it.</p>
-
-      <p>When I read the job description for this role and thought about what I'd heard about where NYT's partnership operation is, I saw the same inflection point. The demand is there. The brands are extraordinary. The question is how you build the operating layer that lets you say yes to the right things, faster, without burning the team or diluting the product.</p>
-
-      <p>That is the exact problem I want to work on.</p>
-
-      <h2>The Multi-Brand Opportunity</h2>
-      <p>What NYT has that the BBC didn't — at least not in the same way — is a genuinely differentiated multi-brand portfolio where the brands actually mean something distinct to distinct audiences. The Athletic isn't a poor man's NYT Sports section. Cooking isn't a recipe appendix. Wirecutter built its reputation on editorial independence from commercial pressure. Games has a daily active user base with remarkable engagement metrics.</p>
-
-      <p>That portfolio is a commercial asset that is, I think, still being discovered. Not because the team isn't talented — clearly they are — but because the frameworks for cross-brand partnership development at this scale are still being invented. The JetBlue case I describe in the About section is one small data point in that direction: what happens when you build a partnership that draws on multiple properties' strengths simultaneously, with a coherent story for the partner about why the combination is worth more than the parts.</p>
-
-      <h2>What I'd Bring</h2>
-      <p>Operating experience in premium multi-brand environments. A genuine affection for the editorial product — I am, embarrassingly, a subscriber to four of the five NYT properties. A bias toward frameworks and tools that help teams make faster, better decisions rather than frameworks that create bureaucracy. And a track record of building partner relationships that renew, because the first deal was delivered clearly and the partner understood what they got.</p>
-
-      <p>I'm not coming in with the answer. I'm coming in with the right questions and enough experience to build the answer alongside Dao and the team.</p>
-
-      <div class="pull-quote">
-        The demand is there. The brands are extraordinary. The question is how you build the operating layer.
-      </div>
-    </section>
-
-    <!-- ─── PAGE 9: ABOUT ──────────────────────────────────────────────── -->
-    <section id="about" class="section-block section-page">
-      <p class="section-eyebrow">Section 09 &middot; The New York Times Advertising Partnerships</p>
-      <h1>About Efe</h1>
-
-      <div class="about-intro">
-        <span class="name">Efe Akbulut</span>
-        <span class="tagline">Partnerships &amp; Commercial Strategy</span>
-      </div>
-
-      <img class="wordmark"
-           src="assets/advertising-partnerships-wordmark.png"
-           alt="The New York Times Advertising Partnerships">
-
-      <h2>Career in Brief</h2>
-      <p>My career has been built at the intersection of premium media brands and commercial partnership development. I've worked with organizations where the brand is the product — where the editorial reputation is both the asset and the constraint, and where the job is to grow commercial relationships without ever making the editorial team feel like they've been sold out.</p>
-
-      <p>That background includes significant time in international media at the BBC, where I worked on commercial partnerships across multiple content brands and developed the operating frameworks that are the intellectual foundation for everything described on this site. Before that, brand-side and agency experience that taught me what partners actually need from these relationships — and why so many partnerships underperform despite good intentions on both sides.</p>
-
-      <p><em class="placeholder-note">Full career timeline and specific role history to be added here. (Placeholder — to be expanded.)</em></p>
-
-      <h2>The JetBlue Case</h2>
-      <p>The partnership I'm most proud of — and most instructive for the NYT role — is a multi-brand content and distribution partnership I developed with JetBlue. The core insight was that JetBlue didn't need another advertising placement. They needed a way to tell a coherent story about travel, lifestyle, and discovery to an audience that was both aspirational and actually traveling.</p>
-
-      <p>The solution was a partnership that drew on multiple content properties simultaneously: travel-oriented editorial, food and restaurant content, destination-specific programming, and audience targeting that mapped to JetBlue's route network. The deal was structured modularly — each component had a clear scope and deliverable — which made it possible to expand in year two without renegotiating the entire relationship from scratch.</p>
-
-      <p>The outcome: a multi-year renewal, an expanded scope, and a case study that became a template for how to pitch cross-brand partnerships to travel and hospitality categories going forward.</p>
-
-      <p><em class="placeholder-note">Specific revenue figures, timeline, and outcome metrics to be added here. (Placeholder — to be expanded.)</em></p>
-
-      <h2>Why The Times Specifically</h2>
-      <p>I've been deliberate about where I've invested my career, and I'm being deliberate here. The New York Times is not just the biggest opportunity in media partnerships right now — it's the most interesting. The combination of editorial ambition, brand portfolio complexity, audience depth, and the specific inflection point the partnerships operation is at makes this a once-in-a-career problem to work on.</p>
-
-      <p>I also think the work matters beyond the commercial outcome. NYT's ability to fund its journalism depends, in part, on the health and growth of its commercial operations. That's a relationship I take seriously. The best partnership work I've done has always been in service of something larger than the deal itself — and this role has that quality in abundance.</p>
-
-      <p>I want to build something here. Not just execute a pipeline. Build the operating model, the frameworks, the team culture, and the partner relationships that compound over time. That's the pitch.</p>
-
-      <hr>
-
-      <p style="font-family: var(--sans); font-size: 13px; color: var(--muted);">
-        This site was built for Dao as a thought-starter, not a finished document. Every section is a conversation opener. I'm looking forward to the conversation.
-      </p>
-    </section>
-
   </main>
 
   <script>
@@ -885,9 +436,9 @@
 
       const PAD = { top: 28, right: 28, bottom: 40, left: 40 };
 
-      let userBubble    = null;  // submitted partnership (from eval flow)
-      let currentW      = 0;
-      let currentH      = 0;
+      let userBubble = null;
+      let currentW   = 0;
+      let currentH   = 0;
 
       function toCanvas(val, min, max, minPx, maxPx) {
         return minPx + ((val - min) / (max - min)) * (maxPx - minPx);
@@ -913,7 +464,6 @@
         const cw    = w * dpr, ch = h * dpr;
         const plotW = cw - PAD.left * dpr - PAD.right * dpr;
         const plotH = ch - PAD.top  * dpr - PAD.bottom * dpr;
-        // Radius: linear interpolation ri 1→14px, 5→36px
         const r = (14 + (userBubble.ri - 1) / 4 * 22) * dpr;
         return {
           ...userBubble,
@@ -972,14 +522,12 @@
         // User bubble (drawn last — on top)
         const ub = getUserBubbleCoords(w, h);
         if (ub) {
-          // Yellow outer ring
           ctx.beginPath();
           ctx.arc(ub.cx, ub.cy, ub.r + 6 * dpr, 0, Math.PI * 2);
           ctx.strokeStyle = "#f7e600";
           ctx.lineWidth   = 2.5 * dpr;
           ctx.stroke();
 
-          // Bubble fill
           ctx.beginPath();
           ctx.arc(ub.cx, ub.cy, ub.r, 0, Math.PI * 2);
           ctx.fillStyle   = ub.color + "55";
@@ -988,16 +536,15 @@
           ctx.lineWidth   = 2.5 * dpr;
           ctx.stroke();
 
-          // NEW tag above bubble
-          const TAG    = "NEW";
-          const fSize  = Math.round(10 * dpr);
-          ctx.font     = `700 ${fSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
-          const textW  = ctx.measureText(TAG).width;
-          const padX   = 7 * dpr, padY = 3 * dpr;
-          const tagW   = textW + padX * 2;
-          const tagH   = fSize + padY * 2;
-          const tagX   = ub.cx - tagW / 2;
-          const tagY   = ub.cy - ub.r - 14 * dpr - tagH;
+          const TAG   = "NEW";
+          const fSize = Math.round(10 * dpr);
+          ctx.font    = `700 ${fSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+          const textW = ctx.measureText(TAG).width;
+          const padX  = 7 * dpr, padY = 3 * dpr;
+          const tagW  = textW + padX * 2;
+          const tagH  = fSize + padY * 2;
+          const tagX  = ub.cx - tagW / 2;
+          const tagY  = ub.cy - ub.r - 14 * dpr - tagH;
 
           ctx.fillStyle = "#f7e600";
           ctx.fillRect(tagX, tagY, tagW, tagH);
@@ -1007,13 +554,11 @@
           ctx.textBaseline = "middle";
           ctx.fillText(TAG, ub.cx, tagY + tagH / 2);
 
-          // Reset text alignment
           ctx.textAlign    = "left";
           ctx.textBaseline = "alphabetic";
         }
 
-        // Store all bubbles for hover detection
-        canvas._bubbles   = bubbles;
+        canvas._bubbles    = bubbles;
         canvas._userBubble = ub;
       }
 
@@ -1034,7 +579,6 @@
         const cx   = (mx - rect.left)  * dpr;
         const cy   = (my - rect.top)   * dpr;
 
-        // Check user bubble first (it's on top)
         const ub = canvas._userBubble;
         if (ub && Math.sqrt((cx - ub.cx) ** 2 + (cy - ub.cy) ** 2) <= ub.r + 6 * dpr) {
           return ub;
@@ -1085,7 +629,6 @@
       window.chartAddUserBubble = function (data) {
         userBubble = data;
         resize();
-        // Show clear link
         const cl = document.getElementById("clear-submission");
         if (cl) cl.style.display = "inline-block";
       };
@@ -1098,7 +641,6 @@
       };
     }
 
-    // ── Init ─────────────────────────────────────────────────────────────────
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", setupChart);
     } else {

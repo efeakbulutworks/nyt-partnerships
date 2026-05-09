@@ -1,12 +1,10 @@
 /**
  * Fullpage scroll controller.
  *
- * Editorial pages (non-.form-page): hard JS hijack — one wheel/key/swipe
- * advances exactly one section.
- *
- * Form pages (.form-page): JS hijack disabled; browser scrolls naturally.
- * CSS scroll-snap (set on <html>) handles boundary snap into the next/prev
- * section. IntersectionObserver keeps the dot indicator in sync.
+ * Two sections: evaluation form (form-page, no hijack) and map.
+ * The map section uses hard JS hijack — one wheel/key/swipe = one section.
+ * The evaluation section (form-page) scrolls naturally; CSS scroll-snap
+ * handles boundary snap. IntersectionObserver keeps state in sync.
  *
  * Desktop only (>= 720px). Below 720px, native scroll everywhere.
  */
@@ -14,15 +12,8 @@
   'use strict';
 
   const SECTION_IDS = [
-    'what-i-heard',
-    'step-strategic',
-    'step-commercial',
-    'step-resource',
+    'evaluation',
     'map-visualized',
-    'partnership-types',
-    'modular-architecture',
-    'why-this-excites-me',
-    'about',
   ];
 
   const LOCK_MS         = 700;
@@ -30,7 +21,6 @@
   const WHEEL_MIN_DELTA = 5;
 
   let sections = [];
-  let dots     = [];
   let current  = 0;
   let locked   = false;
   let enabled  = false;
@@ -45,16 +35,14 @@
 
   function init() {
     sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
-    dots     = Array.from(document.querySelectorAll('.scroll-dot'));
 
-    activate(0, false);
-
+    activate(0);
     setupIntersectionObserver();
     checkEnable();
     window.addEventListener('resize', debounce(checkEnable, 120));
   }
 
-  // ── IntersectionObserver — keeps dots in sync during native scroll ──────────
+  // ── IntersectionObserver — keeps current in sync during native scroll ──────
 
   function setupIntersectionObserver() {
     const observer = new IntersectionObserver(
@@ -65,7 +53,6 @@
             if (idx >= 0) {
               current = idx;
               sections[idx].classList.add('visible');
-              dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
             }
           }
         });
@@ -102,7 +89,7 @@
     locked = true;
 
     current = target;
-    activate(current, true);
+    activate(current);
     sections[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setTimeout(() => { locked = false; }, LOCK_MS);
@@ -115,13 +102,12 @@
 
   function activate(index) {
     if (sections[index]) sections[index].classList.add('visible');
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
   }
 
   // ── Wheel ──────────────────────────────────────────────────────────────────
 
   function onWheel(e) {
-    if (isFormPage(current)) return;   // let browser scroll naturally
+    if (isFormPage(current)) return;
     e.preventDefault();
     if (locked) return;
     if (Math.abs(e.deltaY) < WHEEL_MIN_DELTA) return;
@@ -133,7 +119,7 @@
   function onKey(e) {
     const tag = document.activeElement && document.activeElement.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-    if (isFormPage(current)) return;   // let browser handle arrow keys naturally
+    if (isFormPage(current)) return;
 
     switch (e.key) {
       case 'ArrowDown': case 'PageDown':
@@ -157,7 +143,7 @@
 
   function onTouchEnd(e) {
     if (locked) return;
-    if (isFormPage(current)) return;   // let browser scroll naturally
+    if (isFormPage(current)) return;
     const dy = touchStartY - e.changedTouches[0].clientY;
     if (Math.abs(dy) < SWIPE_THRESH) return;
     goTo(current + (dy > 0 ? 1 : -1));
