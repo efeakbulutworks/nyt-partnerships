@@ -225,12 +225,13 @@ body {
 
 .step-h1 {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: clamp(30px, 3vw, 42px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
+  white-space: nowrap;
 }
 
 .step-subhead {
@@ -637,6 +638,10 @@ body {
 
   .step-subhead {
     font-size: 18px;
+  }
+
+  .step-h1 {
+    white-space: normal;
   }
 
   .metric-title    { font-size: 20px; }
